@@ -1,13 +1,20 @@
-CC			= gcc
-CFLAGS		= -L mlx -lmlx -framework OpenGL -framework AppKit
-RM			= rm -f
+INCLIB=$(INC)/../lib
 
-NAME		= cub3d.a
-INCLUDE		= cub3d.h 
+CC=gcc
 
-SRCS =	cub3d.c keys.c cub3d_utils.c draws.c init.c
+CFLAGS= -I$(INC) -O3 -I..
 
-all:
-	$(CC) -L./mlx -lmlx -framework OpenGL -framework AppKit $(SRCS)
-re:
-	$(RM) a.out 
+NAME= cub3d.a
+SRC = test.c 04_floor_ceiling.c calcs.c keys.c calcs2.c
+OBJ = $(SRC:.c=.o)
+
+all	:$(NAME)
+
+$(NAME)	:$(OBJ)
+	$(CC) -o $(NAME) $(OBJ) -L.. mlx_linux/libmlx_Linux.a -L$(INCLIB) -lXext -lX11 -lm -lbsd
+
+clean	:
+	rm -f $(NAME) $(OBJ) *~ core *.core
+
+
+re	: clean all

@@ -1,33 +1,42 @@
 #include "cub3d.h"
 
-int key_press(int keycode, t_game *game) //move keys
+int	key_press(int key, t_info *info)
 {
-	
-	if (keycode == KEY_W)
+	if (key == K_W)
 	{
-		game->px += game->pdx; //player receive deltaX
-		game->py += game->pdy; //player receice deltaY
+		if (!info->map[(int)(info->posX + info->dirX * info->moveSpeed)][(int)(info->posY)])
+			info->posX += info->dirX * info->moveSpeed;
+		if (!info->map[(int)(info->posX)][(int)(info->posY + info->dirY * info->moveSpeed)])
+			info->posY += info->dirY * info->moveSpeed;
 	}
-	else if (keycode == KEY_S)
+	if (key == K_S)
 	{
-		game->px += game->pdx;
-		game->py += game->pdy;
+		if (!info->map[(int)(info->posX - info->dirX * info->moveSpeed)][(int)(info->posY)])
+			info->posX -= info->dirX * info->moveSpeed;
+		if (!info->map[(int)(info->posX)][(int)(info->posY - info->dirY * info->moveSpeed)])
+			info->posY -= info->dirY * info->moveSpeed;
 	}
-	else if (keycode == KEY_A)
+	if (key == K_D)
 	{
-		game->pa-=0.1;
-		if (game->pa < 0)
-			game->pa+=2 * PI;
-		game->pdx = cos(game->pa) * 20; 
-		game->pdy = sin(game->pa) * 20;
+
+		double oldDirX = info->dirX;
+		info->dirX = info->dirX * cos(-info->rotSpeed) - info->dirY * sin(-info->rotSpeed);
+		info->dirY = oldDirX * sin(-info->rotSpeed) + info->dirY * cos(-info->rotSpeed);
+		double oldPlaneX = info->planeX;
+		info->planeX = info->planeX * cos(-info->rotSpeed) - info->planeY * sin(-info->rotSpeed);
+		info->planeY = oldPlaneX * sin(-info->rotSpeed) + info->planeY * cos(-info->rotSpeed);
 	}
-	else if (keycode == KEY_D)
+
+	if (key == K_A)
 	{
-		game->pa+=0.1;
-		if (game->pa > 2 * PI)
-			game->pa-=2 * PI;
-		game->pdx = cos(game->pa) * 20; 
-		game->pdy = sin(game->pa) * 20;
+		double oldDirX = info->dirX;
+		info->dirX = info->dirX * cos(info->rotSpeed) - info->dirY * sin(info->rotSpeed);
+		info->dirY = oldDirX * sin(info->rotSpeed) + info->dirY * cos(info->rotSpeed);
+		double oldPlaneX = info->planeX;
+		info->planeX = info->planeX * cos(info->rotSpeed) - info->planeY * sin(info->rotSpeed);
+		info->planeY = oldPlaneX * sin(info->rotSpeed) + info->planeY * cos(info->rotSpeed);
 	}
+	if (key == K_ESC)
+		exit(0);
 	return (0);
 }
