@@ -1,47 +1,142 @@
 #ifndef CUB3D_H
 #define CUB3D_H
 
-#include <stdio.h>
-#include <math.h>
-#include <unistd.h>
 #include "mlx/mlx.h"
-#include "string.h"
+#include "key_macos.h"
+#include <math.h>
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#define X_EVENT_KEY_PRESS	2
+#define X_EVENT_KEY_EXIT	17
+#define texWidth 64
+#define texHeight 64
+#define mapWidth 24
+#define mapHeight 24
+#define width 1920
+#define height 1024
 
-#define WIDTH 1024
-#define HEIGHT 512
-#define mapX 8
-#define mapY 8
-
-typedef struct s_img
+typedef struct	s_img
 {
-    void *img;
-    char *data;
-    int endian;
-    int bpp;
-    int sizel;
+	void	*img;
+	int		*data;
 
-} t_img;
+	int		size_l;
+	int		bpp;
+	int		endian;
+	int		img_width;
+	int		img_height;
+}				t_img;
 
-typedef struct s_game
+typedef struct	s_game
 {
-    void *mlx;
-    void *win;
-    t_img img;
-    double posx; //positon of the player 
-    double posy;
-    double dir_x; // direction of player 
-    double dix_y;
-    double plane_x; // the camera plane of the player
-    double plane_y;
-    double movespeed;
-    double rotspeed;
-    int     map[mapX][mapY];
+	double posX;
+	double posY;
+	double dirX;
+	double dirY;
+	double planeX;
+	double planeY;
+	void	*mlx;
+	void	*win;
+	t_img	img;
+	int		buf[height][width];
+	int		**texture;
+	double	moveSpeed;
+	double	rotSpeed;
+    int     map[mapWidth][mapHeight];
+}				t_game;
 
-} t_game;
+typedef struct s_flor
+{
+	float rayDirX0;
+	float rayDirY0;
+	float rayDirX1;
+	float rayDirY1;
+    int p;
+    float posZ;
+    float rowDistance;
+    float floorStepX;
+    float floorStepY;
+    float floorY;
+    float floorX;
+    int y;
+    double currentFloorX;
+    double currentFloorY;
+    int floorTexX; 
+    int floorTexY;
+    int checkerBoardPattern;
 
-void    ft_mlx_pixel_put(t_game *game, int x, int y, int color);
-void	map_init(t_game *game);
-void    vertical_line(t_game *game, int x, int y1, int y2 , int color);
+} t_flor;
 
+typedef struct s_cell
+{
+	int x;
+	int cellX;
+	int cellY;
+	int tx;
+	int ty;
+	int floorTexture;
+	int ceilingTexture;
+	int color;
+
+} t_cell;
+
+typedef struct s_wall
+{
+	double cameraX;
+	double rayDirX;
+	double rayDirY;
+	int mapX;
+	int mapY;
+	int x;
+    int y;
+	double sideDistX;
+	double sideDistY;
+	double perpWallDist;
+	double deltaDistX;
+	double deltaDistY;
+	int stepX;
+	int stepY;
+	int hit;
+	int side;
+    int lineHeight;
+    int drawStart;
+    int drawEnd;
+    double floorXWall; 
+    double floorYWall;
+    double weight;
+
+} t_wall;
+
+typedef struct s_textures
+{
+	int texX;
+	int texNum;
+	double wallX;
+	double step;
+	double texPos;
+	int texY;
+	int color;
+    double distWall;
+    double distPlayer;
+    double currentDist;
+    int floorTexture;
+    int y;
+} t_textures;
+
+void    init_map(t_game *game);
+void	draw(t_game *game);
+t_flor 	put_flor(t_flor flor , t_game *game);
+t_cell 	put_cell(t_game *game, t_flor *flor, t_cell cell);
+void 	init_wall(t_wall *wall, t_game *game);
+void 	steps(t_wall *wall , t_game *game);
+void 	perp_wall(t_game *game, t_wall *wall);
+int		key_press(int key, t_game *game);
+void 	textures_wall(t_wall *wall, t_textures *textures, t_game *game);
+void 	draw_wall(t_game *game, t_textures *textures, t_wall *wall);
+void 	floor_wall(t_wall *wall, t_textures *textures);
+void 	flor_wall2(t_game *game, t_textures *textures, t_wall *wall, t_flor *flor);
+void	load_image(t_game *game, int *texture, char *path, t_img *img);
+void	load_texture(t_game *game);
 
 #endif
