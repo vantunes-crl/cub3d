@@ -23,8 +23,6 @@ void	calc(t_game *game , t_flor flor)
 		perp_wall(game, &wall);
 		textures_wall(&wall,&textures,game);
 		draw_wall(game,&textures, &wall);
-		floor_wall(&wall, &textures);
-		flor_wall2(game,&textures,&wall,&flor);
 	}
 }
 
@@ -34,6 +32,8 @@ int	main_loop(t_game *game)
 
 	calc(game, flor);
 	draw(game);
+	draw_rectangles(game);
+	mlx_put_image_to_window(game->mlx, game->win, game->img.img, 0, 0);
 	return (0);
 }
 
@@ -86,12 +86,12 @@ int	main(void)
 	init_buff(&game);
 	init_map(&game);
 	load_texture(&game);
-	game.posX = 22.0;
-	game.posY = 11.5;
+	game.posX = 5.0;
+	game.posY = 10.0;
 	game.dirX = -1.0;
 	game.dirY = 0.0;
 	game.planeX = 0.0;
-	game.planeY = 0.66;
+	game.planeY = 0.90;
 	game.moveSpeed = 0.08;
 	game.rotSpeed = 0.08;
 	game.win = mlx_new_window(game.mlx, width, height, "mlx");

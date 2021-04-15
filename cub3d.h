@@ -13,6 +13,7 @@
 #define texHeight 64
 #define mapWidth 24
 #define mapHeight 24
+#define mapS 14
 #define width 1920
 #define height 1024
 
@@ -60,11 +61,6 @@ typedef struct s_flor
     float floorY;
     float floorX;
     int y;
-    double currentFloorX;
-    double currentFloorY;
-    int floorTexX; 
-    int floorTexY;
-    int checkerBoardPattern;
 
 } t_flor;
 
@@ -104,7 +100,6 @@ typedef struct s_wall
     int drawEnd;
     double floorXWall; 
     double floorYWall;
-    double weight;
 
 } t_wall;
 
@@ -117,9 +112,6 @@ typedef struct s_textures
 	double texPos;
 	int texY;
 	int color;
-    double distWall;
-    double distPlayer;
-    double currentDist;
     int floorTexture;
     int y;
 } t_textures;
@@ -134,9 +126,13 @@ void 	perp_wall(t_game *game, t_wall *wall);
 int		key_press(int key, t_game *game);
 void 	textures_wall(t_wall *wall, t_textures *textures, t_game *game);
 void 	draw_wall(t_game *game, t_textures *textures, t_wall *wall);
-void 	floor_wall(t_wall *wall, t_textures *textures);
-void 	flor_wall2(t_game *game, t_textures *textures, t_wall *wall, t_flor *flor);
 void	load_image(t_game *game, int *texture, char *path, t_img *img);
 void	load_texture(t_game *game);
+void	draw_rectangle(t_game *game, int x, int y , int color);
+void	draw_rectangles(t_game *game);
+void 	draw_lines(t_game *game);
+void	draw_line(t_game *game, double x1, double y1, double x2, double y2);
+void    my_mlx_pixel_put(t_game *game, int x, int y, int color);
+void 	draw_player(t_game *game);
 
 #endif
