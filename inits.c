@@ -14,9 +14,9 @@ void init_map(t_game *game)
     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    {1,0,0,0,0,0,0,0,0,0,8,0,0,0,0,0,0,0,0,0,0,0,0,1},
     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    {1,0,0,0,0,0,0,5,0,5,0,5,0,5,0,0,0,0,0,0,0,0,0,1},
+    {1,0,0,0,0,0,0,0,0,5,0,5,0,5,0,0,0,0,0,0,0,0,0,1},
     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
     {1,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,1},
     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,1},
@@ -81,12 +81,7 @@ void	load_texture(t_game *game)
 	load_image(game, game->texture[5], "textures/mossy.xpm", &img);
 	load_image(game, game->texture[6], "textures/galaxy.xpm", &img);
 	load_image(game, game->texture[7], "textures/colorstone.xpm", &img);
-}
-
-void            my_mlx_pixel_put(t_game *game, int x, int y, int color)
-{
-    int    *dst;
-
-    dst = game->img.data + (y * game->img.size_l + x * (game->img.bpp / 8));
-    *(unsigned int*)dst = color;
+    load_image(game, game->texture[8], "textures/barrel.xpm", &img);
+	load_image(game, game->texture[9], "textures/pillar.xpm", &img);
+	load_image(game, game->texture[10], "textures/greenlight.xpm", &img);
 }

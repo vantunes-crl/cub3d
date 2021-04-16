@@ -20,26 +20,6 @@ void	draw_rectangle(t_game *game, int x, int y , int color)
 	}
 }
 
-void	draw_rectangle2(t_game *game, int x, int y , int color)
-{
-	int i;
-	int j;
-
-	x *= mapS; // size of the cubes
-	y *= mapS;
-	i = 0;
-	while (i < mapS)
-	{
-		j = 0;
-		while (j < mapS)
-		{
-			game->img.data[(x + i) * width + y + j] = color;
-			j++;
-		}
-		i++;
-	}
-}
-
 void	draw_rectangles(t_game *game)
 {
 	int		i;
@@ -54,8 +34,8 @@ void	draw_rectangles(t_game *game)
 			if (game->map[i][j] >= 1)
 				draw_rectangle(game, j, i , 0xFFFFFF);
 			else
-				draw_rectangle(game, j, i, 0x000000);
-			draw_rectangle(game,floor(game->posX), floor(game->posY), 0xFFF400);
+				draw_rectangle(game, j, i, 0x33D1FF);
+			draw_rectangle(game,game->posY + game->dirY * game->moveSpeed, game->posX + game->dirX * game->moveSpeed, 0xFF5733);
 			j++;
 		}
 		i++;

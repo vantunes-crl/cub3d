@@ -23,7 +23,9 @@ void	calc(t_game *game , t_flor flor)
 		perp_wall(game, &wall);
 		textures_wall(&wall,&textures,game);
 		draw_wall(game,&textures, &wall);
+		game->zBuffer[wall.x] = wall.perpWallDist;
 	}
+	draw_sprites(game);
 }
 
 int	main_loop(t_game *game)
@@ -53,11 +55,11 @@ int init_buff(t_game *game)
 		}
 		i++;
 	}
-	game->texture = (int **)malloc(sizeof(int *) * 8);
+	game->texture = (int **)malloc(sizeof(int *) * 11);
 	if (!game->texture)
 		return (-1);
 	i = 0;
-	while (i < 8)
+	while (i < 11)
 	{
 		game->texture[i] = (int *)malloc(sizeof(int) * (texHeight * texWidth));
 		if (!game->texture)
@@ -65,7 +67,7 @@ int init_buff(t_game *game)
 		i++;
 	}
 	i = 0;
-	while(i < 8)
+	while(i < 11)
 	{
 		j = 0;
 		while (j < texHeight * texWidth)
