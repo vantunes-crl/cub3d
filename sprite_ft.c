@@ -13,11 +13,15 @@ int	compare(const void *first, const void *second)
 void	sort_order(t_pair *orders, int amount)
 {
 	t_pair	tmp;
+	int i;
+	int j;
 
-	for (int i = 0; i < amount; i++)
+	i = 0;
+	while (i < amount)
 	{
-		for (int j = 0; j < amount - 1; j++)
+		while (j < amount - 1)
 		{
+			j = 0;
 			if (orders[j].first > orders[j + 1].first)
 			{
 				tmp.first = orders[j].first;
@@ -27,25 +31,31 @@ void	sort_order(t_pair *orders, int amount)
 				orders[j + 1].first = tmp.first;
 				orders[j + 1].second = tmp.second;
 			}
+			j++;
 		}
+		i++;
 	}
 }
 
 void	sortSprites(int *order, double *dist, int amount)
 {
 	t_pair	*sprites;
+	int i;
 
+	i = 0;
 	sprites = (t_pair*)malloc(sizeof(t_pair) * amount);
-	for (int i = 0; i < amount; i++)
+	while (i < amount)
 	{
 		sprites[i].first = dist[i];
 		sprites[i].second = order[i];
+		i++;
 	}
 	sort_order(sprites, amount);
-	for (int i = 0; i < amount; i++)
+	i = 0;
+	while (i < amount)
 	{
 		dist[i] = sprites[amount - i - 1].first;
 		order[i] = sprites[amount - i - 1].second;
+		i++;
 	}
-	free(sprites);
 }

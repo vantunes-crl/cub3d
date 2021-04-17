@@ -5,7 +5,7 @@ void	draw_rectangle(t_game *game, int x, int y , int color)
 	int i;
 	int j;
 
-	x *= mapS; // size of the cubes
+	x *= mapS;
 	y *= mapS;
 	i = 0;
 	while (i < mapS - 1)

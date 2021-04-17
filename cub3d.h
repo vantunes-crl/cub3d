@@ -16,6 +16,11 @@
 #define mapS 14
 #define width 1920
 #define height 1024
+#define numSprites 19
+#define uDiv 1
+#define vDiv 1
+#define vMove 0.0
+
 
 typedef struct	s_img
 {
@@ -45,6 +50,8 @@ typedef struct	s_game
 	double zBuffer[width];
 	double	moveSpeed;
 	double	rotSpeed;
+	double sprite_posy;
+	double sprite_posx;
     int     map[mapWidth][mapHeight];
 }				t_game;
 
@@ -116,6 +123,34 @@ typedef struct s_textures
     int floorTexture;
     int y;
 } t_textures;
+
+typedef struct s_sprite
+{
+	double 	y;
+	double 	x;
+	int 	texture;
+	int		spriteOrder[numSprites];
+    double	spriteDistance[numSprites];
+	double spriteX;
+	double spriteY;
+	double invDet;
+	double transformX;
+	double transformY;
+	int spriteScreenX;
+	int vMoveScreen;
+	int spriteHeight;
+	int drawStartY;
+	int drawEndY;
+	int spriteWidth;
+	int drawStartX;
+	int drawEndX;
+	int stripe;
+	int d;
+	int texX;
+	int texY;
+	int color;
+	int j;
+} t_sprite;
 
 typedef struct		s_pair
 {

@@ -26,7 +26,7 @@ void draw_wall(t_game *game, t_textures *textures, t_wall *wall)
 		textures->texPos += textures->step;
 		textures->color = game->texture[textures->texNum][texHeight * textures->texY + textures->texX];
 		if (wall->side == 1)
-			textures->color = (textures->color >> 1) & 8355711;	
+			textures->color = (textures->color >> 1) & 8355711;
 		game->buf[wall->y][wall->x] = textures->color;
 	}
 }

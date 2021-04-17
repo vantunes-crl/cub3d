@@ -23,7 +23,7 @@ void init_map(t_game *game)
     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,1},
     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,1},
+    {1,0,0,0,0,0,0,0,0,0,0,0,6,0,0,0,0,0,0,0,5,0,0,1},
     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
@@ -80,8 +80,8 @@ void	load_texture(t_game *game)
 	load_image(game, game->texture[4], "textures/lava.xpm", &img);
 	load_image(game, game->texture[5], "textures/mossy.xpm", &img);
 	load_image(game, game->texture[6], "textures/galaxy.xpm", &img);
-	load_image(game, game->texture[7], "textures/colorstone.xpm", &img);
+	load_image(game, game->texture[7], "textures/purplestone.xpm", &img);
     load_image(game, game->texture[8], "textures/barrel.xpm", &img);
-	load_image(game, game->texture[9], "textures/pillar.xpm", &img);
-	load_image(game, game->texture[10], "textures/greenlight.xpm", &img);
+	load_image(game, game->texture[9], "textures/armor.xpm", &img);
+	load_image(game, game->texture[10], "textures/armor.xpm", &img);
 }
