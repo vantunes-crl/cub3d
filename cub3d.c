@@ -17,10 +17,10 @@ void	calc(t_game *game , t_flor flor)
 		flor.y++;
 	}
 	wall.x = 0;
-	if (game->map[(int)(game->posX + game->dirX * game->moveSpeed + 0.7)][(int)(game->posY)] == 5)
-		game->map[(int)(game->posX + game->dirX * game->moveSpeed + 0.7)][(int)(game->posY)] = 0;
-	else if (game->map[(int)(game->posX)][(int)(game->posY + game->dirY * game->moveSpeed + 0.7)] == 5)
-		game->map[(int)(game->posX)][(int)(game->posY + (game->dirY) * game->moveSpeed + 0.7)] = 0;
+	if (game->map[(int)(game->posX + game->dirX * game->moveSpeed)][(int)(game->posY)] == 10)
+		game->map[(int)(game->posX + game->dirX * game->moveSpeed )][(int)(game->posY)] = 0;
+	else if (game->map[(int)(game->posX)][(int)(game->posY + game->dirY * game->moveSpeed )] == 10)
+		game->map[(int)(game->posX)][(int)(game->posY + (game->dirY) * game->moveSpeed)] = 0;
 	while (++wall.x < width)
 	{
 		init_wall(&wall,game);
@@ -30,7 +30,8 @@ void	calc(t_game *game , t_flor flor)
 		draw_wall(game,&textures, &wall);
 		game->zBuffer[wall.x] = wall.perpWallDist;
 	}
-	draw_sprites(game);
+	draw_sprite(game,11, 5, 10);
+	draw_sprite(game,12, 6, 9);
 }
 
 int	main_loop(t_game *game)
@@ -41,6 +42,8 @@ int	main_loop(t_game *game)
 	draw(game);
 	draw_rectangles(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->img.img, 0, 0);
+	mlx_string_put(game->mlx, game->win ,50, 350, 0xFFFFFF, ft_itoa((int)game->posX));
+	mlx_string_put(game->mlx, game->win ,20, 350, 0xFFFFFF, ft_itoa((int)game->posY));
 	return (0);
 }
 
