@@ -5,6 +5,7 @@ void	calc(t_game *game , t_flor flor)
 	t_cell cell;
 	t_wall wall;
 	t_textures textures;
+	init_map(game);
 
 	flor.y = 0;
 	while(flor.y < height)
@@ -16,6 +17,10 @@ void	calc(t_game *game , t_flor flor)
 		flor.y++;
 	}
 	wall.x = 0;
+	if (game->map[(int)(game->posX + game->dirX * game->moveSpeed + 0.7)][(int)(game->posY)] == 5)
+		game->map[(int)(game->posX + game->dirX * game->moveSpeed + 0.7)][(int)(game->posY)] = 0;
+	else if (game->map[(int)(game->posX)][(int)(game->posY + game->dirY * game->moveSpeed + 0.7)] == 5)
+		game->map[(int)(game->posX)][(int)(game->posY + (game->dirY) * game->moveSpeed + 0.7)] = 0;
 	while (++wall.x < width)
 	{
 		init_wall(&wall,game);
@@ -94,8 +99,8 @@ int	main(void)
 	game.dirY = 0.0;
 	game.planeX = 0.0;
 	game.planeY = 0.90;
-	game.moveSpeed = 0.08;
-	game.rotSpeed = 0.08;
+	game.moveSpeed = 0.11;
+	game.rotSpeed = 0.11;
 	game.win = mlx_new_window(game.mlx, width, height, "mlx");
 	game.img.img = mlx_new_image(game.mlx, width, height);
 	game.img.data = (int *)mlx_get_data_addr(game.img.img, &game.img.bpp, &game.img.size_l, &game.img.endian);

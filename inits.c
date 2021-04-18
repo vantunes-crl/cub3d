@@ -66,7 +66,6 @@ void	load_image(t_game *game, int *texture, char *path, t_img *img)
 			texture[img->img_width * y + x] = img->data[img->img_width * y + x];
 		}
 	}
-	mlx_destroy_image(game->mlx, img->img);
 }
 
 void	load_texture(t_game *game)
