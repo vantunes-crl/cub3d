@@ -7,6 +7,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "get_next_line.h"
 #define X_EVENT_KEY_PRESS	2
 #define X_EVENT_KEY_EXIT	17
 #define texWidth 64
@@ -14,7 +15,6 @@
 #define mapWidth 24
 #define mapHeight 24
 #define mapS 14
-#define numSprites 19
 #define uDiv 1
 #define vDiv 1
 #define vMove 0.0
@@ -45,9 +45,9 @@ typedef struct	s_game
 	void	*mlx;
 	void	*win;
 	t_img	img;
-	int		buf[1024][1920];
+	int		**buf;
 	int		**texture;
-	double zBuffer[1920];
+	double *zBuffer;
 	double	moveSpeed;
 	double	rotSpeed;
 	double sprite_posy;
@@ -129,8 +129,6 @@ typedef struct s_sprite
 	double 	y;
 	double 	x;
 	int 	texture;
-	int		spriteOrder[numSprites];
-    double	spriteDistance[numSprites];
 	double spriteX;
 	double spriteY;
 	double invDet;
@@ -170,5 +168,6 @@ void 	draw_lines(t_game *game);
 void	draw_line(t_game *game, double x1, double y1, double x2, double y2);
 void 	draw_sprite(t_game *game , double sprite_x, double sprite_y , int texture);
 char	*ft_itoa(int n);
+int **AlocaMatriz(int m, int n);
 
 #endif

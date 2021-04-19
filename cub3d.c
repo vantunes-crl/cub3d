@@ -52,7 +52,15 @@ int init_buff(t_game *game)
 {
 	int i;
 	int j;
-
+	
+	i = 0;
+	game->zBuffer = (double *)malloc(sizeof(double *) * game->width);
+	game->buf = (int **)malloc(sizeof(int *) * game->height);
+	while (i < game->height)
+	{
+		game->buf[i] = (int *)malloc(sizeof(int *) * game->width);
+		i++;
+	}
 	i = 0;
 	while (i < game->height)
 	{
@@ -94,6 +102,8 @@ int	main(void)
 	t_game game;
 	
 	game.mlx = mlx_init();
+	game.width = 1920;
+	game.height = 1024;
 	init_buff(&game);
 	init_map(&game);
 	load_texture(&game);
@@ -105,8 +115,6 @@ int	main(void)
 	game.planeY = 0.90;
 	game.moveSpeed = 0.11;
 	game.rotSpeed = 0.11;
-	game.width = 1920;
-	game.height = 1024;
 	game.win = mlx_new_window(game.mlx, game.width, game.height, "mlx");
 	game.img.img = mlx_new_image(game.mlx, game.width, game.height);
 	game.img.data = (int *)mlx_get_data_addr(game.img.img, &game.img.bpp, &game.img.size_l, &game.img.endian);
