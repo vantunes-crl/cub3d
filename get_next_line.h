@@ -5,7 +5,7 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include "cub3d.h"
-#define BUFFER_SIZE 0
+#define BUFFER_SIZE 50
 
 int				get_next_line(const int fd, char **line);
 int				check_line(char *str);
