@@ -38,12 +38,12 @@ void	draw(t_game *game)
     int x;
 
     y = 0;
-	while (y < height)
+	while (y < game->height)
 	{
         x = 0;
-		while (x < width)
+		while (x < game->width)
 		{
-			game->img.data[y * width + x] = game->buf[y][x];
+			game->img.data[y * game->width + x] = game->buf[y][x];
             x++;
 		}
         y++;

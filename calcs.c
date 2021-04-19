@@ -7,11 +7,11 @@ t_flor put_flor(t_flor flor , t_game *game)
 	flor.rayDirY0 = game->dirY - game->planeY;
 	flor.rayDirX1 = game->dirX + game->planeX;
 	flor.rayDirY1 = game->dirY + game->planeY;
-	flor.p = flor.y - height / 2;
-	flor.posZ = 0.5 * height;
+	flor.p = flor.y - game->height / 2;
+	flor.posZ = 0.5 * game->height;
 	flor.rowDistance = flor.posZ / flor.p;
-	flor.floorStepX = flor.rowDistance * (flor.rayDirX1 - flor.rayDirX0) / width;
-	flor.floorStepY = flor.rowDistance * (flor.rayDirY1 - flor.rayDirY0) / width;
+	flor.floorStepX = flor.rowDistance * (flor.rayDirX1 - flor.rayDirX0) / game->width;
+	flor.floorStepY = flor.rowDistance * (flor.rayDirY1 - flor.rayDirY0) / game->width;
 	flor.floorX = game->posX + flor.rowDistance * flor.rayDirX0;
 	flor.floorY = game->posY + flor.rowDistance * flor.rayDirY0;
 	return(flor);
@@ -32,14 +32,14 @@ t_cell put_cell(t_game *game, t_flor *flor, t_cell cell)
 	game->buf[flor->y][cell.x] = cell.color;
 	cell.color = game->texture[cell.ceilingTexture][texWidth * cell.ty + cell.tx];
 	cell.color = (cell.color >> 1) & 8355711;
-	game->buf[height - flor->y - 1][cell.x] = cell.color;
+	game->buf[game->height - flor->y - 1][cell.x] = cell.color;
 	return (cell);
 }
 
 void init_wall(t_wall *wall, t_game *game)
 {
 
-	wall->cameraX = 2 * wall->x / (double)width - 1;
+	wall->cameraX = 2 * wall->x / (double)game->width - 1;
 	wall->rayDirX = game->dirX + game->planeX * wall->cameraX;
 	wall->rayDirY = game->dirY + game->planeY * wall->cameraX;
 	wall->mapX = (int)game->posX;
@@ -95,11 +95,11 @@ void perp_wall(t_game *game, t_wall *wall)
 		wall->perpWallDist = (wall->mapX - game->posX + (1 - wall->stepX) / 2) / wall->rayDirX;
 	else
 		wall->perpWallDist = (wall->mapY - game->posY + (1 - wall->stepY) / 2) / wall->rayDirY;
-	wall->lineHeight = (int)(height / wall->perpWallDist);
-	wall->drawStart = -wall->lineHeight / 2 + height / 2;
+	wall->lineHeight = (int)(game->height / wall->perpWallDist);
+	wall->drawStart = -wall->lineHeight / 2 + game->height / 2;
 	if(wall->drawStart < 0)
 		wall->drawStart = 0;
-	wall->drawEnd = wall->lineHeight / 2 + height / 2;
-	if(wall->drawEnd >= height)
-		wall->drawEnd = height - 1;
+	wall->drawEnd = wall->lineHeight / 2 + game->height / 2;
+	if(wall->drawEnd >= game->height)
+		wall->drawEnd = game->height - 1;
 }

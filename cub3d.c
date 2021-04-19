@@ -5,14 +5,15 @@ void	calc(t_game *game , t_flor flor)
 	t_cell cell;
 	t_wall wall;
 	t_textures textures;
+
 	init_map(game);
 
 	flor.y = 0;
-	while(flor.y < height)
+	while(flor.y < game->height)
 	{
 		flor = put_flor(flor,game);
 		cell.x = 0;
-		while (++cell.x < width)
+		while (++cell.x < game->width)
 			cell = put_cell(game,&flor, cell);
 		flor.y++;
 	}
@@ -21,7 +22,7 @@ void	calc(t_game *game , t_flor flor)
 		game->map[(int)(game->posX + game->dirX * game->moveSpeed )][(int)(game->posY)] = 0;
 	else if (game->map[(int)(game->posX)][(int)(game->posY + game->dirY * game->moveSpeed )] == 10)
 		game->map[(int)(game->posX)][(int)(game->posY + (game->dirY) * game->moveSpeed)] = 0;
-	while (++wall.x < width)
+	while (++wall.x < game->width)
 	{
 		init_wall(&wall,game);
 		steps(&wall, game);
@@ -31,7 +32,7 @@ void	calc(t_game *game , t_flor flor)
 		game->zBuffer[wall.x] = wall.perpWallDist;
 	}
 	draw_sprite(game,11, 5, 10);
-	draw_sprite(game,12, 6, 9);
+	draw_sprite(game,5,5,10);
 }
 
 int	main_loop(t_game *game)
@@ -53,10 +54,10 @@ int init_buff(t_game *game)
 	int j;
 
 	i = 0;
-	while (i < height)
+	while (i < game->height)
 	{
 		j = 0;
-		while (j < width)
+		while (j < game->width)
 		{
 			game->buf[i][j] = 0;
 			j++;
@@ -104,8 +105,10 @@ int	main(void)
 	game.planeY = 0.90;
 	game.moveSpeed = 0.11;
 	game.rotSpeed = 0.11;
-	game.win = mlx_new_window(game.mlx, width, height, "mlx");
-	game.img.img = mlx_new_image(game.mlx, width, height);
+	game.width = 1920;
+	game.height = 1024;
+	game.win = mlx_new_window(game.mlx, game.width, game.height, "mlx");
+	game.img.img = mlx_new_image(game.mlx, game.width, game.height);
 	game.img.data = (int *)mlx_get_data_addr(game.img.img, &game.img.bpp, &game.img.size_l, &game.img.endian);
 	mlx_loop_hook(game.mlx, &main_loop, &game);
 	mlx_hook(game.win, X_EVENT_KEY_PRESS,0, &key_press, &game);

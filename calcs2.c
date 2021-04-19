@@ -14,7 +14,7 @@ void textures_wall(t_wall *wall, t_textures *textures, t_game *game)
 	if (wall->side == 1 && wall->rayDirY < 0)
 		textures->texX = texWidth - textures->texX - 1;
 	textures->step = 1.0 * texHeight / wall->lineHeight;
-	textures->texPos = (wall->drawStart - height / 2 + wall->lineHeight / 2) * textures->step;
+	textures->texPos = (wall->drawStart - game->height / 2 + wall->lineHeight / 2) * textures->step;
 }
 
 void draw_wall(t_game *game, t_textures *textures, t_wall *wall)
