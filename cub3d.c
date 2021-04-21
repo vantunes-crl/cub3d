@@ -100,14 +100,8 @@ int init_buff(t_game *game)
 int	main(void)
 {
 	t_game game;
-	int fd;
-	char **buff;
-	char *line;
 	
 	game.mlx = mlx_init();
-	fd = open("inits.cub", O_RDONLY);
-	get_next_line(fd, &line);
-	write(1,line,13);
 	game.width = 1920;
 	game.height = 1024;
 	init_buff(&game);
