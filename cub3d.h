@@ -14,12 +14,11 @@
 #define texWidth 64
 #define texHeight 64
 #define mapWidth 24
-#define mapHeight 28
+#define mapHeight 24
 #define mapS 14
 #define uDiv 1
 #define vDiv 1
 #define vMove 0.0
-
 
 typedef struct	s_img
 {
@@ -35,6 +34,10 @@ typedef struct	s_img
 
 typedef struct	s_game
 {
+	char *tex_north;
+	char *tex_south;
+	char *tex_west;
+	char *tex_east;
 	double posX;
 	double posY;
 	double dirX;
@@ -169,6 +172,11 @@ void 	draw_lines(t_game *game);
 void	draw_line(t_game *game, double x1, double y1, double x2, double y2);
 void 	draw_sprite(t_game *game , double sprite_x, double sprite_y , int texture);
 char	*ft_itoa(int n);
-int **AlocaMatriz(int m, int n);
+void 	parse_screen(t_game *game ,char *line, int i);
+void	parse(t_game *game);
+int		ft_atoi(const char *str);
+int		ft_isalpha(int c);
+void 	parse_south(t_game *game, char *line, int i);
+void 	parse_north(t_game *game, char *line, int i);
 
 #endif

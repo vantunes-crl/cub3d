@@ -39,3 +39,10 @@ char	*ft_itoa(int n)
 		str[len + sign] = '-';
 	return (str);
 }
+
+int	ft_isalpha(int c)
+{
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+		return (1);
+	return (0);
+}

@@ -97,13 +97,12 @@ int init_buff(t_game *game)
 	return (0);
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	t_game game;
 	
 	game.mlx = mlx_init();
-	game.width = 1920;
-	game.height = 1024;
+	parse(&game); // config
 	init_buff(&game);
 	init_map(&game);
 	load_texture(&game);
