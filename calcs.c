@@ -25,7 +25,7 @@ t_cell put_cell(t_game *game, t_flor *flor, t_cell cell)
 	cell.ty = (int)(texHeight * (flor->floorY - cell.cellY)) & (texHeight - 1);
 	flor->floorX += flor->floorStepX;
 	flor->floorY += flor->floorStepY;
-	cell.floorTexture = 3;
+	cell.floorTexture = 2;
 	cell.ceilingTexture = 6;
 	cell.color = game->texture[cell.floorTexture][texWidth * cell.ty + cell.tx];
 	cell.color = (cell.color >> 1) & 8355711;
@@ -78,20 +78,26 @@ void steps(t_wall *wall , t_game *game)
 		{
 			wall->sideDistX += wall->deltaDistX;
 			wall->mapX += wall->stepX;
-			wall->side = 0;
+			if (wall->stepX == 1)
+				wall->side = 0;
+			else if (wall->stepX == -1)
+				wall->side = 1;
 		}
 		else
 		{
 			wall->sideDistY += wall->deltaDistY;
 			wall->mapY += wall->stepY;
-			wall->side = 1;
+			if (wall->stepY == 1)
+				wall->side = 2;
+			else if (wall->stepY == -1)
+				wall->side = 3;
 		}
 		if (game->map[wall->mapX][wall->mapY] > 0) wall->hit = 1;
 	}
 }
 void perp_wall(t_game *game, t_wall *wall)
 {
-	if (wall->side == 0)
+	if (wall->side == 0 || wall->side == 1)
 		wall->perpWallDist = (wall->mapX - game->posX + (1 - wall->stepX) / 2) / wall->rayDirX;
 	else
 		wall->perpWallDist = (wall->mapY - game->posY + (1 - wall->stepY) / 2) / wall->rayDirY;

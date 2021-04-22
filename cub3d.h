@@ -14,7 +14,7 @@
 #define texWidth 64
 #define texHeight 64
 #define mapWidth 24
-#define mapHeight 24
+#define mapHeight 28
 #define mapS 14
 #define uDiv 1
 #define vDiv 1
