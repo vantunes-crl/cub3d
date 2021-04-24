@@ -4,10 +4,10 @@
 #include "./minilibx/mlx.h"
 #include "key_macos.h"
 #include <math.h>
-#include <string.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>
+#include <unistd.h>
+#include <string.h>
 #include "get_next_line.h"
 #define X_EVENT_KEY_PRESS	2
 #define X_EVENT_KEY_EXIT	17
@@ -15,7 +15,6 @@
 #define texHeight 64
 #define mapWidth 24
 #define mapHeight 24
-#define mapS 14
 #define uDiv 1
 #define vDiv 1
 #define vMove 0.0

@@ -4,7 +4,6 @@ int	main_loop(t_game *game)
 {
 	calc(game);
 	draw(game);
-	draw_rectangles(game);
 	key_move(game);
 	return (0);
 }
@@ -43,7 +42,7 @@ int init_buff(t_game *game)
 	i = 0;
 	while (i < 5)
 	{
-		game->texture[i] = (int *)malloc(sizeof(int) * (texHeight * texWidth));
+		game->texture[i] = (int *)malloc(sizeof(int) * (texHeight * texWidth + 1));
 		if (!game->texture)
 			return (0);
 		i++;
@@ -83,7 +82,7 @@ int	main(void)
 	game.key_s = 0;
 	game.key_d = 0;
 	game.key_esc = 0;
-	game.win = mlx_new_window(game.mlx, game.width, game.height, "mlx");
+	game.win = mlx_new_window(game.mlx, game.width, game.height, "cub3d");
 	game.img.img = mlx_new_image(game.mlx, game.width, game.height);
 	game.img.data = (int *)mlx_get_data_addr(game.img.img, &game.img.bpp, &game.img.size_l, &game.img.endian);
 	mlx_loop_hook(game.mlx, &main_loop, &game);

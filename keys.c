@@ -2,6 +2,8 @@
 
 int	key_move(t_game *game)
 {
+	double oldDirX;
+	double oldPlaneX;
 	if (game->key_w)
 	{
 		if (!game->map[(int)(game->posX + game->dirX * game->moveSpeed)][(int)(game->posY)])
@@ -18,20 +20,20 @@ int	key_move(t_game *game)
 	}
 	if (game->key_d)
 	{
-		double oldDirX = game->dirX;
+		oldDirX = game->dirX;
 		game->dirX = game->dirX * cos(-game->rotSpeed) - game->dirY * sin(-game->rotSpeed);
 		game->dirY = oldDirX * sin(-game->rotSpeed) + game->dirY * cos(-game->rotSpeed);
-		double oldPlaneX = game->planeX;
+		oldPlaneX = game->planeX;
 		game->planeX = game->planeX * cos(-game->rotSpeed) - game->planeY * sin(-game->rotSpeed);
 		game->planeY = oldPlaneX * sin(-game->rotSpeed) + game->planeY * cos(-game->rotSpeed);
 	}
 
 	if (game->key_a)
 	{
-		double oldDirX = game->dirX;
+		oldDirX = game->dirX;
 		game->dirX = game->dirX * cos(game->rotSpeed) - game->dirY * sin(game->rotSpeed);
 		game->dirY = oldDirX * sin(game->rotSpeed) + game->dirY * cos(game->rotSpeed);
-		double oldPlaneX = game->planeX;
+		oldPlaneX = game->planeX;
 		game->planeX = game->planeX * cos(game->rotSpeed) - game->planeY * sin(game->rotSpeed);
 		game->planeY = oldPlaneX * sin(game->rotSpeed) + game->planeY * cos(game->rotSpeed);
 	}
