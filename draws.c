@@ -41,29 +41,3 @@ void	draw_rectangles(t_game *game)
 		i++;
 	}
 }
-
-void draw_line(t_game *game, double x1, double y1, double x2, double y2)
-{
-	double deltaX;
-	double deltaY;
-	double step;
-	int i;
-
-	i = 0;
-
-	deltaX = x2 - x1;
-	deltaY = y2 - y1;
-	if (fabs(deltaX) > fabs(deltaY))
-		step = fabs(deltaX); 
-	else
-		step = fabs(deltaY);
-	deltaX /= step;
-	deltaY /= step;
-	while (i <= step)
-	{
-		game->img.data[(int)fabs(x1) * game->width + (int)fabs(y1)] = 0xEE790A;
-		x1 += deltaX;
-		y1 += deltaY;
-		i++;
-	}
-}

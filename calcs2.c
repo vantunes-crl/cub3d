@@ -30,3 +30,34 @@ void draw_wall(t_game *game, t_textures *textures, t_wall *wall)
 		game->buf[wall->y][wall->x] = textures->color;
 	}
 }
+
+void	calc(t_game *game)
+{
+	t_flor flor;
+	t_cell cell;
+	t_wall wall;
+	t_textures textures;
+
+	init_map(game);
+	flor.y = 0;
+	while(flor.y < game->height)
+	{
+		flor = put_flor(flor,game);
+		cell.x = 0;
+		while (++cell.x < game->width)
+			cell = put_cell(game,&flor, cell);
+		flor.y++;
+	}
+	wall.x = 0;
+	while (++wall.x < game->width)
+	{
+		init_wall(&wall,game);
+		steps(&wall, game);
+		perp_wall(game, &wall);
+		textures_wall(&wall,&textures,game);
+		draw_wall(game,&textures, &wall);
+		game->zBuffer[wall.x] = wall.perpWallDist;
+	}
+	draw_sprite(game,11, 5, 4);
+	draw_sprite(game,5,5,4);
+}
