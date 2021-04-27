@@ -89,6 +89,9 @@ int	main(void)
 	init_buff(&game);
 	init_map(&game);
 	load_texture(&game);
+	parse(&game);
+	game.floor_color = 0xFFFFFF;
+	game.cell_color = 0xFF5000;
 	game.posX = 5.0;
 	game.posY = 10.0;
 	game.dirX = -1.0;
@@ -102,8 +105,8 @@ int	main(void)
 	game.key_a = 0;
 	game.key_d = 0;
 	game.key_esc = 0;
-	game.win = mlx_new_window(game.mlx, width, height, "mlx");
-	game.img.img = mlx_new_image(game.mlx, width, height);
+	game.win = mlx_new_window(game.mlx, game.width_screen, game.height_screen, "mlx");
+	game.img.img = mlx_new_image(game.mlx, game.width_screen, game.height_screen);
 	game.img.data = (int *)mlx_get_data_addr(game.img.img, &game.img.bpp, &game.img.size_l, &game.img.endian);
 	mlx_loop_hook(game.mlx, &main_loop, &game);
 	mlx_hook(game.win, X_EVENT_KEY_PRESS, 0, &key_press, &game);

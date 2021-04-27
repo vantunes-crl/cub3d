@@ -25,12 +25,10 @@ t_cell put_cell(t_game *game, t_flor *flor, t_cell cell)
 	cell.ty = (int)(texHeight * (flor->floorY - cell.cellY)) & (texHeight - 1);
 	flor->floorX += flor->floorStepX;
 	flor->floorY += flor->floorStepY;
-	cell.floorTexture = 3;
-	cell.ceilingTexture = 6;
-	cell.color = game->texture[cell.floorTexture][texWidth * cell.ty + cell.tx];
+	cell.color = game->floor_color;
 	cell.color = (cell.color >> 1) & 8355711;
 	game->buf[flor->y][cell.x] = cell.color;
-	cell.color = game->texture[cell.ceilingTexture][texWidth * cell.ty + cell.tx];
+	cell.color = game->cell_color;
 	cell.color = (cell.color >> 1) & 8355711;
 	game->buf[height - flor->y - 1][cell.x] = cell.color;
 	return (cell);

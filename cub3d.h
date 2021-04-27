@@ -7,6 +7,9 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include "get_next_line.h"
 #define X_EVENT_KEY_PRESS	2
 #define X_EVENT_KEY_EXIT	17
 #define texWidth 64
@@ -36,11 +39,20 @@ typedef struct	s_img
 
 typedef struct	s_game
 {
+	char *tex_south;
+	char *tex_north;
+	char *tex_east;
+	char *tex_west;
+	char *tex_sprite;
+	int floor_color;
+	int cell_color;
 	int key_w;
 	int key_s;
 	int key_a;
 	int key_d;
 	int key_esc;
+	int width_screen;
+	int height_screen;
 	double posX;
 	double posY;
 	double dirX;
@@ -187,5 +199,7 @@ char	*ft_itoa(int n);
 int		key_release(int key, t_game *game);
 int		key_press(int key, t_game *game);
 int		key_move(t_game *game);
+void  	parse(t_game *game);
+int		ft_atoi(const char *str);
 
 #endif
