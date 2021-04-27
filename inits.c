@@ -70,15 +70,15 @@ void	load_texture(t_game *game)
 {
 	t_img	img;
 
-	load_image(game, game->texture[0], "textures/redbrick.xpm", &img);
-	load_image(game, game->texture[1], "textures/mossy.xpm", &img);
-	load_image(game, game->texture[2], "textures/purplestone.xpm", &img);
-	load_image(game, game->texture[3], "textures/greystone.xpm", &img);
+	load_image(game, game->texture[0], game->tex_north, &img);
+	load_image(game, game->texture[1], game->tex_south, &img);
+	load_image(game, game->texture[2], game->tex_west, &img);
+	load_image(game, game->texture[3], game->tex_east, &img);
 	load_image(game, game->texture[4], "textures/lava.xpm", &img);
 	load_image(game, game->texture[5], "textures/mossy.xpm", &img);
 	load_image(game, game->texture[6], "textures/galaxy.xpm", &img);
 	load_image(game, game->texture[7], "textures/purplestone.xpm", &img);
     load_image(game, game->texture[8], "textures/barrel.xpm", &img);
 	load_image(game, game->texture[9], "textures/golddoor.xpm", &img);
-	load_image(game, game->texture[10], "textures/armor.xpm", &img);
+	load_image(game, game->texture[10], game->tex_sprite, &img);
 }
