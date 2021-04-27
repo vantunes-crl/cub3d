@@ -90,16 +90,14 @@ int	main(void)
 	parse(&game);
 	init_buff(&game);
 	load_texture(&game);
-	game.floor_color = 0xFFFFFF;
-	game.cell_color = 0xFF5000;
 	game.posX = 5.0;
 	game.posY = 10.0;
 	game.dirX = -1.0;
 	game.dirY = 0.0;
 	game.planeX = 0.0;
 	game.planeY = 0.90;
-	game.moveSpeed = 0.11;
-	game.rotSpeed = 0.11;
+	game.moveSpeed = 0.08;
+	game.rotSpeed = 0.08;
 	game.key_w = 0;
 	game.key_s = 0;
 	game.key_a = 0;

@@ -204,5 +204,7 @@ void 	parse_north(t_game *game, char *line, int i);
 void 	parse_south(t_game *game, char *line, int i);
 void 	parse_west(t_game *game, char *line, int i);
 void 	parse_east(t_game *game, char *line , int i);
+int		ft_isdigit(int c);
+int		create_trgb(int r, int g, int b);
 
 #endif

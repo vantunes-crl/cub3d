@@ -1,5 +1,57 @@
 #include "cub3d.h"
 
+void parse_floor(t_game *game, char *line, int i)
+{
+    char buff[4];
+    char buff2[4];
+    char buff3[4];
+    int j;
+
+    j = 0;
+    while(ft_isdigit(line[i]) == 0)
+        i++;
+    while(ft_isdigit(line[i]) == 1)
+        buff[j++] = (line[i++]);
+    buff[j] = '\0';
+    j = 0;
+    i++;
+    while(ft_isdigit(line[i]) == 1)
+        buff2[j++] = (line[i++]);
+    buff2[j] = '\0';
+    j = 0;
+    i++;
+    while(ft_isdigit(line[i]) == 1)
+        buff3[j++] = (line[i++]);
+    buff3[j] = '\0';
+    game->floor_color = create_trgb(ft_atoi(buff),ft_atoi(buff2),ft_atoi(buff3));
+
+}
+void parse_cell(t_game *game, char *line, int i)
+{
+    char buff[4];
+    char buff2[4];
+    char buff3[4];
+    int j;
+
+    j = 0;
+    while(ft_isdigit(line[i]) == 0)
+        i++;
+    while(ft_isdigit(line[i]) == 1)
+        buff[j++] = (line[i++]);
+    buff[j] = '\0';
+    j = 0;
+    i++;
+    while(ft_isdigit(line[i]) == 1)
+        buff2[j++] = (line[i++]);
+    buff2[j] = '\0';
+    j = 0;
+    i++;
+    while(ft_isdigit(line[i]) == 1)
+        buff3[j++] = (line[i++]);
+    buff3[j] = '\0';
+    game->cell_color = create_trgb(ft_atoi(buff),ft_atoi(buff2),ft_atoi(buff3));
+}
+
 void parse_sprite(t_game *game, char *line, int i)
 {
     int count; 
@@ -75,6 +127,10 @@ void parse(t_game *game)
                 parse_east(game, line, i + 2);
             if (line[i] == 'S')
                 parse_sprite(game, line, i + 2);
+                if (line[i] == 'F')
+                parse_floor(game, line, i);
+            if (line[i] == 'C')
+                parse_cell(game, line, i);
             i++;
         }
     }
