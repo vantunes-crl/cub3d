@@ -66,6 +66,7 @@ int	main(void)
 	t_game game;
 	
 	game.mlx = mlx_init();
+	init_map(&game);
 	parse(&game);
 	init_buff(&game);
 	load_texture(&game);

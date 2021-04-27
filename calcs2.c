@@ -38,7 +38,6 @@ void	calc(t_game *game)
 	t_wall wall;
 	t_textures textures;
 
-	init_map(game);
 	flor.y = 0;
 	while(flor.y < game->height)
 	{
@@ -58,6 +57,4 @@ void	calc(t_game *game)
 		draw_wall(game,&textures, &wall);
 		game->zBuffer[wall.x] = wall.perpWallDist;
 	}
-	draw_sprite(game,11, 5, 4);
-	draw_sprite(game,5,5,4);
 }
