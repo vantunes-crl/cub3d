@@ -7,16 +7,16 @@ void	calc(t_game *game , t_flor flor)
 	t_textures textures;
 
 	flor.y = 0;
-	while(flor.y < height)
+	while(flor.y < game->height_screen)
 	{
 		flor = put_flor(flor,game);
 		cell.x = 0;
-		while (++cell.x < width)
+		while (++cell.x < game->width_screen)
 			cell = put_cell(game,&flor, cell);
 		flor.y++;
 	}
 	wall.x = 0;
-	while (++wall.x < width)
+	while (++wall.x < game->width_screen)
 	{
 		init_wall(&wall,game);
 		steps(&wall, game);
@@ -46,10 +46,10 @@ int init_buff(t_game *game)
 	int j;
 
 	i = 0;
-	while (i < height)
+	while (i < game->height_screen)
 	{
 		j = 0;
-		while (j < width)
+		while (j < game->width_screen)
 		{
 			game->buf[i][j] = 0;
 			j++;
@@ -86,10 +86,10 @@ int	main(void)
 	t_game game;
 	
 	game.mlx = mlx_init();
-	init_buff(&game);
 	init_map(&game);
-	load_texture(&game);
 	parse(&game);
+	init_buff(&game);
+	load_texture(&game);
 	game.floor_color = 0xFFFFFF;
 	game.cell_color = 0xFF5000;
 	game.posX = 5.0;

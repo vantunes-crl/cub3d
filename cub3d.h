@@ -17,8 +17,6 @@
 #define mapWidth 24
 #define mapHeight 24
 #define mapS 14
-#define width 1920
-#define height 1024
 #define numSprites 19
 #define uDiv 1
 #define vDiv 1
@@ -62,9 +60,9 @@ typedef struct	s_game
 	void	*mlx;
 	void	*win;
 	t_img	img;
-	int		buf[height][width];
+	int		buf[1024][1920];
 	int		**texture;
-	double zBuffer[width];
+	double zBuffer[1920];
 	double	moveSpeed;
 	double	rotSpeed;
 	double sprite_posy;
@@ -201,5 +199,10 @@ int		key_press(int key, t_game *game);
 int		key_move(t_game *game);
 void  	parse(t_game *game);
 int		ft_atoi(const char *str);
+int		ft_isalpha(int c);
+void 	parse_north(t_game *game, char *line, int i);
+void 	parse_south(t_game *game, char *line, int i);
+void 	parse_west(t_game *game, char *line, int i);
+void 	parse_east(t_game *game, char *line , int i);
 
 #endif

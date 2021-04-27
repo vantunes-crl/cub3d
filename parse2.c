@@ -42,6 +42,8 @@ void parse(t_game *game)
         {
             if (line[i] == 'R')
                 parse_screen(game,line,i);
+            if (line[i] == 'N' && line[i + 1] == 'O')
+                parse_north(game, line, i);
             i++;
         }
     }

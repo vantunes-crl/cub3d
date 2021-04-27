@@ -13,7 +13,7 @@ void	draw_rectangle(t_game *game, int x, int y , int color)
 		j = 0;
 		while (j < mapS - 1)
 		{
-			game->img.data[(x + i) * width + y + j] = color;
+			game->img.data[(x + i) * game->width_screen + y + j] = color;
 			j++;
 		}
 		i++;
@@ -61,7 +61,7 @@ void draw_line(t_game *game, double x1, double y1, double x2, double y2)
 	deltaY /= step;
 	while (i <= step)
 	{
-		game->img.data[(int)fabs(x1) * width + (int)fabs(y1)] = 0xEE790A;
+		game->img.data[(int)fabs(x1) * game->width_screen + (int)fabs(y1)] = 0xEE790A;
 		x1 += deltaX;
 		y1 += deltaY;
 		i++;
