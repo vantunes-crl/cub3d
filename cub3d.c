@@ -16,10 +16,6 @@ void	calc(t_game *game , t_flor flor)
 		flor.y++;
 	}
 	wall.x = 0;
-	if (game->map[(int)(game->posX + game->dirX * game->moveSpeed)][(int)(game->posY)] == 10)
-		game->map[(int)(game->posX + game->dirX * game->moveSpeed )][(int)(game->posY)] = 0;
-	else if (game->map[(int)(game->posX)][(int)(game->posY + game->dirY * game->moveSpeed )] == 10)
-		game->map[(int)(game->posX)][(int)(game->posY + (game->dirY) * game->moveSpeed)] = 0;
 	while (++wall.x < width)
 	{
 		init_wall(&wall,game);
@@ -38,6 +34,7 @@ int	main_loop(t_game *game)
 	calc(game, flor);
 	draw(game);
 	draw_rectangles(game);
+	key_move(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->img.img, 0, 0);
 	return (0);
 }
@@ -99,10 +96,16 @@ int	main(void)
 	game.planeY = 0.90;
 	game.moveSpeed = 0.11;
 	game.rotSpeed = 0.11;
+	game.key_w = 0;
+	game.key_s = 0;
+	game.key_a = 0;
+	game.key_d = 0;
+	game.key_esc = 0;
 	game.win = mlx_new_window(game.mlx, width, height, "mlx");
 	game.img.img = mlx_new_image(game.mlx, width, height);
 	game.img.data = (int *)mlx_get_data_addr(game.img.img, &game.img.bpp, &game.img.size_l, &game.img.endian);
 	mlx_loop_hook(game.mlx, &main_loop, &game);
-	mlx_hook(game.win, X_EVENT_KEY_PRESS,0, &key_press, &game);
+	mlx_hook(game.win, X_EVENT_KEY_PRESS, 0, &key_press, &game);
+	mlx_hook(game.win, 3, 1L << 1, &key_release, &game);
 	mlx_loop(game.mlx);
 }

@@ -36,6 +36,11 @@ typedef struct	s_img
 
 typedef struct	s_game
 {
+	int key_w;
+	int key_s;
+	int key_a;
+	int key_d;
+	int key_esc;
 	double posX;
 	double posY;
 	double dirX;
@@ -179,5 +184,8 @@ int		compare(const void *first, const void *second);
 void	sort_order(t_pair *orders, int amount);
 void	sortSprites(int *order, double *dist, int amount);
 char	*ft_itoa(int n);
+int		key_release(int key, t_game *game);
+int		key_press(int key, t_game *game);
+int		key_move(t_game *game);
 
 #endif
