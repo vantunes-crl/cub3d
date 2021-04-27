@@ -1,23 +1,26 @@
 #ifndef CUB3D_H
 #define CUB3D_H
 
-#include "./minilibx/mlx.h"
+#include "mlx/mlx.h"
 #include "key_macos.h"
 #include <math.h>
-#include <stdlib.h>
-#include <fcntl.h>
-#include <unistd.h>
 #include <string.h>
-#include "get_next_line.h"
+#include <stdio.h>
+#include <stdlib.h>
 #define X_EVENT_KEY_PRESS	2
 #define X_EVENT_KEY_EXIT	17
 #define texWidth 64
 #define texHeight 64
 #define mapWidth 24
 #define mapHeight 24
+#define mapS 14
+#define width 1920
+#define height 1024
+#define numSprites 19
 #define uDiv 1
 #define vDiv 1
 #define vMove 0.0
+
 
 typedef struct	s_img
 {
@@ -33,32 +36,18 @@ typedef struct	s_img
 
 typedef struct	s_game
 {
-	int floorcolor;
-	int cellcolor;
-	int key_w;
-	int key_s;
-	int key_a;
-	int key_d;
-	int key_esc;
-	char *tex_north;
-	char *tex_south;
-	char *tex_west;
-	char *tex_east;
-	char *tex_sprite;
 	double posX;
 	double posY;
 	double dirX;
 	double dirY;
 	double planeX;
 	double planeY;
-	int width;
-	int height;
 	void	*mlx;
 	void	*win;
 	t_img	img;
-	int		**buf;
+	int		buf[height][width];
 	int		**texture;
-	double *zBuffer;
+	double zBuffer[width];
 	double	moveSpeed;
 	double	rotSpeed;
 	double sprite_posy;
@@ -140,6 +129,8 @@ typedef struct s_sprite
 	double 	y;
 	double 	x;
 	int 	texture;
+	int		spriteOrder[numSprites];
+    double	spriteDistance[numSprites];
 	double spriteX;
 	double spriteY;
 	double invDet;
@@ -161,6 +152,12 @@ typedef struct s_sprite
 	int j;
 } t_sprite;
 
+typedef struct		s_pair
+{
+	double	first;
+	int		second;
+}					t_pair;
+
 void    init_map(t_game *game);
 void	draw(t_game *game);
 t_flor 	put_flor(t_flor flor , t_game *game);
@@ -175,22 +172,12 @@ void	load_image(t_game *game, int *texture, char *path, t_img *img);
 void	load_texture(t_game *game);
 void	draw_rectangle(t_game *game, int x, int y , int color);
 void	draw_rectangles(t_game *game);
+void 	draw_lines(t_game *game);
+void	draw_line(t_game *game, double x1, double y1, double x2, double y2);
 void 	draw_sprite(t_game *game , double sprite_x, double sprite_y , int texture);
+int		compare(const void *first, const void *second);
+void	sort_order(t_pair *orders, int amount);
+void	sortSprites(int *order, double *dist, int amount);
 char	*ft_itoa(int n);
-void 	parse_screen(t_game *game ,char *line, int i);
-void	parse(t_game *game);
-int		ft_atoi(const char *str);
-int		ft_isalpha(int c);
-void 	parse_south(t_game *game, char *line, int i);
-void 	parse_north(t_game *game, char *line, int i);
-void 	parse_west(t_game *game, char *line, int i);
-void 	parse_east(t_game *game, char *line , int i);
-char	**ft_split(char const *s, char c);
-int		ft_isdigit(int c);
-int		create_trgb(int r, int g, int b);
-void 	parse(t_game *game);
-void	calc(t_game *game);
-int		key_release(int key, t_game *game);
-int		key_move(t_game *game);
 
 #endif

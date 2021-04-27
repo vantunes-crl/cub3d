@@ -9,34 +9,34 @@ void draw_sprite(t_game *game , double sprite_x, double sprite_y , int texture)
 	sprites.invDet = 1.0 / (game->planeX * game->dirY - game->dirX * game->planeY);
 	sprites.transformX = sprites.invDet * (game->dirY * sprites.spriteX - game->dirX * sprites.spriteY);
 	sprites.transformY = sprites.invDet * (-game->planeY * sprites.spriteX + game->planeX * sprites.spriteY);
-	sprites.spriteScreenX = (int)((game->width / 2) * (1 + sprites.transformX / sprites.transformY));
+	sprites.spriteScreenX = (int)((width / 2) * (1 + sprites.transformX / sprites.transformY));
 	sprites.vMoveScreen = (int)(vMove / sprites.transformY);
-	sprites.spriteHeight = (int)fabs((game->height / sprites.transformY) / vDiv);
-	sprites.drawStartY = -sprites.spriteHeight / 2 + game->height / 2 + sprites.vMoveScreen;
+	sprites.spriteHeight = (int)fabs((height / sprites.transformY) / vDiv);
+	sprites.drawStartY = -sprites.spriteHeight / 2 + height / 2 + sprites.vMoveScreen;
 	if (sprites.drawStartY < 0) 
 		sprites.drawStartY = 0;
-	sprites.drawEndY = sprites.spriteHeight / 2 + game->height / 2 + sprites.vMoveScreen;
-	if(sprites.drawEndY >= game->height) 
-		sprites.drawEndY = game->height - 1;
-	sprites.spriteWidth = (int)fabs((game->height / sprites.transformY) / uDiv);
+	sprites.drawEndY = sprites.spriteHeight / 2 + height / 2 + sprites.vMoveScreen;
+	if(sprites.drawEndY >= height) 
+		sprites.drawEndY = height - 1;
+	sprites.spriteWidth = (int)fabs((height / sprites.transformY) / uDiv);
 	sprites.drawStartX = -sprites.spriteWidth / 2 + sprites.spriteScreenX;
 	if(sprites.drawStartX < 0) 
 		sprites.drawStartX = 0;
 	sprites.drawEndX = sprites.spriteWidth / 2 + sprites.spriteScreenX;
-	if(sprites.drawEndX >= game->width) 
-		sprites.drawEndX = game->width - 1;
+	if(sprites.drawEndX >= width) 
+		sprites.drawEndX = width - 1;
 	sprites.stripe = sprites.drawStartX;
 	while (sprites.stripe < sprites.drawEndX)
 	{
 		sprites.texX = (int)((256 * (sprites.stripe - (-sprites.spriteWidth / 2 + sprites.spriteScreenX)) * texWidth / sprites.spriteWidth) / 256);
-		if (sprites.transformY > 0 && sprites.stripe > 0 && sprites.stripe < game->width && sprites.transformY < game->zBuffer[sprites.stripe])
+		if (sprites.transformY > 0 && sprites.stripe > 0 && sprites.stripe < width && sprites.transformY < game->zBuffer[sprites.stripe])
 			sprites.j = sprites.drawStartY;
 		while (sprites.j < sprites.drawEndY)
 		{
-			sprites.d = (sprites.j-sprites.vMoveScreen) * 256 - game->height * 128 + sprites.spriteHeight * 128;
+			sprites.d = (sprites.j-sprites.vMoveScreen) * 256 - height * 128 + sprites.spriteHeight * 128;
 			sprites.texY = ((sprites.d * texHeight) / sprites.spriteHeight) / 256;
 			sprites.color = game->texture[texture][texWidth * sprites.texY + sprites.texX];
-			if ((sprites.color & 0x00FFFFFF) != 0)
+			if ((sprites.color & 0x00FFFFFF) != 0) 
 				game->buf[sprites.j][sprites.stripe] = sprites.color;
 			sprites.j++;
 		}

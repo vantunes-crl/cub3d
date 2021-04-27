@@ -2,14 +2,19 @@
 
 void textures_wall(t_wall *wall, t_textures *textures, t_game *game)
 {
-	if (wall->side == 0 || wall->side == 1)
+	textures->texNum = game->map[wall->mapX][wall->mapY] - 1;
+	if (wall->side == 0)
 		textures->wallX = game->posY + wall->perpWallDist * wall->rayDirY;
 	else
 		textures->wallX = game->posX + wall->perpWallDist * wall->rayDirX;
 	textures->wallX -= floor(textures->wallX);
 	textures->texX = (int)(textures->wallX * (double)texWidth);
+	if (wall->side == 0 && wall->rayDirX > 0)
+		textures->texX = texWidth - textures->texX - 1;
+	if (wall->side == 1 && wall->rayDirY < 0)
+		textures->texX = texWidth - textures->texX - 1;
 	textures->step = 1.0 * texHeight / wall->lineHeight;
-	textures->texPos = (wall->drawStart - game->height / 2 + wall->lineHeight / 2) * textures->step;
+	textures->texPos = (wall->drawStart - height / 2 + wall->lineHeight / 2) * textures->step;
 }
 
 void draw_wall(t_game *game, t_textures *textures, t_wall *wall)
@@ -19,42 +24,9 @@ void draw_wall(t_game *game, t_textures *textures, t_wall *wall)
 	{
 		textures->texY = (int)textures->texPos & (texHeight - 1);
 		textures->texPos += textures->step;
-		if (wall->side == 0)
-			textures->color = game->texture[0][texHeight * textures->texY + textures->texX];
-		else if (wall->side == 1)
-			textures->color = game->texture[1][texHeight * textures->texY + textures->texX];
-		else if (wall->side == 2)
-			textures->color = game->texture[2][texHeight * textures->texY + textures->texX];
-		else if (wall->side == 3)
-			textures->color = game->texture[3][texHeight * textures->texY + textures->texX];
+		textures->color = game->texture[textures->texNum][texHeight * textures->texY + textures->texX];
+		if (wall->side == 1)
+			textures->color = (textures->color >> 1) & 8355711;
 		game->buf[wall->y][wall->x] = textures->color;
-	}
-}
-
-void	calc(t_game *game)
-{
-	t_flor flor;
-	t_cell cell;
-	t_wall wall;
-	t_textures textures;
-
-	flor.y = 0;
-	while(flor.y < game->height)
-	{
-		flor = put_flor(flor,game);
-		cell.x = 0;
-		while (++cell.x < game->width)
-			cell = put_cell(game,&flor, cell);
-		flor.y++;
-	}
-	wall.x = 0;
-	while (++wall.x < game->width)
-	{
-		init_wall(&wall,game);
-		steps(&wall, game);
-		perp_wall(game, &wall);
-		textures_wall(&wall,&textures,game);
-		draw_wall(game,&textures, &wall);
-		game->zBuffer[wall.x] = wall.perpWallDist;
 	}
 }

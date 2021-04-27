@@ -1,24 +1,13 @@
-NAME = cub3d.a
+CC			= gcc
+CFLAGS		= -L mlx -lmlx -framework OpenGL -framework AppKit
+RM			= rm -f
 
-SRC = calcs.c calcs2.c cub3d.c get_next_line.c get_next_line_utils.c inits.c keys.c parse.c parse2.c sprite.c utils.c \
+NAME		= cub3d.a
+INCLUDE		= cub3d.h 
 
+SRCS =	cub3d.c calcs.c calcs2.c keys.c inits.c draws.c sprite.c sprite_ft.c itoa.c
 
-OBJ = $(SRC:.c=.o)
-
-all: $(NAME)
-
-$(NAME): $(OBJ)
-		make -C minilibx
-		mv minilibx/libmlx.a .
-		gcc -Wall -g -Werror -Wextra -c $(SRC)
-		gcc -Wall -g -Werror -Wextra -L. -lmlx -framework OpenGL -framework Appkit -g $(OBJ) -o $(NAME)
-
-clean:
-		make -C minilibx clean
-		rm -rf $(OBJ) libft.a libmlx.a
-
-fclean: clean
-		make -C minilibx clean
-		rm -rf $(NAME)
-
-re : fclean all
+all:
+	$(CC) -lmlx -lm -framework OpenGL -framework AppKit $(SRCS)
+re:
+	$(RM) a.out 
