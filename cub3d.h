@@ -179,7 +179,7 @@ void	draw_rectangle(t_game *game, int x, int y , int color);
 void	draw_rectangles(t_game *game);
 void 	draw_lines(t_game *game);
 void	draw_line(t_game *game, double x1, double y1, double x2, double y2);
-void 	draw_sprite(t_game *game , double sprite_x, double sprite_y , int texture);
+void 	draw_sprites(t_game *game);
 int		compare(const void *first, const void *second);
 void	sort_order(t_pair *orders, int amount);
 void	sortSprites(int *order, double *dist, int amount);

@@ -25,6 +25,7 @@ void	calc(t_game *game , t_flor flor)
 		draw_wall(game,&textures, &wall);
 		game->zBuffer[wall.x] = wall.perpWallDist;
 	}
+	draw_sprites(game);
 }
 
 int	main_loop(t_game *game)
