@@ -107,7 +107,7 @@ int	main(void)
 	game.img.img = mlx_new_image(game.mlx, game.width_screen, game.height_screen);
 	game.img.data = (int *)mlx_get_data_addr(game.img.img, &game.img.bpp, &game.img.size_l, &game.img.endian);
 	mlx_loop_hook(game.mlx, &main_loop, &game);
-	mlx_hook(game.win, X_EVENT_KEY_PRESS, 0, &key_press, &game);
+	mlx_hook(game.win, 2, 0, &key_press, &game);
 	mlx_hook(game.win, 3, 1L << 1, &key_release, &game);
 	mlx_loop(game.mlx);
 }

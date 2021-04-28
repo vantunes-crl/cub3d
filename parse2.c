@@ -1,13 +1,15 @@
 #include "cub3d.h"
 
-void parse_floor(t_game *game, char *line, int i)
+void parse_floor(t_game *game, char *line)
 {
     char buff[4];
     char buff2[4];
     char buff3[4];
     int j;
+    int i;
 
     j = 0;
+    i = 0;
     while(ft_isdigit(line[i]) == 0)
         i++;
     while(ft_isdigit(line[i]) == 1)
@@ -26,14 +28,16 @@ void parse_floor(t_game *game, char *line, int i)
     game->floor_color = create_trgb(ft_atoi(buff),ft_atoi(buff2),ft_atoi(buff3));
 
 }
-void parse_cell(t_game *game, char *line, int i)
+void parse_cell(t_game *game, char *line)
 {
     char buff[4];
     char buff2[4];
     char buff3[4];
     int j;
+    int i;
 
     j = 0;
+    i = 0;
     while(ft_isdigit(line[i]) == 0)
         i++;
     while(ft_isdigit(line[i]) == 1)
@@ -110,28 +114,24 @@ void parse(t_game *game)
 
     i = 0;
     fd = open("inits.cub", O_RDONLY);
-    while (get_next_line(fd,&line) > 0)
+    while (get_next_line(fd,&line))
     {
-        i = 0;
-        while(line[i] != '\0')
-        {
-            if (line[i] == 'R')
-                parse_screen(game,line,i);
-            if (line[i] == 'N' && line[i + 1] == 'O')
-                parse_north(game, line, i + 2);
-            if (line[i] == 'S' && line[i + 1] == 'O')
-                parse_south(game, line, i + 2);
-            if (line[i] == 'W' && line[i + 1] == 'E')
-                parse_west(game, line, i + 2);
-            if (line[i] == 'E' && line[i + 1] == 'A')
-                parse_east(game, line, i + 2);
-            if (line[i] == 'S')
-                parse_sprite(game, line, i + 2);
-                if (line[i] == 'F')
-                parse_floor(game, line, i);
-            if (line[i] == 'C')
-                parse_cell(game, line, i);
-            i++;
-        }
+        if (line[0] == 'R')
+            parse_screen(game,line,i);
+        if (line[0] == 'N' && line[1] == 'O')
+            parse_north(game, line, i + 2);
+        if (line[0] == 'S' && line[1] == 'O')
+            parse_south(game, line, i + 2);
+        if (line[0] == 'W' && line[1] == 'E')
+            parse_west(game, line, i + 2);
+        if (line[0] == 'E' && line[1] == 'A')
+            parse_east(game, line, i + 2);
+        if (line[0] == 'S' && line[1] == ' ')
+            parse_sprite(game, line, i + 2);
+        if (line[0] == 'F' && line[1] == ' ')
+            parse_floor(game, line);
+        if (line[0] == 'C' && line[1] == ' ')
+            parse_cell(game, line);
+        i++;
     }
 }
