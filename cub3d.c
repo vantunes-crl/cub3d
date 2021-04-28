@@ -90,8 +90,8 @@ int	main(void)
 	parse(&game);
 	init_buff(&game);
 	load_texture(&game);
-	game.posX = 19;
-	game.posY = 10.0;
+	game.posX = 5;
+	game.posY = 5;
 	game.dirX = -1.0;
 	game.dirY = 0.0;
 	game.planeX = 0.0;

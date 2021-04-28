@@ -14,8 +14,6 @@
 #define X_EVENT_KEY_EXIT	17
 #define texWidth 64
 #define texHeight 64
-#define mapWidth 24
-#define mapHeight 24
 #define mapS 14
 #define numSprites 19
 #define uDiv 1
@@ -51,6 +49,7 @@ typedef struct	s_game
 	int key_esc;
 	int width_screen;
 	int height_screen;
+	int map_size;
 	double posX;
 	double posY;
 	double dirX;

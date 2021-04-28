@@ -22,6 +22,7 @@ void parse_map(t_game *game)
     }
 
     i = ft_lstsize(elem);
+    game->map_size = i;
     game->map = (char **)malloc(sizeof(char *) * i);
 
     while(elem)
