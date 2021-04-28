@@ -22,11 +22,11 @@ void parse_map(t_game *game)
     }
 
     i = ft_lstsize(elem);
-    game->map1 = (char **)malloc(sizeof(char *) * i);
+    game->map = (char **)malloc(sizeof(char *) * i);
 
     while(elem)
     {
-        game->map1[x] = ft_strdup(elem->content);
+        game->map[x] = ft_strdup(elem->content);
         elem = elem->next;
         x++;
     }

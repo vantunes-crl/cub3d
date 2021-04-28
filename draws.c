@@ -29,9 +29,9 @@ void	draw_rectangles(t_game *game)
 	while (i < mapHeight)
 	{
 		j = 0;
-		while (j < ft_strlen(game->map1[i]))
+		while (j < ft_strlen(game->map[i]))
 		{
-			if (game->map1[i][j] == '1')
+			if (game->map[i][j] == '1')
 				draw_rectangle(game, j, i , 0xFFFFFF);
 			else
 				draw_rectangle(game, j, i, 0x33D1FF);

@@ -2,7 +2,6 @@
 
 void textures_wall(t_wall *wall, t_textures *textures, t_game *game)
 {
-	textures->texNum = game->map[wall->mapX][wall->mapY] - 1;
 	if (wall->side == 0 || wall->side == 1)
 		textures->wallX = game->posY + wall->perpWallDist * wall->rayDirY;
 	else
@@ -24,7 +23,6 @@ void draw_wall(t_game *game, t_textures *textures, t_wall *wall)
 	{
 		textures->texY = (int)textures->texPos & (texHeight - 1);
 		textures->texPos += textures->step;
-		textures->color = game->texture[textures->texNum][texHeight * textures->texY + textures->texX];
 		if (wall->side == 0)
 			textures->color = game->texture[0][texHeight * textures->texY + textures->texX];
 		else if (wall->side == 1)

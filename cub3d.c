@@ -86,12 +86,11 @@ int	main(void)
 	t_game game;
 	
 	game.mlx = mlx_init();
-	init_map(&game);
 	parse_map(&game);
 	parse(&game);
 	init_buff(&game);
 	load_texture(&game);
-	game.posX = 5.0;
+	game.posX = 19;
 	game.posY = 10.0;
 	game.dirX = -1.0;
 	game.dirY = 0.0;
@@ -108,7 +107,7 @@ int	main(void)
 	game.img.img = mlx_new_image(game.mlx, game.width_screen, game.height_screen);
 	game.img.data = (int *)mlx_get_data_addr(game.img.img, &game.img.bpp, &game.img.size_l, &game.img.endian);
 	mlx_loop_hook(game.mlx, &main_loop, &game);
-	mlx_hook(game.win, 2, 0, &key_press, &game);
+	mlx_hook(game.win, 2, 1L << 0, &key_press, &game);
 	mlx_hook(game.win, 3, 1L << 1, &key_release, &game);
 	mlx_loop(game.mlx);
 }

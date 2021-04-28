@@ -67,8 +67,7 @@ typedef struct	s_game
 	double	rotSpeed;
 	double sprite_posy;
 	double sprite_posx;
-	char 	**map1;
-    int     map[mapWidth][mapHeight];
+	char 	**map;
 }				t_game;
 
 typedef struct s_flor
