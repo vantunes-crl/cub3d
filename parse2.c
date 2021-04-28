@@ -134,4 +134,5 @@ void parse(t_game *game)
             parse_cell(game, line);
         i++;
     }
+    close(fd);
 }

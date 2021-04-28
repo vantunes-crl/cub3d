@@ -1,6 +1,5 @@
 #include "cub3d.h"
 
-
 t_flor put_flor(t_flor flor , t_game *game)
 {
 	flor.rayDirX0 = game->dirX - game->planeX;
@@ -90,7 +89,7 @@ void steps(t_wall *wall , t_game *game)
 			else if (wall->stepY == -1)
 				wall->side = 3;
 		}
-		if (game->map[wall->mapX][wall->mapY] > 0) 
+		if (game->map[wall->mapX][wall->mapY] > 0)
 			wall->hit = 1;
 	}
 }

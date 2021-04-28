@@ -67,6 +67,7 @@ typedef struct	s_game
 	double	rotSpeed;
 	double sprite_posy;
 	double sprite_posx;
+	char 	**map1;
     int     map[mapWidth][mapHeight];
 }				t_game;
 
@@ -221,5 +222,6 @@ t_list	*ft_lstlast(t_list *lst);
 void	ft_lstadd_back(t_list **alst, t_list *new);
 int		ft_strlen(const char *str);
 char	*ft_strdup(const char *s1);
+void 	parse_map(t_game *game);
 
 #endif
