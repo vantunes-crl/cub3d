@@ -102,12 +102,12 @@ int	main(void)
 	parse(&game);
 	init_buff(&game);
 	load_texture(&game);
-	game.posX = 10;
-	game.posY = 5;
+	game.posX = 1.5;
+	game.posY = 1.0;
 	game.dirX = -1.0;
 	game.dirY = 0.0;
 	game.planeX = 0.0;
-	game.planeY = 0.90;
+	game.planeY = 0.66;
 	game.moveSpeed = 0.08;
 	game.rotSpeed = 0.08;
 	game.key_w = 0;

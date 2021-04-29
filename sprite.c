@@ -6,8 +6,8 @@ void draw_sprite(t_game *game , double pos_x, double pos_y)
 {
 	t_sprite sprites;
 
-	sprites.spriteX = pos_x - game->posX;
-	sprites.spriteY = pos_y - game->posY;
+	sprites.spriteX = (int)pos_x - game->posX;
+	sprites.spriteY = (int)pos_y - game->posY;
 	sprites.invDet = 1.0 / (game->planeX * game->dirY - game->dirX * game->planeY);
 	sprites.transformX = sprites.invDet * (game->dirY * sprites.spriteX - game->dirX * sprites.spriteY);
 	sprites.transformY = sprites.invDet * (-game->planeY * sprites.spriteX + game->planeX * sprites.spriteY);
