@@ -6,16 +6,16 @@ int	key_move(t_game *game)
 	double oldPlaneX;
 	if (game->key_w)
 	{
-		if (game->map[(int)(game->posX + game->dirX * game->moveSpeed)][(int)(game->posY)] == '0')
+		if ((game->map[(int)(game->posX + game->dirX * game->moveSpeed)][(int)(game->posY)] == '0') || (game->map[(int)(game->posX + game->dirX * game->moveSpeed)][(int)(game->posY)] == '2'))
 			game->posX += game->dirX * game->moveSpeed;
-		if (game->map[(int)(game->posX)][(int)(game->posY + game->dirY * game->moveSpeed)] == '0')
+		if ((game->map[(int)(game->posX)][(int)(game->posY + game->dirY * game->moveSpeed)] == '0') || (game->map[(int)(game->posX)][(int)(game->posY + game->dirY * game->moveSpeed)] == '2'))
 			game->posY += game->dirY * game->moveSpeed;
 	}
 	if (game->key_s)
 	{
-		if (game->map[(int)(game->posX - game->dirX * game->moveSpeed)][(int)(game->posY)] || game->map[(int)game->sprite_posx][(int)game->sprite_posy] == '0')
+		if ((game->map[(int)(game->posX - game->dirX * game->moveSpeed)][(int)(game->posY)] || game->map[(int)game->sprite_posx][(int)game->sprite_posy] == '0') || (game->map[(int)(game->posX - game->dirX * game->moveSpeed)][(int)(game->posY)] || game->map[(int)game->sprite_posx][(int)game->sprite_posy] == '2'))
 			game->posX -= game->dirX * game->moveSpeed;
-		if (game->map[(int)(game->posX)][(int)(game->posY - game->dirY * game->moveSpeed)] || game->map[(int)game->sprite_posy][(int)game->sprite_posx] == '0')
+		if ((game->map[(int)(game->posX)][(int)(game->posY - game->dirY * game->moveSpeed)] || game->map[(int)game->sprite_posy][(int)game->sprite_posx] == '0') || (game->map[(int)(game->posX)][(int)(game->posY - game->dirY * game->moveSpeed)] || game->map[(int)game->sprite_posy][(int)game->sprite_posx] == '2'))
 			game->posY -= game->dirY * game->moveSpeed;
 	}
 	if (game->key_d)

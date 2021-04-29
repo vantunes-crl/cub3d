@@ -84,7 +84,7 @@ void parse_screen(t_game *game ,char *line, int i)
     char width_screen[5];
     char height_screen[5];
     int j;
-
+  
     j = 0;
     while(line[i] != '\0')
     {
@@ -111,28 +111,59 @@ void parse(t_game *game)
     int fd;
     int i;
     char *line;
+    t_list *elem;
+    int x;
 
-    i = 0;
+    elem = NULL;
+    x = 0;
     fd = open("inits.cub", O_RDONLY);
     while (get_next_line(fd,&line))
     {
         if (line[0] == 'R')
             parse_screen(game,line,i);
-        if (line[0] == 'N' && line[1] == 'O')
+        else if (line[0] == 'N' && line[1] == 'O')
             parse_north(game, line, i + 2);
-        if (line[0] == 'S' && line[1] == 'O')
+        else if (line[0] == 'S' && line[1] == 'O')
             parse_south(game, line, i + 2);
-        if (line[0] == 'W' && line[1] == 'E')
+        else if (line[0] == 'W' && line[1] == 'E')
             parse_west(game, line, i + 2);
-        if (line[0] == 'E' && line[1] == 'A')
+        else if (line[0] == 'E' && line[1] == 'A')
             parse_east(game, line, i + 2);
-        if (line[0] == 'S' && line[1] == ' ')
+        else if (line[0] == 'S' && line[1] == ' ')
             parse_sprite(game, line, i + 2);
-        if (line[0] == 'F' && line[1] == ' ')
+        else if (line[0] == 'F' && line[1] == ' ')
             parse_floor(game, line);
-        if (line[0] == 'C' && line[1] == ' ')
+        else if (line[0] == 'C' && line[1] == ' ')
             parse_cell(game, line);
-        i++;
+        else
+        {
+            i = 0;
+            while(line[i])
+            {
+                if (line[i] == '1')
+                {
+                    ft_lstadd_back(&elem,ft_lstnew((void *)line));
+                    break;
+                }
+                i++;
+            }
+        }
     }
+    i = ft_lstsize(elem);
+    game->map_size = i;
+    game->map = (char **)malloc(sizeof(char *) * i);
+    while(elem)
+    {
+        game->map[x] = ft_strdup(elem->content);
+        elem = elem->next;
+        x++;
+    }
+    x = 0;
+    while (x < i)
+    {
+        printf("%s\n",game->map[x]);
+        x++;
+    }
+
     close(fd);
 }

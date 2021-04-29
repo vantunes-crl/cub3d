@@ -1,35 +1,26 @@
 #include "cub3d.h"
 
-void parse_map(t_game *game)
+void map_check(t_game *game)
 {
-    int flag;
-    int x;
-    char *line;
-    t_list *elem;
     int i;
-    int fd;
+    int j;
 
-    fd = open("inits.cub",O_RDONLY);
-    flag = 0;
-    x = 0;
-    elem = NULL;
-    while (get_next_line(fd, &line))
-    {   
-        if (line[0] == '1')
-            flag = 1;
-        if (flag == 1)
-            ft_lstadd_back(&elem,ft_lstnew((void *)line));
-    }
+    i = 0;
 
-    i = ft_lstsize(elem);
-    game->map_size = i;
-    game->map = (char **)malloc(sizeof(char *) * i);
-
-    while(elem)
+    while (i < game->map_size)
     {
-        game->map[x] = ft_strdup(elem->content);
-        elem = elem->next;
-        x++;
+        j = 0;
+        while (j < ft_strlen(game->map[i]))
+        {
+            if (game->map[i][j] == 'N')
+            {
+                game->posY = i;
+                game->posX = j;
+                game->map[i][j] = '0';
+                break;
+            }
+            j++;
+        }
+        i++;
     }
-    close(fd);
 }

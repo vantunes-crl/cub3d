@@ -5,6 +5,8 @@ void	calc(t_game *game , t_flor flor)
 	t_cell cell;
 	t_wall wall;
 	t_textures textures;
+	int i;
+	int j;
 
 	flor.y = 0;
 	while(flor.y < game->height_screen)
@@ -25,7 +27,18 @@ void	calc(t_game *game , t_flor flor)
 		draw_wall(game,&textures, &wall);
 		game->zBuffer[wall.x] = wall.perpWallDist;
 	}
-	draw_sprites(game);
+	i = 0;
+	while (i < game->map_size)
+    {
+        j = 0;
+        while (j < ft_strlen(game->map[i]))
+        {
+            if (game->map[i][j] == '2')
+               draw_sprite(game,i,j);
+            j++;
+        }
+        i++;
+    }
 }
 
 int	main_loop(t_game *game)
@@ -86,11 +99,10 @@ int	main(void)
 	t_game game;
 	
 	game.mlx = mlx_init();
-	parse_map(&game);
 	parse(&game);
 	init_buff(&game);
 	load_texture(&game);
-	game.posX = 5;
+	game.posX = 10;
 	game.posY = 5;
 	game.dirX = -1.0;
 	game.dirY = 0.0;

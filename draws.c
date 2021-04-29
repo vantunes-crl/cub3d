@@ -33,8 +33,10 @@ void	draw_rectangles(t_game *game)
 		{
 			if (game->map[i][j] == '1')
 				draw_rectangle(game, j, i , 0xFFFFFF);
-			else
+			if (game->map[i][j] == '0')
 				draw_rectangle(game, j, i, 0x33D1FF);
+			if (game->map[i][j] == '2')
+				draw_rectangle(game, j, i, 0xFA8800);
 			draw_rectangle(game,game->posY + game->dirY * game->moveSpeed, game->posX + game->dirX * game->moveSpeed, 0xFF5733);
 			j++;
 		}
