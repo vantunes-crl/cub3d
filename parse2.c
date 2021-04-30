@@ -106,7 +106,7 @@ void parse_screen(t_game *game ,char *line, int i)
     game->height_screen = ft_atoi(height_screen);
 }
 
-void parse(t_game *game)
+void parse(t_game *game , char *argv)
 {
     int fd;
     int i;
@@ -116,7 +116,7 @@ void parse(t_game *game)
 
     elem = NULL;
     x = 0;
-    fd = open("inits.cub", O_RDONLY);
+    fd = open(argv, O_RDONLY);
     while (get_next_line(fd,&line))
     {
         if (line[0] == 'R')

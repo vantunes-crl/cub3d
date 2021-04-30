@@ -192,7 +192,7 @@ char	*ft_itoa(int n);
 int		key_release(int key, t_game *game);
 int		key_press(int key, t_game *game);
 int		key_move(t_game *game);
-void  	parse(t_game *game);
+void 	parse(t_game *game , char *argv);
 int		ft_atoi(const char *str);
 int		ft_isalpha(int c);
 void 	parse_north(t_game *game, char *line, int i);

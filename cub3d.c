@@ -94,12 +94,12 @@ int init_buff(t_game *game)
 	return (0);
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	t_game game;
 	
 	game.mlx = mlx_init();
-	parse(&game);
+	parse(&game,argv[1]);
 	map_check(&game);
 	init_buff(&game);
 	load_texture(&game);
