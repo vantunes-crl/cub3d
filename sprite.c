@@ -1,7 +1,5 @@
 #include "cub3d.h"
 
-#include "cub3d.h"
-
 void draw_sprite(t_game *game , double pos_x, double pos_y)
 {
 	t_sprite sprites;
@@ -37,7 +35,7 @@ void draw_sprite(t_game *game , double pos_x, double pos_y)
 		{
 			sprites.d = (sprites.j-sprites.vMoveScreen) * 256 - game->height_screen * 128 + sprites.spriteHeight * 128;
 			sprites.texY = ((sprites.d * texHeight) / sprites.spriteHeight) / 256;
-			sprites.color = game->texture[10][texWidth * sprites.texY + sprites.texX];
+			sprites.color = game->texture[4][texWidth * sprites.texY + sprites.texX];
 			if ((sprites.color & 0x00FFFFFF) != 0)
 				game->buf[sprites.j][sprites.stripe] = sprites.color;
 			sprites.j++;

@@ -50,8 +50,6 @@ int	main_loop(t_game *game)
 	draw_rectangles(game);
 	key_move(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->img.img, 0, 0);
-	mlx_string_put(game->mlx,game->win,500,350,0xFFFFFF,ft_itoa((int)game->planeX));
-	mlx_string_put(game->mlx,game->win,500,300,0xFFFFFF,ft_itoa((int)game->planeY));
 	return (0);
 }
 
@@ -71,11 +69,11 @@ int init_buff(t_game *game)
 		}
 		i++;
 	}
-	game->texture = (int **)malloc(sizeof(int *) * 11);
+	game->texture = (int **)malloc(sizeof(int *) * 5);
 	if (!game->texture)
 		return (-1);
 	i = 0;
-	while (i < 11)
+	while (i < 5)
 	{
 		game->texture[i] = (int *)malloc(sizeof(int) * (texHeight * texWidth));
 		if (!game->texture)
@@ -83,7 +81,7 @@ int init_buff(t_game *game)
 		i++;
 	}
 	i = 0;
-	while(i < 11)
+	while(i < 5)
 	{
 		j = 0;
 		while (j < texHeight * texWidth)

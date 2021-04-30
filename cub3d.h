@@ -15,7 +15,6 @@
 #define texWidth 64
 #define texHeight 64
 #define mapS 14
-#define numSprites 19
 #define uDiv 1
 #define vDiv 1
 #define vMove 0.0
@@ -144,8 +143,6 @@ typedef struct s_sprite
 	double 	y;
 	double 	x;
 	int 	texture;
-	int		spriteOrder[numSprites];
-    double	spriteDistance[numSprites];
 	double spriteX;
 	double spriteY;
 	double invDet;
@@ -172,12 +169,6 @@ typedef struct		s_list
 	void			*content;
 	struct s_list	*next;
 }					t_list;
-
-typedef struct		s_pair
-{
-	double	first;
-	int		second;
-}					t_pair;
 
 void    init_map(t_game *game);
 void	draw(t_game *game);

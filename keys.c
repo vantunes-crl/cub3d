@@ -6,16 +6,16 @@ int	key_move(t_game *game)
 	double oldPlaneX;
 	if (game->key_w)
 	{
-		if (game->map[(int)(game->posX + game->dirX * game->moveSpeed)][(int)(game->posY)] == '0')
+		if ((game->map[(int)(game->posX + game->dirX * game->moveSpeed)][(int)(game->posY)] == '0') || (game->map[(int)(game->posX + game->dirX * game->moveSpeed)][(int)(game->posY)] == '2'))
 			game->posX += game->dirX * game->moveSpeed;
-		if (game->map[(int)(game->posX)][(int)(game->posY + game->dirY * game->moveSpeed)] == '0')
+		if ((game->map[(int)(game->posX)][(int)(game->posY + game->dirY * game->moveSpeed)] == '0') || (game->map[(int)(game->posX)][(int)(game->posY + game->dirY * game->moveSpeed)] == '2'))
 			game->posY += game->dirY * game->moveSpeed;
 	}
 	if (game->key_s)
 	{
-		if (game->map[(int)(game->posX - game->dirX * game->moveSpeed)][(int)(game->posY)] == '0' || game->map[(int)game->sprite_posx][(int)game->sprite_posy] == '0')
+		if ((game->map[(int)(game->posX - game->dirX * game->moveSpeed)][(int)(game->posY)] == '0' || game->map[(int)game->sprite_posx][(int)game->sprite_posy] == '0') || (game->map[(int)(game->posX - game->dirX * game->moveSpeed)][(int)(game->posY)] == '0' || game->map[(int)game->sprite_posx][(int)game->sprite_posy] == '2'))
 			game->posX -= game->dirX * game->moveSpeed;
-		if (game->map[(int)(game->posX)][(int)(game->posY - game->dirY * game->moveSpeed)] == '0' || game->map[(int)game->sprite_posy][(int)game->sprite_posx] == '0')
+		if ((game->map[(int)(game->posX)][(int)(game->posY - game->dirY * game->moveSpeed)] == '0' || game->map[(int)game->sprite_posy][(int)game->sprite_posx] == '0') || (game->map[(int)(game->posX)][(int)(game->posY - game->dirY * game->moveSpeed)] == '0' || game->map[(int)game->sprite_posy][(int)game->sprite_posx] == '2'))
 			game->posY -= game->dirY * game->moveSpeed;
 	}
 	if (game->key_d)
@@ -26,10 +26,6 @@ int	key_move(t_game *game)
 		oldPlaneX = game->planeX;
 		game->planeX = game->planeX * cos(-game->rotSpeed) - game->planeY * sin(-game->rotSpeed);
 		game->planeY = oldPlaneX * sin(-game->rotSpeed) + game->planeY * cos(-game->rotSpeed);
-		printf("%f\n",game->dirX);
-		printf("%f\n",game->dirY);
-		printf("%f\n",game->planeX);
-		printf("%f\n",game->planeY);
 	}
 
 	if (game->key_a)

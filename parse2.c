@@ -158,12 +158,5 @@ void parse(t_game *game)
         elem = elem->next;
         x++;
     }
-    x = 0;
-    while (x < i)
-    {
-        printf("%s\n",game->map[x]);
-        x++;
-    }
-
     close(fd);
 }
