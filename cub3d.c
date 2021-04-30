@@ -50,6 +50,8 @@ int	main_loop(t_game *game)
 	draw_rectangles(game);
 	key_move(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->img.img, 0, 0);
+	mlx_string_put(game->mlx,game->win,500,350,0xFFFFFF,ft_itoa((int)game->planeX));
+	mlx_string_put(game->mlx,game->win,500,300,0xFFFFFF,ft_itoa((int)game->planeY));
 	return (0);
 }
 
@@ -100,14 +102,9 @@ int	main(void)
 	
 	game.mlx = mlx_init();
 	parse(&game);
+	map_check(&game);
 	init_buff(&game);
 	load_texture(&game);
-	game.posX = 1.5;
-	game.posY = 1.0;
-	game.dirX = -1.0;
-	game.dirY = 0.0;
-	game.planeX = 0.0;
-	game.planeY = 0.66;
 	game.moveSpeed = 0.08;
 	game.rotSpeed = 0.08;
 	game.key_w = 0;

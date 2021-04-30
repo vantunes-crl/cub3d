@@ -26,6 +26,10 @@ int	key_move(t_game *game)
 		oldPlaneX = game->planeX;
 		game->planeX = game->planeX * cos(-game->rotSpeed) - game->planeY * sin(-game->rotSpeed);
 		game->planeY = oldPlaneX * sin(-game->rotSpeed) + game->planeY * cos(-game->rotSpeed);
+		printf("%f\n",game->dirX);
+		printf("%f\n",game->dirY);
+		printf("%f\n",game->planeX);
+		printf("%f\n",game->planeY);
 	}
 
 	if (game->key_a)
