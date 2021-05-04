@@ -1,9 +1,10 @@
 #include "cub3d.h"
 
-void	calc(t_game *game , t_flor flor)
+void	calc(t_game *game)
 {
 	t_cell cell;
 	t_wall wall;
+	t_flor flor;
 	t_textures textures;
 	int i;
 	int j;
@@ -43,9 +44,7 @@ void	calc(t_game *game , t_flor flor)
 
 int	main_loop(t_game *game)
 {
-	t_flor flor;
-
-	calc(game, flor);
+	calc(game);
 	draw(game);
 	draw_rectangles(game);
 	key_move(game);
@@ -112,6 +111,8 @@ int	main(int argc, char **argv)
 {
 	t_game game;
 	
+	if (argc < 2)
+		exit(0);
 	game.mlx = mlx_init();
 	parse(&game,argv[1]);
 	player_check(&game);

@@ -182,7 +182,7 @@ void check_map(t_game *game, int size_map)
                    exit(0);
                }
             }
-            else if (x == size_map - 1 || j + 1 == ft_strlen(game->map[x]))
+            else if ((x == size_map - 1) || (j + 1 == ft_strlen(game->map[x])))
             {
                 if (!(ismap(game->map[x][j])))
                 {
@@ -192,12 +192,12 @@ void check_map(t_game *game, int size_map)
             }
             if (!((x == size_map - 1 || j + 1 == ft_strlen(game->map[x])) || (x == 0 || j == 0)))
             {
-                if (game->map[x][j] == '0' && !game->map[x - 1][j] || game->map[x][j] == '0' && game->map[x - 1][j] == ' ')
+                if ((game->map[x][j] == '0' && !game->map[x - 1][j]) || (game->map[x][j] == '0' && game->map[x - 1][j] == ' '))
                 {
                     printf("Map Error");
                     exit(0);
                 }
-                else if (game->map[x][j] == '0' && !game->map[x + 1][j] || game->map[x][j] == '0' && game->map[x + 1][j] == ' ')
+                else if ((game->map[x][j] == '0' && !game->map[x + 1][j]) || (game->map[x][j] == '0' && game->map[x + 1][j] == ' '))
                 {
                     printf("Map Error");
                     exit(0);

@@ -187,7 +187,6 @@ void	draw_rectangles(t_game *game);
 void 	draw_lines(t_game *game);
 void	draw_line(t_game *game, double x1, double y1, double x2, double y2);
 void 	draw_sprite(t_game *game , double pos_x, double pos_y);
-void 	map_check(t_game *game);
 char	*ft_itoa(int n);
 int		key_release(int key, t_game *game);
 int		key_press(int key, t_game *game);
