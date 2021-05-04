@@ -61,3 +61,10 @@ void map_check(t_game *game)
         i++;
     }
 }
+
+int ismap(char c)
+{
+    if (c == ' ' || c == '1')
+        return (1);
+    return (0);
+}

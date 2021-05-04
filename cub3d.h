@@ -211,5 +211,7 @@ void	ft_lstadd_back(t_list **alst, t_list *new);
 int		ft_strlen(const char *str);
 char	*ft_strdup(const char *s1);
 void 	parse_map(t_game *game);
+void 	check_map(t_game *game, int size_map);
+int 	ismap(char c);
 
 #endif

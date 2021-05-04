@@ -158,5 +158,53 @@ void parse(t_game *game , char *argv)
         elem = elem->next;
         x++;
     }
+    check_map(game,i);
     close(fd);
+}
+
+void check_map(t_game *game, int size_map)
+{
+    int x;
+    int j;
+
+    x = 0;
+    j = 0;
+    while(x < size_map)
+    {
+        j = 0;
+        while(j < ft_strlen(game->map[x]))
+        {
+            if (x == 0 || j == 0)
+            {
+               if (!(ismap(game->map[x][j])))
+               {
+                   printf("Map Error");
+                   exit(0);
+               }
+            }
+            else if (x == size_map - 1 || j + 1 == ft_strlen(game->map[x]))
+            {
+                if (!(ismap(game->map[x][j])))
+                {
+                    printf("Map Error");
+                    exit(0);
+                }
+            }
+            if (!((x == size_map - 1 || j + 1 == ft_strlen(game->map[x])) || (x == 0 || j == 0)))
+            {
+                if (game->map[x][j] == '0' && !game->map[x - 1][j] || game->map[x][j] == '0' && game->map[x - 1][j] == ' ')
+                {
+                    printf("Map Error");
+                    exit(0);
+                }
+                else if (game->map[x][j] == '0' && !game->map[x + 1][j] || game->map[x][j] == '0' && game->map[x + 1][j] == ' ')
+                {
+                    printf("Map Error");
+                    exit(0);
+                }
+            }
+            j++;
+        }
+        x++;
+    }
 }
