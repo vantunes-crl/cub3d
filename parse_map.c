@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-void map_check(t_game *game)
+void player_check(t_game *game)
 {
     int i;
     int j;

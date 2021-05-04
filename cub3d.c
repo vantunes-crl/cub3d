@@ -59,6 +59,20 @@ int init_buff(t_game *game)
 	int j;
 
 	i = 0;
+	game->zBuffer = (double *)malloc(sizeof(double *) * game->width_screen);
+	while(i < game->width_screen)
+	{
+		game->zBuffer[i] = 0;
+		i++;
+	}
+	i = 0;
+	game->buf = (int **)malloc(sizeof(int *) * game->height_screen);
+	while(i < game->height_screen)
+	{
+		game->buf[i] = (int *)malloc(sizeof(int *) * game->width_screen);
+		i++;
+	}
+	i = 0;
 	while (i < game->height_screen)
 	{
 		j = 0;
@@ -100,7 +114,7 @@ int	main(int argc, char **argv)
 	
 	game.mlx = mlx_init();
 	parse(&game,argv[1]);
-	map_check(&game);
+	player_check(&game);
 	init_buff(&game);
 	load_texture(&game);
 	game.moveSpeed = 0.08;

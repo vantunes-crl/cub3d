@@ -59,9 +59,9 @@ typedef struct	s_game
 	void	*mlx;
 	void	*win;
 	t_img	img;
-	int		buf[1024][1920];
+	int		**buf;
 	int		**texture;
-	double zBuffer[1920];
+	double *zBuffer;
 	double	moveSpeed;
 	double	rotSpeed;
 	double sprite_posy;
@@ -212,6 +212,7 @@ int		ft_strlen(const char *str);
 char	*ft_strdup(const char *s1);
 void 	parse_map(t_game *game);
 void 	check_map(t_game *game, int size_map);
+void 	player_check(t_game *game);
 int 	ismap(char c);
 
 #endif
