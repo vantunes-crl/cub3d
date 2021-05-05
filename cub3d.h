@@ -14,7 +14,6 @@
 #define X_EVENT_KEY_EXIT	17
 #define texWidth 64
 #define texHeight 64
-#define mapS 14
 #define uDiv 1
 #define vDiv 1
 #define vMove 0.0
@@ -40,6 +39,7 @@ typedef struct	s_game
 	char *tex_east;
 	char *tex_west;
 	char *tex_sprite;
+	int minimap_size;
 	int floor_color;
 	int cell_color;
 	int screenshot;
