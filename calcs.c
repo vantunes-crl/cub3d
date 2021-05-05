@@ -26,10 +26,8 @@ t_cell put_cell(t_game *game, t_flor *flor, t_cell cell)
 	flor->floorY += flor->floorStepY;
 	cell.color = game->floor_color;
 	game->buf[flor->y][cell.x] = cell.color;
-	game->bmp_buf[flor->y][cell.x] = cell.color;
 	cell.color = game->cell_color;
 	game->buf[game->height_screen - flor->y - 1][cell.x] = cell.color;
-	game->bmp_buf[game->height_screen - flor->y - 1][cell.x] = cell.color;
 	return (cell);
 }
 

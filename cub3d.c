@@ -35,7 +35,7 @@ int write_bmp_data(int file, t_game *game)
 {
 	int					i;
 	int					j;
-	
+	draw_all(game);
 	i = game->height_screen - 1;
 	while (i >= 0)
 	{
@@ -192,11 +192,11 @@ int	main(int argc, char **argv)
 		calc(&game);
 		draw(&game);
 		draw_rectangles(&game);
-		mlx_put_image_to_window(game.mlx, game.win, game.img.img, 0, 0);
 		fd = open("screenshot.bmp", O_WRONLY | O_CREAT, 0777 | O_TRUNC | O_APPEND);
 		write_bmp_header(fd, fz, &game);
 		write_bmp_data(fd,&game);
 		close(0);
+		exit(0);
 	}
 	else
 		mlx_loop_hook(game.mlx, &main_loop, &game);

@@ -32,6 +32,5 @@ void draw_wall(t_game *game, t_textures *textures, t_wall *wall)
 		else if (wall->side == 3)
 			textures->color = game->texture[3][texHeight * textures->texY + textures->texX];
 		game->buf[wall->y][wall->x] = textures->color;
-		game->bmp_buf[wall->y][wall->x] = textures->color;
 	}
 }

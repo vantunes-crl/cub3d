@@ -218,5 +218,6 @@ int 	ismap(char c);
 void	calc(t_game *game);
 int		ft_strncmp(const char *str1, const char *str2, size_t n);
 void 	init_bpm_buf(t_game *game);
+void	draw_all(t_game *game);
 
 #endif
