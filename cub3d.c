@@ -1,5 +1,55 @@
 #include "cub3d.h"
 
+void set_int_in_char(unsigned char *start, int value)
+{
+	start[0] = (unsigned char)(value);
+	start[1] = (unsigned char)(value >> 8);
+	start[2] = (unsigned char)(value >> 16);
+	start[3] = (unsigned char)(value >> 24);
+}
+
+int	write_bmp_header(int fd, int filesize, t_game *game)
+{
+	int				i;
+	int				tmp;
+	unsigned char	bmpfileheader[54];
+
+	i = 0;
+	while (i < 54)
+		bmpfileheader[i++] = (unsigned char)(0);
+	bmpfileheader[0] = (unsigned char)('B');
+	bmpfileheader[1] = (unsigned char)('M');
+	set_int_in_char(bmpfileheader + 2, filesize);
+	bmpfileheader[10] = (unsigned char)(54);
+	bmpfileheader[14] = (unsigned char)(40);
+	tmp = game->width_screen;
+	set_int_in_char(bmpfileheader + 18, tmp);
+	tmp = game->height_screen;
+	set_int_in_char(bmpfileheader + 22, tmp);
+	bmpfileheader[27] = (unsigned char)(1);
+	bmpfileheader[28] = (unsigned char)(24);
+	return (!(write(fd, bmpfileheader, 54) < 0));
+}
+
+int write_bmp_data(int file, t_game *game)
+{
+	int					i;
+	int					j;
+	
+	i = game->height_screen - 1;
+	while (i >= 0)
+	{
+		j = 0;
+		while (j < game->width_screen)
+		{
+			write(file, &game->bmp_buf[i][j], 3);
+			j++;
+		}
+		i--;
+	}
+	return (1);
+}
+
 void	calc(t_game *game)
 {
 	t_cell cell;
@@ -48,7 +98,8 @@ int	main_loop(t_game *game)
 	draw(game);
 	draw_rectangles(game);
 	key_move(game);
-	mlx_put_image_to_window(game->mlx, game->win, game->img.img, 0, 0);
+	if (!game->screenshot)
+		mlx_put_image_to_window(game->mlx, game->win, game->img.img, 0, 0);
 	return (0);
 }
 
@@ -111,12 +162,16 @@ int	main(int argc, char **argv)
 {
 	t_game game;
 	
+	game.screenshot = 0;
 	if (argc < 2)
 		exit(0);
+	if (ft_strncmp("--save",argv[1],5) == 0)
+		game.screenshot = 1;
 	game.mlx = mlx_init();
 	parse(&game,argv[1]);
 	player_check(&game);
 	init_buff(&game);
+	init_bpm_buf(&game);
 	load_texture(&game);
 	game.moveSpeed = 0.08;
 	game.rotSpeed = 0.08;
@@ -128,7 +183,23 @@ int	main(int argc, char **argv)
 	game.win = mlx_new_window(game.mlx, game.width_screen, game.height_screen, "mlx");
 	game.img.img = mlx_new_image(game.mlx, game.width_screen, game.height_screen);
 	game.img.data = (int *)mlx_get_data_addr(game.img.img, &game.img.bpp, &game.img.size_l, &game.img.endian);
-	mlx_loop_hook(game.mlx, &main_loop, &game);
+	if (game.screenshot)
+	{
+		int fd;
+		int fz;
+
+		fz = 54 + (3 * ((int)game.height_screen) * (int)game.width_screen);
+		calc(&game);
+		draw(&game);
+		draw_rectangles(&game);
+		mlx_put_image_to_window(game.mlx, game.win, game.img.img, 0, 0);
+		fd = open("screenshot.bmp", O_WRONLY | O_CREAT, 0777 | O_TRUNC | O_APPEND);
+		write_bmp_header(fd, fz, &game);
+		write_bmp_data(fd,&game);
+		close(0);
+	}
+	else
+		mlx_loop_hook(game.mlx, &main_loop, &game);
 	mlx_hook(game.win, 2, 1L << 0, &key_press, &game);
 	mlx_hook(game.win, 3, 1L << 1, &key_release, &game);
 	mlx_loop(game.mlx);

@@ -116,7 +116,11 @@ void parse(t_game *game , char *argv)
 
     elem = NULL;
     x = 0;
-    fd = open(argv, O_RDONLY);
+    
+    if (game->screenshot)
+        fd = open("inits.cub", O_RDONLY);
+    else
+        fd = open(argv, O_RDONLY);
     while (get_next_line(fd,&line))
     {
         if (line[0] == 'R')

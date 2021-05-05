@@ -95,3 +95,40 @@ char	*ft_strdup(const char *s1)
 	s1_cpy[i] = '\0';
 	return (s1_cpy);
 }
+
+int	ft_strncmp(const char *str1, const char *str2, size_t n)
+{
+	size_t i;
+
+	i = 0;
+	if (n == 0)
+		return (0);
+	while (str1[i] != '\0' && str1[i] == str2[i] && i < n - 1)
+		i++;
+	return ((unsigned char)str1[i] - (unsigned char)str2[i]);
+}
+
+void init_bpm_buf(t_game *game)
+{
+	int i;
+	int j;
+
+	i = 0;
+	game->bmp_buf = (int **)malloc(sizeof(int *) * game->height_screen);
+	while(i < game->height_screen)
+	{
+		game->bmp_buf[i] = (int *)malloc(sizeof(int *) * game->width_screen);
+		i++;
+	}
+	i = 0;
+	while (i < game->height_screen)
+	{
+		j = 0;
+		while (j < game->width_screen)
+		{
+			game->bmp_buf[i][j] = 0;
+			j++;
+		}
+		i++;
+	}
+}

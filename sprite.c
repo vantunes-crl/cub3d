@@ -37,7 +37,10 @@ void draw_sprite(t_game *game , double pos_x, double pos_y)
 			sprites.texY = ((sprites.d * texHeight) / sprites.spriteHeight) / 256;
 			sprites.color = game->texture[4][texWidth * sprites.texY + sprites.texX];
 			if ((sprites.color & 0x00FFFFFF) != 0)
+			{
 				game->buf[sprites.j][sprites.stripe] = sprites.color;
+				game->bmp_buf[sprites.j][sprites.stripe] = sprites.color;
+			}
 			sprites.j++;
 		}
 		sprites.stripe++;

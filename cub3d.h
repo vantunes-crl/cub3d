@@ -34,6 +34,7 @@ typedef struct	s_img
 
 typedef struct	s_game
 {
+	int **bmp_buf;
 	char *tex_south;
 	char *tex_north;
 	char *tex_east;
@@ -41,6 +42,7 @@ typedef struct	s_game
 	char *tex_sprite;
 	int floor_color;
 	int cell_color;
+	int screenshot;
 	int key_w;
 	int key_s;
 	int key_a;
@@ -213,5 +215,8 @@ void 	parse_map(t_game *game);
 void 	check_map(t_game *game, int size_map);
 void 	player_check(t_game *game);
 int 	ismap(char c);
+void	calc(t_game *game);
+int		ft_strncmp(const char *str1, const char *str2, size_t n);
+void 	init_bpm_buf(t_game *game);
 
 #endif
