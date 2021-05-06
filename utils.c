@@ -132,3 +132,20 @@ void init_bpm_buf(t_game *game)
 		i++;
 	}
 }
+
+void	*ft_calloc(size_t count, size_t size)
+{
+	char	*mem;
+	size_t	i;
+
+	i = 0;
+	mem = (char *)malloc(count * size);
+	if (mem == 0)
+		return (0);
+	while (i < count * size)
+	{
+		mem[i] = 0;
+		i++;
+	}
+	return ((void *)mem);
+}
