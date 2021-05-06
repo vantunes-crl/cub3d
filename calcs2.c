@@ -62,15 +62,10 @@ void hit_wall(t_game *game, t_wall *wall)
 	}
 }
 
-void	calc(t_game *game)
+void wall_calc(t_wall *wall, t_game *game, t_textures *textures)
 {
-	t_cell cell;
-	t_wall wall;
 	t_flor flor;
-	t_textures textures;
-	int i;
-	int j;
-
+	t_cell cell;
 	flor.y = 0;
 	while(flor.y < game->height_screen)
 	{
@@ -80,16 +75,26 @@ void	calc(t_game *game)
 			cell = put_cell(game,&flor, cell);
 		flor.y++;
 	}
-	wall.x = 0;
-	while (++wall.x < game->width_screen)
+	wall->x = 0;
+	while (++wall->x < game->width_screen)
 	{
-		init_wall(&wall,game);
-		steps(&wall, game);
-		perp_wall(game, &wall);
-		textures_wall(&wall,&textures,game);
-		draw_wall(game,&textures, &wall);
-		game->zBuffer[wall.x] = wall.perpWallDist;
+		init_wall(wall,game);
+		steps(wall, game);
+		perp_wall(game, wall);
+		textures_wall(wall,textures,game);
+		draw_wall(game,textures, wall);
+		game->zBuffer[wall->x] = wall->perpWallDist;
 	}
+}
+
+void	calc(t_game *game)
+{
+	t_wall wall;
+	t_textures textures;
+	int i;
+	int j;
+
+	wall_calc(&wall, game, &textures);
 	i = 0;
 	while (i < game->map_size)
     {
