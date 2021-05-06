@@ -66,31 +66,9 @@ void steps(t_wall *wall , t_game *game)
 		wall->stepY = 1;
 		wall->sideDistY = (wall->mapY + 1.0 - game->posY) * wall->deltaDistY;
 	}
-
-	while (wall->hit == 0)
-	{
-		if (wall->sideDistX < wall->sideDistY)
-		{
-			wall->sideDistX += wall->deltaDistX;
-			wall->mapX += wall->stepX;
-			if (wall->stepX == 1)
-				wall->side = 0;
-			else if (wall->stepX == -1)
-				wall->side = 1;
-		}
-		else
-		{
-			wall->sideDistY += wall->deltaDistY;
-			wall->mapY += wall->stepY;
-			if (wall->stepY == 1)
-				wall->side = 2;
-			else if (wall->stepY == -1)
-				wall->side = 3;
-		}
-		if (game->map[wall->mapX][wall->mapY] == '1')
-			wall->hit = 1;
-	}
+	hit_wall(game,wall);
 }
+
 void perp_wall(t_game *game, t_wall *wall)
 {
 	if (wall->side == 0 || wall->side == 1)

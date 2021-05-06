@@ -34,3 +34,30 @@ void draw_wall(t_game *game, t_textures *textures, t_wall *wall)
 		game->buf[wall->y][wall->x] = textures->color;
 	}
 }
+
+void hit_wall(t_game *game, t_wall *wall)
+{
+	while (wall->hit == 0)
+	{
+		if (wall->sideDistX < wall->sideDistY)
+		{
+			wall->sideDistX += wall->deltaDistX;
+			wall->mapX += wall->stepX;
+			if (wall->stepX == 1)
+				wall->side = 0;
+			else if (wall->stepX == -1)
+				wall->side = 1;
+		}
+		else
+		{
+			wall->sideDistY += wall->deltaDistY;
+			wall->mapY += wall->stepY;
+			if (wall->stepY == 1)
+				wall->side = 2;
+			else if (wall->stepY == -1)
+				wall->side = 3;
+		}
+		if (game->map[wall->mapX][wall->mapY] == '1')
+			wall->hit = 1;
+	}
+}
