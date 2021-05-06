@@ -66,3 +66,58 @@ void	draw_all(t_game *game)
         y++;
 	}
 }
+
+int init_buff(t_game *game)
+{
+	int i;
+	int j;
+
+	i = 0;
+	game->zBuffer = (double *)malloc(sizeof(double *) * game->width_screen);
+	while(i < game->width_screen)
+	{
+		game->zBuffer[i] = 0;
+		i++;
+	}
+	i = 0;
+	game->buf = (int **)malloc(sizeof(int *) * game->height_screen);
+	while(i < game->height_screen)
+	{
+		game->buf[i] = (int *)malloc(sizeof(int *) * game->width_screen);
+		i++;
+	}
+	i = 0;
+	while (i < game->height_screen)
+	{
+		j = 0;
+		while (j < game->width_screen)
+		{
+			game->buf[i][j] = 0;
+			j++;
+		}
+		i++;
+	}
+	game->texture = (int **)malloc(sizeof(int *) * 5);
+	if (!game->texture)
+		return (-1);
+	i = 0;
+	while (i < 5)
+	{
+		game->texture[i] = (int *)malloc(sizeof(int) * (texHeight * texWidth));
+		if (!game->texture)
+			return (-1);
+		i++;
+	}
+	i = 0;
+	while(i < 5)
+	{
+		j = 0;
+		while (j < texHeight * texWidth)
+		{
+			game->texture[i][j] = 0;
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}

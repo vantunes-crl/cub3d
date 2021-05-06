@@ -11,68 +11,25 @@ int	main_loop(t_game *game)
 	return (0);
 }
 
-int init_buff(t_game *game)
+void init_game(t_game *game)
 {
-	int i;
-	int j;
-
-	i = 0;
-	game->zBuffer = (double *)malloc(sizeof(double *) * game->width_screen);
-	while(i < game->width_screen)
-	{
-		game->zBuffer[i] = 0;
-		i++;
-	}
-	i = 0;
-	game->buf = (int **)malloc(sizeof(int *) * game->height_screen);
-	while(i < game->height_screen)
-	{
-		game->buf[i] = (int *)malloc(sizeof(int *) * game->width_screen);
-		i++;
-	}
-	i = 0;
-	while (i < game->height_screen)
-	{
-		j = 0;
-		while (j < game->width_screen)
-		{
-			game->buf[i][j] = 0;
-			j++;
-		}
-		i++;
-	}
-	game->texture = (int **)malloc(sizeof(int *) * 5);
-	if (!game->texture)
-		return (-1);
-	i = 0;
-	while (i < 5)
-	{
-		game->texture[i] = (int *)malloc(sizeof(int) * (texHeight * texWidth));
-		if (!game->texture)
-			return (-1);
-		i++;
-	}
-	i = 0;
-	while(i < 5)
-	{
-		j = 0;
-		while (j < texHeight * texWidth)
-		{
-			game->texture[i][j] = 0;
-			j++;
-		}
-		i++;
-	}
-	return (0);
+	game->screenshot = 0;
+	game->moveSpeed = 0.08;
+	game->rotSpeed = 0.08;
+	game->key_w = 0;
+	game->key_s = 0;
+	game->key_a = 0;
+	game->key_d = 0;
+	game->key_esc = 0;
 }
 
 int	main(int argc, char **argv)
 {
 	t_game game;
 	
-	game.screenshot = 0;
 	if (argc < 2)
 		exit(0);
+	init_game(&game);
 	if (ft_strncmp("--save",argv[1],5) == 0)
 		game.screenshot = 1;
 	game.mlx = mlx_init();
@@ -81,31 +38,11 @@ int	main(int argc, char **argv)
 	init_buff(&game);
 	init_bpm_buf(&game);
 	load_texture(&game);
-	game.moveSpeed = 0.08;
-	game.rotSpeed = 0.08;
-	game.key_w = 0;
-	game.key_s = 0;
-	game.key_a = 0;
-	game.key_d = 0;
-	game.key_esc = 0;
 	game.win = mlx_new_window(game.mlx, game.width_screen, game.height_screen, "mlx");
 	game.img.img = mlx_new_image(game.mlx, game.width_screen, game.height_screen);
 	game.img.data = (int *)mlx_get_data_addr(game.img.img, &game.img.bpp, &game.img.size_l, &game.img.endian);
 	if (game.screenshot)
-	{
-		int fd;
-		int fz;
-
-		fz = 54 + (3 * ((int)game.height_screen) * (int)game.width_screen);
-		calc(&game);
-		draw(&game);
-		draw_rectangles(&game);
-		fd = open("screenshot.bmp", O_WRONLY | O_CREAT, 0777 | O_TRUNC | O_APPEND);
-		write_bmp_header(fd, fz, &game);
-		write_bmp_data(fd,&game);
-		close(0);
-		exit(0);
-	}
+		creat_bmp(&game);
 	else
 		mlx_loop_hook(game.mlx, &main_loop, &game);
 	mlx_hook(game.win, 2, 1L << 0, &key_press, &game);

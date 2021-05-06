@@ -49,3 +49,19 @@ int write_bmp_data(int file, t_game *game)
 	}
 	return (1);
 }
+
+void creat_bmp(t_game *game)
+{
+    int fd;
+    int fz;
+
+    fz = 54 + (3 * ((int)game->height_screen) * (int)game->width_screen);
+    calc(game);
+    draw(game);
+    draw_rectangles(game);
+    fd = open("screenshot.bmp", O_WRONLY | O_CREAT, 0777 | O_TRUNC | O_APPEND);
+    write_bmp_header(fd, fz, game);
+    write_bmp_data(fd,game);
+    close(0);
+    exit(0);
+}

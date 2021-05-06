@@ -223,5 +223,7 @@ void 	hit_wall(t_game *game, t_wall *wall);
 void 	set_int_in_char(unsigned char *start, int value);
 int		write_bmp_header(int fd, int filesize, t_game *game);
 int 	write_bmp_data(int file, t_game *game);
+int 	init_buff(t_game *game);
+void 	creat_bmp(t_game *game);
 
 #endif
