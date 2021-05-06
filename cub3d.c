@@ -1,48 +1,5 @@
 #include "cub3d.h"
 
-
-void	calc(t_game *game)
-{
-	t_cell cell;
-	t_wall wall;
-	t_flor flor;
-	t_textures textures;
-	int i;
-	int j;
-
-	flor.y = 0;
-	while(flor.y < game->height_screen)
-	{
-		flor = put_flor(flor,game);
-		cell.x = 0;
-		while (++cell.x < game->width_screen)
-			cell = put_cell(game,&flor, cell);
-		flor.y++;
-	}
-	wall.x = 0;
-	while (++wall.x < game->width_screen)
-	{
-		init_wall(&wall,game);
-		steps(&wall, game);
-		perp_wall(game, &wall);
-		textures_wall(&wall,&textures,game);
-		draw_wall(game,&textures, &wall);
-		game->zBuffer[wall.x] = wall.perpWallDist;
-	}
-	i = 0;
-	while (i < game->map_size)
-    {
-        j = 0;
-        while (j < ft_strlen(game->map[i]))
-        {
-            if (game->map[i][j] == '2')
-               draw_sprite(game,i,j);
-            j++;
-        }
-        i++;
-    }
-}
-
 int	main_loop(t_game *game)
 {
 	calc(game);

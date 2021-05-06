@@ -1,4 +1,4 @@
-R = 1500 1024
+R = 1920 1024
 
 NO = textures/redbrick.xpm
 SO = textures/purplestone.xpm
