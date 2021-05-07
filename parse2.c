@@ -126,15 +126,15 @@ void parse(t_game *game , char *argv)
         if (line[0] == 'R')
             parse_screen(game,line,i);
         else if (line[0] == 'N' && line[1] == 'O')
-            parse_north(game, line, i + 2);
+            parse_side(game, line, 2, 0);
         else if (line[0] == 'S' && line[1] == 'O')
-            parse_south(game, line, i + 2);
+            parse_side(game, line, 2, 1);
         else if (line[0] == 'W' && line[1] == 'E')
-            parse_west(game, line, i + 2);
+            parse_side(game, line, 2, 2);
         else if (line[0] == 'E' && line[1] == 'A')
-            parse_east(game, line, i + 2);
+            parse_side(game, line, 2, 3);
         else if (line[0] == 'S' && line[1] == ' ')
-            parse_sprite(game, line, i + 2);
+            parse_side(game, line, 2, 4);
         else if (line[0] == 'F' && line[1] == ' ')
             parse_floor(game, line);
         else if (line[0] == 'C' && line[1] == ' ')

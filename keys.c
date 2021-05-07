@@ -1,42 +1,66 @@
 #include "cub3d.h"
 
-int	key_move(t_game *game)
+void key_up(t_game *game)
 {
-	double oldDirX;
-	double oldPlaneX;
-	if (game->key_w)
-	{
-		if ((game->map[(int)(game->posX + game->dirX * game->moveSpeed)][(int)(game->posY)] == '0') || (game->map[(int)(game->posX + game->dirX * game->moveSpeed)][(int)(game->posY)] == '2'))
-			game->posX += game->dirX * game->moveSpeed;
-		if ((game->map[(int)(game->posX)][(int)(game->posY + game->dirY * game->moveSpeed)] == '0') || (game->map[(int)(game->posX)][(int)(game->posY + game->dirY * game->moveSpeed)] == '2'))
-			game->posY += game->dirY * game->moveSpeed;
-	}
-	if (game->key_s)
-	{
-		if ((game->map[(int)(game->posX - game->dirX * game->moveSpeed)][(int)(game->posY)] == '0' || game->map[(int)game->sprite_posx][(int)game->sprite_posy] == '0') || (game->map[(int)(game->posX - game->dirX * game->moveSpeed)][(int)(game->posY)] == '0' || game->map[(int)game->sprite_posx][(int)game->sprite_posy] == '2'))
-			game->posX -= game->dirX * game->moveSpeed;
-		if ((game->map[(int)(game->posX)][(int)(game->posY - game->dirY * game->moveSpeed)] == '0' || game->map[(int)game->sprite_posy][(int)game->sprite_posx] == '0') || (game->map[(int)(game->posX)][(int)(game->posY - game->dirY * game->moveSpeed)] == '0' || game->map[(int)game->sprite_posy][(int)game->sprite_posx] == '2'))
-			game->posY -= game->dirY * game->moveSpeed;
-	}
-	if (game->key_d)
-	{
+	if ((game->map[(int)(game->posX + game->dirX * game->moveSpeed)][(int)(game->posY)] == '0') || 
+							(game->map[(int)(game->posX + game->dirX * game->moveSpeed)][(int)(game->posY)] == '2'))
+		game->posX += game->dirX * game->moveSpeed;
+	if ((game->map[(int)(game->posX)][(int)(game->posY + game->dirY * game->moveSpeed)] == '0') || 
+							(game->map[(int)(game->posX)][(int)(game->posY + game->dirY * game->moveSpeed)] == '2'))
+		game->posY += game->dirY * game->moveSpeed;
+}
+
+void key_down(t_game *game)
+{
+	if ((game->map[(int)(game->posX - game->dirX * game->moveSpeed)][(int)(game->posY)] == '0' || 
+						game->map[(int)game->sprite_posx][(int)game->sprite_posy] == '0') || 
+								(game->map[(int)(game->posX - game->dirX * game->moveSpeed)][(int)(game->posY)] == '0' ||
+										 game->map[(int)game->sprite_posx][(int)game->sprite_posy] == '2'))
+		game->posX -= game->dirX * game->moveSpeed;
+	if ((game->map[(int)(game->posX)][(int)(game->posY - game->dirY * game->moveSpeed)] == '0' ||
+						 game->map[(int)game->sprite_posy][(int)game->sprite_posx] == '0') ||
+									 (game->map[(int)(game->posX)][(int)(game->posY - game->dirY * game->moveSpeed)] == '0' || 
+														game->map[(int)game->sprite_posy][(int)game->sprite_posx] == '2'))
+		game->posY -= game->dirY * game->moveSpeed;
+}
+
+void key_left(t_game *game)
+{
+		double oldDirX;
+		double oldPlaneX;
+
 		oldDirX = game->dirX;
 		game->dirX = game->dirX * cos(-game->rotSpeed) - game->dirY * sin(-game->rotSpeed);
 		game->dirY = oldDirX * sin(-game->rotSpeed) + game->dirY * cos(-game->rotSpeed);
 		oldPlaneX = game->planeX;
 		game->planeX = game->planeX * cos(-game->rotSpeed) - game->planeY * sin(-game->rotSpeed);
 		game->planeY = oldPlaneX * sin(-game->rotSpeed) + game->planeY * cos(-game->rotSpeed);
-	}
+}
 
+void key_right(t_game *game)
+{
+	double oldDirX;
+	double oldPlaneX;
+
+	oldDirX = game->dirX;
+	game->dirX = game->dirX * cos(game->rotSpeed) - game->dirY * sin(game->rotSpeed);
+	game->dirY = oldDirX * sin(game->rotSpeed) + game->dirY * cos(game->rotSpeed);
+	oldPlaneX = game->planeX;
+	game->planeX = game->planeX * cos(game->rotSpeed) - game->planeY * sin(game->rotSpeed);
+	game->planeY = oldPlaneX * sin(game->rotSpeed) + game->planeY * cos(game->rotSpeed);
+}
+
+int	key_move(t_game *game)
+{
+	
+	if (game->key_w)
+		key_up(game);
+	if (game->key_s)
+		key_down(game);
+	if (game->key_d)
+		key_left(game);
 	if (game->key_a)
-	{
-		oldDirX = game->dirX;
-		game->dirX = game->dirX * cos(game->rotSpeed) - game->dirY * sin(game->rotSpeed);
-		game->dirY = oldDirX * sin(game->rotSpeed) + game->dirY * cos(game->rotSpeed);
-		oldPlaneX = game->planeX;
-		game->planeX = game->planeX * cos(game->rotSpeed) - game->planeY * sin(game->rotSpeed);
-		game->planeY = oldPlaneX * sin(game->rotSpeed) + game->planeY * cos(game->rotSpeed);
-	}
+		key_right(game);
 	if (game->key_esc)
 		exit(0);
 	return (0);

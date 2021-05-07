@@ -1,14 +1,5 @@
 #include "cub3d.h"
 
-void	ft_lstadd_front(t_list **lst, t_list *new)
-{
-	if (lst && new)
-	{
-		new->next = *lst;
-		*lst = new;
-	}
-}
-
 t_list	*ft_lstnew(void *content)
 {
 	t_list	*new_elem;

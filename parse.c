@@ -1,98 +1,38 @@
 #include "cub3d.h"
 
-void parse_north(t_game *game, char *line, int i)
+void chose_side(t_game *game , int side, char *texture)
+{
+     if (side == 0)
+        game->tex_north = ft_strdup(texture);
+    if (side == 1)
+        game->tex_south = ft_strdup(texture);
+    if (side == 2)
+        game->tex_east = ft_strdup(texture);
+    if (side == 3)
+        game->tex_west = ft_strdup(texture);
+    if (side == 4)
+        game->tex_sprite = ft_strdup(texture);
+}
+
+void parse_side(t_game *game, char *line, int i, int side)
 {
     int count;
     int j;
+    char *texture;
 
     count = 0;
     j = 0;
     while (ft_isalpha(line[i]) == 0)
         i++;
-    while(ft_isalpha(line[i]) || line[i] == '.' || line[i] == '/')
-    {
+    while(ft_isalpha(line[i++]) || line[i++] == '.' || line[i++] == '/')
         count++;
-        i++;
-    }
     i = 2;
-    game->tex_north = (char *)malloc(sizeof(char *) * count + 1);
+    texture = (char *)malloc(sizeof(char *) * count + 1);
     while(ft_isalpha(line[i]) == 0)
         i++;
     while(ft_isalpha(line[i]) || line[i] == '.' || line[i] == '/')
-        game->tex_north[j++] = line[i++];
-    game->tex_north[j] = '\0';
-}
-
-void parse_south(t_game *game, char *line, int i)
-{
-    int count;
-    int j;
-
-    count = 0;
-    j = 0;
-    while (ft_isalpha(line[i]) == 0)
-        i++;
-    while(ft_isalpha(line[i]) || line[i] == '.' || line[i] == '/')
-    {
-        count++;
-        i++;
-    }
-    i = 2;
-    game->tex_south = (char *)malloc(sizeof(char *) * count + 1);
-    while(ft_isalpha(line[i]) == 0)
-        i++;
-    while(ft_isalpha(line[i]) || line[i] == '.' || line[i] == '/')
-        game->tex_south[j++] = line[i++];
-    game->tex_south[j] = '\0';
-}
-
-void parse_west(t_game *game, char *line, int i)
-{
-    int count;
-    int j;
-
-    count = 0;
-    j = 0;
-    while (ft_isalpha(line[i]) == 0)
-        i++;
-    while(ft_isalpha(line[i]) || line[i] == '.' || line[i] == '/')
-    {
-        count++;
-        i++;
-    }
-    i = 2;
-    game->tex_west = (char *)malloc(sizeof(char *) * count + 1);
-    while(ft_isalpha(line[i]) == 0)
-        i++;
-    while(ft_isalpha(line[i]) || line[i] == '.' || line[i] == '/')
-        game->tex_west[j++] = line[i++];
-    game->tex_west[j] = '\0';
-}
-
-void parse_east(t_game *game, char *line , int i)
-{
-    int count;
-    int j;
-
-    count = 0;
-    j = 0;
-    while (ft_isalpha(line[i]) == 0)
-        i++;
-    while(ft_isalpha(line[i]) || line[i] == '.' || line[i] == '/')
-    {
-        count++;
-        i++;
-    }
-    i = 2;
-    game->tex_east = (char *)malloc(sizeof(char *) * count + 1);
-    while(ft_isalpha(line[i]) == 0)
-        i++;
-    while(ft_isalpha(line[i]) || line[i] == '.' || line[i] == '/')
-        game->tex_east[j++] = line[i++];
-    game->tex_east[j] = '\0';
-}
-
-int		create_trgb(int r, int g, int b)
-{
-	return(r << 16 | g << 8 | b);
+        texture[j++] = line[i++];
+    texture[j] = '\0';
+    chose_side(game,side,texture);
+    free(texture);
 }

@@ -34,7 +34,7 @@ int	main(int argc, char **argv)
 		game.screenshot = 1;
 	game.mlx = mlx_init();
 	parse(&game,argv[1]);
-	player_check(&game);
+	player_init(&game);
 	init_buff1(&game);
 	init_bpm_buf(&game);
 	load_texture(&game);

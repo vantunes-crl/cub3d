@@ -149,3 +149,15 @@ void	*ft_calloc(size_t count, size_t size)
 	}
 	return ((void *)mem);
 }
+
+int ismap(char c)
+{
+    if (c == ' ' || c == '1')
+        return (1);
+    return (0);
+}
+
+int		create_trgb(int r, int g, int b)
+{
+	return(r << 16 | g << 8 | b);
+}

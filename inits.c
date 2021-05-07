@@ -71,14 +71,14 @@ int init_buff1(t_game *game)
 {
 	int i;
 
-	game->texture = calloc(5, sizeof(int *));
+	game->texture = ft_calloc(5, sizeof(int *));
 	i = -1;
 	while (++i < 5)
-		game->texture[i] = calloc(texHeight * texWidth, sizeof(int));
-	game->zBuffer = calloc(game->width_screen, sizeof(double *));
-	game->buf = calloc(game->height_screen, sizeof(int *));
+		game->texture[i] = ft_calloc(texHeight * texWidth, sizeof(int));
+	game->zBuffer = ft_calloc(game->width_screen, sizeof(double *));
+	game->buf = ft_calloc(game->height_screen, sizeof(int *));
 	i = -1;
 	while(++i < game->height_screen)
-		game->buf[i] = calloc(game->width_screen, sizeof(int *));
+		game->buf[i] = ft_calloc(game->width_screen, sizeof(int *));
 	return (0);
 }
