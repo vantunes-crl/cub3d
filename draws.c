@@ -5,7 +5,7 @@ void	draw_rectangle(t_game *game, int x, int y , int color)
 	int i;
 	int j;
 
-	game->minimap_size = game->width_screen / 150;
+	game->minimap_size = game->width_screen / 170;
 	x *= game->minimap_size;
 	y *= game->minimap_size;
 	i = 0;
@@ -34,9 +34,9 @@ void	draw_rectangles(t_game *game)
 		{
 			if (game->map[i][j] == '1')
 				draw_rectangle(game, j, i , 0xFFFFFF);
-			if (game->map[i][j] == '0')
+			else if (game->map[i][j] == '0')
 				draw_rectangle(game, j, i, 0x33D1FF);
-			if (game->map[i][j] == '2')
+			else if (game->map[i][j] == '2')
 				draw_rectangle(game, j, i, 0xFA8800);
 			draw_rectangle(game,game->posY + game->dirY * game->moveSpeed, game->posX + game->dirX * game->moveSpeed, 0xFF5733);
 			j++;

@@ -58,12 +58,10 @@ void parse_screen(t_game *game ,char *line, int i)
     game->height_screen = ft_atoi(height_screen);
 }
 
-t_list *parse_infos(t_game *game, int fd)
+t_list *parse_infos(t_game *game, int fd , t_list *elem)
 {
-    t_list *elem;
     char *line;
 
-    elem = NULL;
     while (get_next_line(fd,&line))
     {
         if (line[0] == 'R')
@@ -93,14 +91,15 @@ void parse(t_game *game , char *argv)
     int fd;
     int i;
     t_list *elem;
-    
     int x;
+
+    elem = NULL;
     x = 0;
     if (game->screenshot)
         fd = open("inits.cub", O_RDONLY);
     else
         fd = open(argv, O_RDONLY);
-    elem = parse_infos(game,fd);
+    elem = parse_infos(game,fd ,elem);
     i = ft_lstsize(elem);
     game->map_size = i;
     game->map = (char **)malloc(sizeof(char *) * i);
