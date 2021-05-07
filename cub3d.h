@@ -33,6 +33,9 @@ typedef struct	s_img
 
 typedef struct	s_game
 {
+	char buff[4];
+    char buff2[4];
+    char buff3[4];
 	int **bmp_buf;
 	char *tex_south;
 	char *tex_north;
