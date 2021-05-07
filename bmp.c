@@ -69,24 +69,11 @@ void creat_bmp(t_game *game)
 void init_bpm_buf(t_game *game)
 {
 	int i;
-	int j;
-
 	i = 0;
-	game->bmp_buf = (int **)malloc(sizeof(int *) * game->height_screen);
+	game->bmp_buf = ft_calloc(game->height_screen,sizeof(int *));
 	while(i < game->height_screen)
 	{
-		game->bmp_buf[i] = (int *)malloc(sizeof(int *) * game->width_screen);
-		i++;
-	}
-	i = 0;
-	while (i < game->height_screen)
-	{
-		j = 0;
-		while (j < game->width_screen)
-		{
-			game->bmp_buf[i][j] = 0;
-			j++;
-		}
+		game->bmp_buf[i] = ft_calloc(game->width_screen,sizeof(int *));
 		i++;
 	}
 }
