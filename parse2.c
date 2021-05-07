@@ -58,25 +58,6 @@ void parse_screen(t_game *game ,char *line, int i)
     game->height_screen = ft_atoi(height_screen);
 }
 
-t_list *list_map(char *line, t_list *elem)
-{
-    int i;
-
-    i = 0;
-    if (!line)
-        error();
-    while(line[i])
-    {
-        if (line[i] == '1')
-        {
-            ft_lstadd_back(&elem,ft_lstnew((void *)line));
-            break;
-        }
-        i++;
-    }
-    return (elem);
-}
-
 t_list *parse_infos(t_game *game, int fd)
 {
     t_list *elem;
@@ -102,7 +83,7 @@ t_list *parse_infos(t_game *game, int fd)
         else if (line[0] == 'C' && line[1] == ' ')
             parse_floor(game, line, 1);
         else
-            elem = list_map(line,elem);
+            ft_lstadd_back(&elem,ft_lstnew((void *)line));
     }
     return (elem);
 }
