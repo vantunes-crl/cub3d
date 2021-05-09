@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-void set_int_in_char(unsigned char *start, int value)
+void	set_int_in_char(unsigned char *start, int value)
 {
 	start[0] = (unsigned char)(value);
 	start[1] = (unsigned char)(value >> 8);
@@ -31,12 +31,13 @@ int	write_bmp_header(int fd, int filesize, t_game *game)
 	return (!(write(fd, bmpfileheader, 54) < 0));
 }
 
-int write_bmp_data(int file, t_game *game)
+int	write_bmp_data(int file, t_game *game)
 {
 	int					i;
 	int					j;
-	draw_all(game);
+
 	i = game->height_screen - 1;
+	draw_all(game);
 	while (i >= 0)
 	{
 		j = 0;
@@ -50,30 +51,31 @@ int write_bmp_data(int file, t_game *game)
 	return (1);
 }
 
-void creat_bmp(t_game *game)
+void	creat_bmp(t_game *game)
 {
-    int fd;
-    int fz;
+	int	fd;
+	int	fz;
 
-    fz = 54 + (3 * ((int)game->height_screen) * (int)game->width_screen);
-    calc(game);
-    draw(game);
-    draw_rectangles(game);
-    fd = open("screenshot.bmp", O_WRONLY | O_CREAT, 0777 | O_TRUNC | O_APPEND);
-    write_bmp_header(fd, fz, game);
-    write_bmp_data(fd,game);
-    close(0);
-    exit(0);
+	fz = 54 + (3 * ((int)game->height_screen) * (int)game->width_screen);
+	calc(game);
+	draw(game);
+	draw_rectangles(game);
+	fd = open("screenshot.bmp", O_WRONLY | O_CREAT, 0777 | O_TRUNC | O_APPEND);
+	write_bmp_header(fd, fz, game);
+	write_bmp_data(fd, game);
+	close(0);
+	exit(0);
 }
 
-void init_bpm_buf(t_game *game)
+void	init_bpm_buf(t_game *game)
 {
-	int i;
+	int	i;
+
 	i = 0;
-	game->bmp_buf = ft_calloc(game->height_screen,sizeof(int *));
-	while(i < game->height_screen)
+	game->bmp_buf = ft_calloc(game->height_screen, sizeof(int *));
+	while (i < game->height_screen)
 	{
-		game->bmp_buf[i] = ft_calloc(game->width_screen,sizeof(int *));
+		game->bmp_buf[i] = ft_calloc(game->width_screen, sizeof(int *));
 		i++;
 	}
 }

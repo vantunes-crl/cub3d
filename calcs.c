@@ -1,7 +1,10 @@
 #include "cub3d.h"
 
-t_flor put_flor(t_flor flor , t_game *game)
+t_flor	put_flor(t_flor flor, t_game *game)
 {
+	double	a;
+	double	b;
+
 	flor.rayDirX0 = game->dirX - game->planeX;
 	flor.rayDirY0 = game->dirY - game->planeY;
 	flor.rayDirX1 = game->dirX + game->planeX;
@@ -9,14 +12,16 @@ t_flor put_flor(t_flor flor , t_game *game)
 	flor.p = flor.y - game->height_screen / 2;
 	flor.posZ = 0.5 * game->height_screen;
 	flor.rowDistance = flor.posZ / flor.p;
-	flor.floorStepX = flor.rowDistance * (flor.rayDirX1 - flor.rayDirX0) / game->width_screen;
-	flor.floorStepY = flor.rowDistance * (flor.rayDirY1 - flor.rayDirY0) / game->width_screen;
+	a = (flor.rayDirX1 - flor.rayDirX0);
+	b = (flor.rayDirY1 - flor.rayDirY0);
+	flor.floorStepX = flor.rowDistance * a / game->width_screen;
+	flor.floorStepY = flor.rowDistance * b / game->width_screen;
 	flor.floorX = game->posX + flor.rowDistance * flor.rayDirX0;
 	flor.floorY = game->posY + flor.rowDistance * flor.rayDirY0;
-	return(flor);
+	return (flor);
 }
 
-t_cell put_cell(t_game *game, t_flor *flor, t_cell cell)
+t_cell	put_cell(t_game *game, t_flor *flor, t_cell cell)
 {
 	cell.cellX = (int)(flor->floorX);
 	cell.cellY = (int)(flor->floorY);
@@ -31,9 +36,8 @@ t_cell put_cell(t_game *game, t_flor *flor, t_cell cell)
 	return (cell);
 }
 
-void init_wall(t_wall *wall, t_game *game)
+void	init_wall(t_wall *wall, t_game *game)
 {
-
 	wall->cameraX = 2 * wall->x / (double)game->width_screen - 1;
 	wall->rayDirX = game->dirX + game->planeX * wall->cameraX;
 	wall->rayDirY = game->dirY + game->planeY * wall->cameraX;
@@ -44,7 +48,7 @@ void init_wall(t_wall *wall, t_game *game)
 	wall->hit = 0;
 }
 
-void steps(t_wall *wall , t_game *game)
+void	steps(t_wall *wall, t_game *game)
 {
 	if (wall->rayDirX < 0)
 	{
@@ -66,10 +70,10 @@ void steps(t_wall *wall , t_game *game)
 		wall->stepY = 1;
 		wall->sideDistY = (wall->mapY + 1.0 - game->posY) * wall->deltaDistY;
 	}
-	hit_wall(game,wall);
+	hit_wall(game, wall);
 }
 
-void perp_wall(t_game *game, t_wall *wall)
+void	perp_wall(t_game *game, t_wall *wall)
 {
 	if (wall->side == 0 || wall->side == 1)
 		wall->perpWallDist = (wall->mapX - game->posX + (1 - wall->stepX) / 2) / wall->rayDirX;
@@ -77,9 +81,9 @@ void perp_wall(t_game *game, t_wall *wall)
 		wall->perpWallDist = (wall->mapY - game->posY + (1 - wall->stepY) / 2) / wall->rayDirY;
 	wall->lineHeight = (int)(game->height_screen / wall->perpWallDist);
 	wall->drawStart = -wall->lineHeight / 2 + game->height_screen / 2;
-	if(wall->drawStart < 0)
+	if (wall->drawStart < 0)
 		wall->drawStart = 0;
 	wall->drawEnd = wall->lineHeight / 2 + game->height_screen / 2;
-	if(wall->drawEnd >= game->height_screen)
+	if (wall->drawEnd >= game->height_screen)
 		wall->drawEnd = game->height_screen - 1;
 }

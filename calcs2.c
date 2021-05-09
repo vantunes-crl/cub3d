@@ -41,12 +41,12 @@ void hit_wall(t_game *game, t_wall *wall)
 	{
 		if (wall->sideDistX < wall->sideDistY)
 		{
-			wall->sideDistX += wall->deltaDistX;
-			wall->mapX += wall->stepX;
-			if (wall->stepX == 1)
-				wall->side = 0;
-			else if (wall->stepX == -1)
-				wall->side = 1;
+				wall->sideDistX += wall->deltaDistX;
+				wall->mapX += wall->stepX;
+				if (wall->stepX == 1)
+					wall->side = 0;
+				else if (wall->stepX == -1)
+		wall->side = 1;
 		}
 		else
 		{
