@@ -27,3 +27,13 @@ char	*ft_strdup(const char *s1)
 	s1_cpy[i] = '\0';
 	return (s1_cpy);
 }
+
+void	cell_or_floor(t_game *game, int type)
+{
+	if (type == 0)
+		game->floor_color = create_trgb(ft_atoi(game->buff),
+				ft_atoi(game->buff2), ft_atoi(game->buff3));
+	else if (type == 1)
+		game->cell_color = create_trgb(ft_atoi(game->buff),
+				ft_atoi(game->buff2), ft_atoi(game->buff3));
+}
