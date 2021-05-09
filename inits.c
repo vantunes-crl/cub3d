@@ -2,30 +2,32 @@
 
 void	draw(t_game *game)
 {
-    int y;
-    int x;
+	int	y;
+	int	x;
 
-    y = 0;
+	y = 0;
 	while (y < game->height_screen)
 	{
-        x = 0;
+		x = 0;
 		while (x < game->width_screen)
 		{
 			game->img.data[y * game->width_screen + x] = game->buf[y][x];
-            x++;
+			x++;
 		}
-        y++;
+		y++;
 	}
 }
 
 void	load_image(t_game *game, int *texture, char *path, t_img *img)
 {
-    int y;
-	int x;
+	int	y;
+	int	x;
 
-    y = 0;
-	img->img = mlx_xpm_file_to_image(game->mlx, path, &img->img_width, &img->img_height);
-	img->data = (int *)mlx_get_data_addr(img->img, &img->bpp, &img->size_l, &img->endian);
+	y = 0;
+	img->img = mlx_xpm_file_to_image(game->mlx, path,
+			&img->img_width, &img->img_height);
+	img->data = (int *)mlx_get_data_addr(img->img,
+			&img->bpp, &img->size_l, &img->endian);
 	while (y < img->img_height)
 	{
 		x = 0;
@@ -51,25 +53,25 @@ void	load_texture(t_game *game)
 
 void	draw_all(t_game *game)
 {
-    int y;
-    int x;
+	int	y;
+	int	x;
 
-    y = 0;
+	y = 0;
 	while (y < game->height_screen)
 	{
-        x = 0;
+		x = 0;
 		while (x < game->width_screen)
 		{
 			game->bmp_buf[y][x] = game->img.data[y * game->width_screen + x];
-            x++;
+			x++;
 		}
-        y++;
+		y++;
 	}
 }
 
-int init_buff1(t_game *game)
+int	init_buff1(t_game *game)
 {
-	int i;
+	int	i;
 
 	game->texture = ft_calloc(5, sizeof(int *));
 	i = -1;
@@ -78,7 +80,7 @@ int init_buff1(t_game *game)
 	game->zBuffer = ft_calloc(game->width_screen, sizeof(double *));
 	game->buf = ft_calloc(game->height_screen, sizeof(int *));
 	i = -1;
-	while(++i < game->height_screen)
+	while (++i < game->height_screen)
 		game->buf[i] = ft_calloc(game->width_screen, sizeof(int *));
 	return (0);
 }
