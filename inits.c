@@ -74,7 +74,7 @@ int init_buff1(t_game *game)
 	game->texture = ft_calloc(5, sizeof(int *));
 	i = -1;
 	while (++i < 5)
-		game->texture[i] = ft_calloc(texHeight * texWidth, sizeof(int));
+		game->texture[i] = ft_calloc(TEXHEIGHT * TEXWIDTH, sizeof(int));
 	game->zBuffer = ft_calloc(game->width_screen, sizeof(double *));
 	game->buf = ft_calloc(game->height_screen, sizeof(int *));
 	i = -1;

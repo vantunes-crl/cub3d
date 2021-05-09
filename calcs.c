@@ -25,8 +25,8 @@ t_cell	put_cell(t_game *game, t_flor *flor, t_cell cell)
 {
 	cell.cellX = (int)(flor->floorX);
 	cell.cellY = (int)(flor->floorY);
-	cell.tx = (int)(texWidth * (flor->floorX - cell.cellX)) & (texWidth - 1);
-	cell.ty = (int)(texHeight * (flor->floorY - cell.cellY)) & (texHeight - 1);
+	cell.tx = (int)(TEXWIDTH * (flor->floorX - cell.cellX)) & (TEXWIDTH - 1);
+	cell.ty = (int)(TEXHEIGHT * (flor->floorY - cell.cellY)) & (TEXHEIGHT - 1);
 	flor->floorX += flor->floorStepX;
 	flor->floorY += flor->floorStepY;
 	cell.color = game->floor_color;
