@@ -1,58 +1,73 @@
 #include "cub3d.h"
 
-void draw_sprites_half2(t_game *game, t_sprite *sprites)
+void	draw_sprites_half2(t_game *game, t_sprite *sp)
 {
-	if (sprites->drawStartY < 0) 
-		sprites->drawStartY = 0;
-	sprites->drawEndY = sprites->spriteHeight / 2 + game->height_screen / 2 + sprites->vMoveScreen;
-	if(sprites->drawEndY >= game->height_screen) 
-		sprites->drawEndY = game->height_screen - 1;
-	sprites->spriteWidth = (int)fabs((game->height_screen / sprites->transformY) / 1);
-	sprites->drawStartX = -sprites->spriteWidth / 2 + sprites->spriteScreenX;
-	if(sprites->drawStartX < 0)
-		sprites->drawStartX = 0;
-	sprites->drawEndX = sprites->spriteWidth / 2 + sprites->spriteScreenX;
-	if(sprites->drawEndX >= game->width_screen) 
-		sprites->drawEndX = game->width_screen - 1;
-	sprites->stripe = sprites->drawStartX;
+	double	n;
+
+	n = sp->spriteHeight;
+	if (sp->drawStartY < 0)
+		sp->drawStartY = 0;
+	sp->drawEndY = n / 2 + game->height_screen / 2 + sp->vMoveScreen;
+	if (sp->drawEndY >= game->height_screen)
+		sp->drawEndY = game->height_screen - 1;
+	sp->spriteWidth = (int)fabs((game->height_screen / sp->transformY) / 1);
+	sp->drawStartX = -sp->spriteWidth / 2 + sp->spriteScreenX;
+	if (sp->drawStartX < 0)
+		sp->drawStartX = 0;
+	sp->drawEndX = sp->spriteWidth / 2 + sp->spriteScreenX;
+	if (sp->drawEndX >= game->width_screen)
+		sp->drawEndX = game->width_screen - 1;
+	sp->stripe = sp->drawStartX;
 }
 
-void draw_sprites_half(t_game *game, t_sprite *sprites)
+void	draw_sprites_half(t_game *game, t_sprite *sp)
 {
-	while (sprites->stripe < sprites->drawEndX)
+	int		n;
+	double	spw;
+
+	while (sp->stripe < sp->drawEndX)
 	{
-		sprites->texX = (int)((256 * (sprites->stripe - (-sprites->spriteWidth / 2 + sprites->spriteScreenX)) * TEXWIDTH / sprites->spriteWidth) / 256);
-		if (sprites->transformY > 0 && sprites->stripe > 0 && sprites->stripe < game->width_screen && sprites->transformY < game->zBuffer[sprites->stripe])
-			sprites->j = sprites->drawStartY;
-		while (sprites->j < sprites->drawEndY)
+		spw = -sp->spriteWidth;
+		n = (int)((256 * (sp->stripe - (spw / 2 + sp->spriteScreenX))));
+		sp->texX = n * TEXWIDTH / sp->spriteWidth / 256;
+		if (sp->transformY > 0 && sp->stripe > 0
+			&& sp->stripe < game->width_screen
+			&& sp->transformY < game->zBuffer[sp->stripe])
+			sp->j = sp->drawStartY;
+		while (sp->j < sp->drawEndY)
 		{
-			sprites->d = (sprites->j-sprites->vMoveScreen) * 256 - game->height_screen * 128 + sprites->spriteHeight * 128;
-			sprites->texY = ((sprites->d * TEXHEIGHT) / sprites->spriteHeight) / 256;
-			sprites->color = game->texture[4][TEXWIDTH * sprites->texY + sprites->texX];
-			if ((sprites->color & 0x00FFFFFF) != 0)
-			{
-				game->buf[sprites->j][sprites->stripe] = sprites->color;
-				game->bmp_buf[sprites->j][sprites->stripe] = sprites->color;
-			}
-			sprites->j++;
+			spw = (sp->j - sp->vMoveScreen);
+			n = sp->spriteHeight;
+			sp->d = spw * 256 - game->height_screen * 128 + n * 128;
+			sp->texY = ((sp->d * TEXHEIGHT) / sp->spriteHeight) / 256;
+			sp->color = game->texture[4][TEXWIDTH * sp->texY + sp->texX];
+			if ((sp->color & 0x00FFFFFF) != 0)
+				game->buf[sp->j][sp->stripe] = sp->color;
+			sp->j++;
 		}
-		sprites->stripe++;
+		sp->stripe++;
 	}
 }
 
-void draw_sprite(t_game *game , double pos_x, double pos_y)
+void	draw_sprite(t_game *game, double pos_x, double pos_y)
 {
-	t_sprite sprites;
+	t_sprite	sp;
+	double		norm;
 
-	sprites.spriteX = (int)pos_x - game->posX;
-	sprites.spriteY = (int)pos_y - game->posY;
-	sprites.invDet = 1.0 / (game->planeX * game->dirY - game->dirX * game->planeY);
-	sprites.transformX = sprites.invDet * (game->dirY * sprites.spriteX - game->dirX * sprites.spriteY);
-	sprites.transformY = sprites.invDet * (-game->planeY * sprites.spriteX + game->planeX * sprites.spriteY);
-	sprites.spriteScreenX = (int)((game->width_screen / 2) * (1 + sprites.transformX / sprites.transformY));
-	sprites.vMoveScreen = (int)(0.0 / sprites.transformY);
-	sprites.spriteHeight = (int)fabs((game->height_screen / sprites.transformY) / 1);
-	sprites.drawStartY = -sprites.spriteHeight / 2 + game->height_screen / 2 + sprites.vMoveScreen;
-	draw_sprites_half2(game,&sprites);
-	draw_sprites_half(game, &sprites);
+	sp.spriteX = (int)pos_x - game->posX;
+	sp.spriteY = (int)pos_y - game->posY;
+	norm = (game->planeX * game->dirY - game->dirX * game->planeY);
+	sp.invDet = 1.0 / norm;
+	norm = (game->dirY * sp.spriteX - game->dirX * sp.spriteY);
+	sp.transformX = sp.invDet * norm;
+	norm = (-game->planeY * sp.spriteX + game->planeX * sp.spriteY);
+	sp.transformY = sp.invDet * norm;
+	norm = (1 + sp.transformX / sp.transformY);
+	sp.spriteScreenX = (int)((game->width_screen / 2) * norm);
+	sp.vMoveScreen = (int)(0.0 / sp.transformY);
+	sp.spriteHeight = (int)fabs((game->height_screen / sp.transformY) / 1);
+	norm = 2 + sp.vMoveScreen;
+	sp.drawStartY = -sp.spriteHeight / 2 + game->height_screen / norm;
+	draw_sprites_half2(game, &sp);
+	draw_sprites_half(game, &sp);
 }
