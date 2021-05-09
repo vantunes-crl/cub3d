@@ -14,7 +14,7 @@ void	draw_rectangle(t_game *game, int x, int y, int color)
 		j = 0;
 		while (j < game->minimap_size - 1)
 		{
-			game->img.data[(x + i) * game->width_screen + y + j] = color;
+			game->img.data[(x + i)*game->width_screen + y + j] = color;
 			j++;
 		}
 		i++;

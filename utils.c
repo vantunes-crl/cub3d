@@ -2,7 +2,7 @@
 
 int	ft_strncmp(const char *str1, const char *str2, size_t n)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	if (n == 0)
@@ -29,19 +29,19 @@ void	*ft_calloc(size_t count, size_t size)
 	return ((void *)mem);
 }
 
-int ismap(char c)
+int	ismap(char c)
 {
-    if (c == ' ' || c == '1')
-        return (1);
-    return (0);
+	if (c == ' ' || c == '1')
+		return (1);
+	return (0);
 }
 
-int		create_trgb(int r, int g, int b)
+int	create_trgb(int r, int g, int b)
 {
-	return(r << 16 | g << 8 | b);
+	return (r << 16 | g << 8 | b);
 }
 
-void error(void)
+void	error(void)
 {
 	printf("error");
 	exit(0);

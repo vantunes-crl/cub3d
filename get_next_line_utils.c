@@ -1,8 +1,8 @@
 #include "get_next_line.h"
 
-int		ft_len(const char *str)
+int	ft_len(const char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!str)
@@ -14,8 +14,8 @@ int		ft_len(const char *str)
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	char *d;
-	char *s;
+	char	*d;
+	char	*s;
 
 	d = (char *)dst;
 	s = (char *)src;
@@ -54,9 +54,9 @@ char	*str_join(char const *s1, char const *s2)
 	return (rtn);
 }
 
-int		check_line(char *str)
+int	check_line(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!str)

@@ -1,7 +1,7 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "mlx/mlx.h"
+# include <mlx.h>
 # include "key_macos.h"
 # include <math.h>
 # include <string.h>

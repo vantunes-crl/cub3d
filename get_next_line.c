@@ -49,7 +49,13 @@ static	char	*take_line(char *str)
 	return (new_str);
 }
 
-int				get_next_line(const int fd, char **line)
+static int	read_error(char *save)
+{
+	free(save);
+	return (-1);
+}
+
+int	get_next_line(const int fd, char **line)
 {
 	static char	*save;
 	char		*buff;
@@ -58,15 +64,14 @@ int				get_next_line(const int fd, char **line)
 	lst_p = 1;
 	if (read(fd, 0, 0) || !line || BUFFER_SIZE <= 0)
 		return (-1);
-	if (!(buff = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1)))
+	buff = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
+	if (!buff)
 		return (-1);
 	while (!check_line(save) && lst_p != 0)
 	{
-		if ((lst_p = read(fd, buff, BUFFER_SIZE)) == -1)
-		{
-			free(save);
-			return (-1);
-		}
+		lst_p = read(fd, buff, BUFFER_SIZE);
+		if (lst_p == -1)
+			read_error(save);
 		buff[lst_p] = '\0';
 		save = str_join(save, buff);
 	}

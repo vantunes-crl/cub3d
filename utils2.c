@@ -2,8 +2,8 @@
 
 int	ft_atoi(const char *str)
 {
-	int i;
-	int n;
+	int	i;
+	int	n;
 
 	i = 0;
 	n = 0;
@@ -24,7 +24,7 @@ int	ft_isdigit(int c)
 
 int	ft_lenofnum_bonus(int n)
 {
-	int l;
+	int	l;
 
 	l = 1;
 	while (n > 9)
