@@ -75,10 +75,15 @@ void	steps(t_wall *wall, t_game *game)
 
 void	perp_wall(t_game *game, t_wall *wall)
 {
+	double	a;
+	double	b;
+
+	a = (wall->mapX - game->posX + (1 - wall->stepX) / 2);
+	b = (wall->mapY - game->posY + (1 - wall->stepY) / 2);
 	if (wall->side == 0 || wall->side == 1)
-		wall->perpWallDist = (wall->mapX - game->posX + (1 - wall->stepX) / 2) / wall->rayDirX;
+		wall->perpWallDist = a / wall->rayDirX;
 	else
-		wall->perpWallDist = (wall->mapY - game->posY + (1 - wall->stepY) / 2) / wall->rayDirY;
+		wall->perpWallDist = b / wall->rayDirY;
 	wall->lineHeight = (int)(game->height_screen / wall->perpWallDist);
 	wall->drawStart = -wall->lineHeight / 2 + game->height_screen / 2;
 	if (wall->drawStart < 0)
