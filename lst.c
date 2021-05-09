@@ -4,7 +4,8 @@ t_list	*ft_lstnew(void *content)
 {
 	t_list	*new_elem;
 
-	if (!(new_elem = malloc(sizeof(t_list))))
+	new_elem = malloc(sizeof(t_list));
+	if (!new_elem)
 		return (NULL);
 	new_elem->content = content;
 	new_elem->next = NULL;
@@ -13,7 +14,7 @@ t_list	*ft_lstnew(void *content)
 
 int	ft_lstsize(t_list *lst)
 {
-	int count;
+	int	count;
 
 	count = 0;
 	while (lst)
@@ -45,4 +46,3 @@ void	ft_lstadd_back(t_list **alst, t_list *new)
 	last_elem = ft_lstlast(*alst);
 	last_elem->next = new;
 }
-

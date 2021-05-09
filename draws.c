@@ -45,3 +45,39 @@ void	draw_rectangles(t_game *game)
 		i++;
 	}
 }
+
+int	key_press(int key, t_game *game)
+{
+	if (key == K_ESC)
+	{
+		mlx_destroy_window(game->mlx, game->win);
+		exit(0);
+	}
+	else if (key == K_W)
+		game->key_w = 1;
+	else if (key == K_A)
+		game->key_a = 1;
+	else if (key == K_S)
+		game->key_s = 1;
+	else if (key == K_D)
+		game->key_d = 1;
+	return (0);
+}
+
+int	key_release(int key, t_game *game)
+{
+	if (key == K_ESC)
+	{
+		mlx_destroy_window(game->mlx, game->win);
+		exit(0);
+	}
+	else if (key == K_W)
+		game->key_w = 0;
+	else if (key == K_A)
+		game->key_a = 0;
+	else if (key == K_S)
+		game->key_s = 0;
+	else if (key == K_D)
+		game->key_d = 0;
+	return (0);
+}

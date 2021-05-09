@@ -215,5 +215,6 @@ int		init_buff1(t_game *game);
 void	creat_bmp(t_game *game);
 void	*ft_calloc(size_t count, size_t size);
 void	error(void);
+void	chose_side(t_game *game, int side, char *texture);
 
 #endif

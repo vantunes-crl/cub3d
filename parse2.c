@@ -1,5 +1,28 @@
 #include "cub3d.h"
 
+void	parse_side(t_game *game, char *line, int i, int side)
+{
+	int		count;
+	int		j;
+	char	*texture;
+
+	count = 0;
+	j = 0;
+	while (ft_isalpha(line[i]) == 0)
+		i++;
+	while (ft_isalpha(line[i++]) || line[i++] == '.' || line[i++] == '/')
+		count++;
+	i = 2;
+	texture = (char *)malloc(sizeof(char *) * count + 1);
+	while (ft_isalpha(line[i]) == 0)
+		i++;
+	while (ft_isalpha(line[i]) || line[i] == '.' || line[i] == '/')
+		texture[j++] = line[i++];
+	texture[j] = '\0';
+	chose_side(game, side, texture);
+	free(texture);
+}
+
 void parse_floor_cell(t_game *game, char *line , int type)
 {
     int j;
@@ -110,66 +133,3 @@ void parse(t_game *game , char *argv)
     close(fd);
 }
 
-void check_left_borders(t_game *game, int x, int j)
-{
-    int k;
-
-    if (!(ismap(game->map[x][j])))
-        error();
-    if (game->map[x][j] == ' ')
-    {
-        k = 0;
-        while(game->map[x][k] == ' ')
-            k++;
-        if (game->map[x][k] != '1')
-            error();
-    }
-}
-
-void check_right_borders(t_game *game, int x, int j)
-{
-    int k;
-
-    if (!(ismap(game->map[x][j])))
-        error();
-    if (game->map[x][j] == ' ')
-    {
-        k = j;
-        while(game->map[x][k] == ' ')
-            k--;
-        if (game->map[x][k] != '1')
-            error();
-    }
-}
-
-void check_map(t_game *game, int size_map)
-{
-    int x;
-    int j;
-    x = 0;
-    j = 0;
-    while(x < size_map)
-    {
-        j = 0;
-        while(j < ft_strlen(game->map[x]))
-        {
-            if (x == 0 || j == 0)
-                check_left_borders(game, x, j);
-            else if ((x == size_map - 1) || (j + 1 == ft_strlen(game->map[x])))
-                check_right_borders(game, x, j);
-            else if (!((x == size_map - 1 || j + 1 == ft_strlen(game->map[x])) || (x == 0 || j == 0)))
-            {
-                if ((game->map[x][j] == '0' && !game->map[x - 1][j]) || (game->map[x][j] == '0' && game->map[x - 1][j] == ' '))
-                    error();
-                else if ((game->map[x][j] == '0' && !game->map[x + 1][j]) || (game->map[x][j] == '0' && game->map[x + 1][j] == ' '))
-                    error();
-                if ((game->map[x][j] == '2' && !game->map[x - 1][j]) || (game->map[x][j] == '2' && game->map[x - 1][j] == ' '))
-                    error();
-                else if ((game->map[x][j] == '2' && !game->map[x + 1][j]) || (game->map[x][j] == '2' && game->map[x + 1][j] == ' '))
-                    error();
-            }
-            j++;
-        }
-        x++;
-    }
-}
