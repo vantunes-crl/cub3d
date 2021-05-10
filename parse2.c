@@ -45,17 +45,24 @@ void	parse_floor_cell(t_game *game, char *line, int type)
 	j = 0;
 	i = 0;
 	while (ft_isdigit(line[i]) == 0)
+	{
+		
 		i++;
+	}
 	while (ft_isdigit(line[i]) == 1)
 		game->buff[j++] = (line[i++]);
 	game->buff[j] = '\0';
 	j = 0;
 	i++;
+	if (!ft_isdigit(line[i]))
+		error("caracter in color");
 	while (ft_isdigit(line[i]) == 1)
 		game->buff2[j++] = (line[i++]);
-	game->buff2[j] = '\0';
+	game->buff2[j] = '\0';;
 	j = 0;
 	i++;
+	if (!ft_isdigit(line[i]))
+		error("caracter in color");
 	while (ft_isdigit(line[i]) == 1)
 		game->buff3[j++] = (line[i++]);
 	game->buff3[j] = '\0';

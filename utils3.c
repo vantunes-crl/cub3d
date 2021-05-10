@@ -29,13 +29,20 @@ char	*ft_strdup(const char *s1)
 }
 
 void	cell_or_floor(t_game *game, int type)
-{
+{	
+	int r;
+	int g;
+	int b;
+
+	r = ft_atoi(game->buff);
+	g = ft_atoi(game->buff2);
+	b = ft_atoi(game->buff3);
+	if (r > 255 || g > 255 || b > 255)
+		error("color error");
 	if (type == 0)
-		game->floor_color = create_trgb(ft_atoi(game->buff),
-				ft_atoi(game->buff2), ft_atoi(game->buff3));
+		game->floor_color = create_trgb(r, g, b);
 	else if (type == 1)
-		game->cell_color = create_trgb(ft_atoi(game->buff),
-				ft_atoi(game->buff2), ft_atoi(game->buff3));
+		game->cell_color = create_trgb(r, g, b);
 	game->flag_parse += 1;
 }
 
