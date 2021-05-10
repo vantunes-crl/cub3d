@@ -43,6 +43,6 @@ int	create_trgb(int r, int g, int b)
 
 void	error(char *str)
 {
-	printf("Error\n%s",str);
+	printf("Error\n%s", str);
 	exit(0);
 }

@@ -63,6 +63,26 @@ void	check_top_botton(t_game *game, int x, int j)
 		error("Map");
 }
 
+int check_start_map(t_game *game)
+{
+	int x;
+
+	x = 0;
+	while (!ismap(game->map[x][0]))
+		x++;
+	return (x);
+}
+
+int check_map_end(t_game *game)
+{
+	int x;
+
+	x = game->map_size;
+	while (!ismap(game->map[x][0]))
+		x--;
+	return (x);
+}
+
 void	check_map(t_game *game, int size_map)
 {
 	int	x;
@@ -75,7 +95,7 @@ void	check_map(t_game *game, int size_map)
 		j = 0;
 		while (j < ft_strlen(game->map[x]))
 		{
-			if (x == 1 || j == 0)
+			if (x == check_start_map(game) || j == 0)
 				check_left_borders(game, x, j);
 			else if ((x == size_map - 1)
 				|| (j + 1 == ft_strlen(game->map[x])))
