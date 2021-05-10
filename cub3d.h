@@ -220,5 +220,6 @@ void	chose_side(t_game *game, int side, char *texture);
 void	cell_or_floor(t_game *game, int type);
 int		check_start_map(t_game *game);
 int		ft_strstr(const char *s1, const char *s2);
+void	screen_error(t_game *game);
 
 #endif

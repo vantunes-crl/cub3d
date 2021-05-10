@@ -38,6 +38,7 @@ void	load_image(t_game *game, int *texture, char *path, t_img *img)
 		}
 		y++;
 	}
+	mlx_destroy_image(game->mlx, img->img);
 }
 
 void	load_texture(t_game *game)

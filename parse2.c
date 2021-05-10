@@ -13,12 +13,14 @@ void	parse_side(t_game *game, char *line, int i, int side)
 	while (ft_isalpha(line[i++]) || line[i++] == '.' || line[i++] == '/')
 		count++;
 	i = 2;
-	texture = (char *)malloc(sizeof(char *) * count + 1);
+	texture = ft_calloc(count + 1, sizeof(char *));
 	while (ft_isalpha(line[i]) == 0)
 		i++;
 	while (ft_isalpha(line[i]) || line[i] == '.' || line[i] == '/')
 		texture[j++] = line[i++];
 	texture[j] = '\0';
+	if (!texture)
+		error("texture name");
 	chose_side(game, side, texture);
 	free(texture);
 }

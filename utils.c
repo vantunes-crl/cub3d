@@ -19,8 +19,8 @@ void	*ft_calloc(size_t count, size_t size)
 
 	i = 0;
 	mem = (char *)malloc(count * size);
-	if (mem == 0)
-		return (0);
+	if (!mem)
+		error("malloc error");
 	while (i < count * size)
 	{
 		mem[i] = 0;
