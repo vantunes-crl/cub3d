@@ -111,6 +111,8 @@ void	parse(t_game *game, char *argv)
 	t_list	*elem;
 	int		x;
 
+	if (!ft_strstr(argv, ".cub"))
+		error("Name file error");
 	elem = NULL;
 	x = 0;
 	fd = open(argv, O_RDONLY);

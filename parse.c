@@ -73,16 +73,6 @@ int check_start_map(t_game *game)
 	return (x);
 }
 
-int check_map_end(t_game *game)
-{
-	int x;
-
-	x = game->map_size;
-	while (!ismap(game->map[x][0]))
-		x--;
-	return (x);
-}
-
 void	check_map(t_game *game, int size_map)
 {
 	int	x;

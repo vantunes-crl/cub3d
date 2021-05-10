@@ -218,5 +218,7 @@ void	*ft_calloc(size_t count, size_t size);
 void	error(char *str);
 void	chose_side(t_game *game, int side, char *texture);
 void	cell_or_floor(t_game *game, int type);
+int		check_start_map(t_game *game);
+int		ft_strstr(const char *s1, const char *s2);
 
 #endif
