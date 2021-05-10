@@ -112,10 +112,8 @@ void	parse(t_game *game, char *argv)
 
 	elem = NULL;
 	x = 0;
-	if (game->screenshot)
-		fd = open("inits.cub", O_RDONLY);
-	else
-		fd = open(argv, O_RDONLY);
+
+	fd = open(argv, O_RDONLY);
 	elem = parse_infos(game, fd, elem);
 	i = ft_lstsize(elem);
 	game->map_size = i;

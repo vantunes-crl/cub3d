@@ -56,7 +56,8 @@ void	creat_bmp(t_game *game)
 	int	fd;
 	int	fz;
 
-	fz = 54 + (3 * ((int)game->height_screen) * (int)game->width_screen);
+	init_bpm_buf(game);
+	fz = 54 + (3 * (game->height_screen * game->width_screen));
 	calc(game);
 	draw(game);
 	draw_rectangles(game);

@@ -25,17 +25,17 @@ void	init_game(t_game *game)
 int	main(int argc, char **argv)
 {
 	t_game	game;
-
-	if (argc < 2)
-		exit(0);
+	
 	init_game(&game);
-	if (ft_strncmp("--save", argv[1], 5) == 0)
-		game.screenshot = 1;
+	if (argc == 3)
+	{	
+		if (ft_strncmp(argv[2], "--save", ft_strlen(argv[2])) == 0)
+			game.screenshot = 1;
+	}
 	game.mlx = mlx_init();
 	parse(&game, argv[1]);
 	player_init(&game);
 	init_buff1(&game);
-	init_bpm_buf(&game);
 	load_texture(&game);
 	game.win = mlx_new_window(game.mlx,
 			game.width_screen, game.height_screen, "mlx");
@@ -43,7 +43,7 @@ int	main(int argc, char **argv)
 			game.width_screen, game.height_screen);
 	game.img.data = (int *)mlx_get_data_addr(game.img.img,
 			&game.img.bpp, &game.img.size_l, &game.img.endian);
-	if (game.screenshot)
+	if (game.screenshot == 1)
 		creat_bmp(&game);
 	mlx_loop_hook(game.mlx, &main_loop, &game);
 	mlx_hook(game.win, 2, 1L << 0, &key_press, &game);
