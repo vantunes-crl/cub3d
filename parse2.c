@@ -100,6 +100,7 @@ t_list	*parse_infos(t_game *game, int fd, t_list *elem)
 		else
 			ft_lstadd_back(&elem, ft_lstnew((void *)line));
 	}
+	free(line);
 	return (elem);
 }
 
@@ -112,7 +113,6 @@ void	parse(t_game *game, char *argv)
 
 	elem = NULL;
 	x = 0;
-
 	fd = open(argv, O_RDONLY);
 	elem = parse_infos(game, fd, elem);
 	i = ft_lstsize(elem);

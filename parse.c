@@ -19,14 +19,14 @@ void	check_left_borders(t_game *game, int x, int j)
 	int	k;
 
 	if (!(ismap(game->map[x][j])))
-		error();
+		error("Map");
 	if (game->map[x][j] == ' ')
 	{
 		k = 0;
 		while (game->map[x][k] == ' ')
 			k++;
 		if (game->map[x][k] != '1')
-			error();
+			error("Map");
 	}
 }
 
@@ -35,14 +35,14 @@ void	check_right_borders(t_game *game, int x, int j)
 	int	k;
 
 	if (!(ismap(game->map[x][j])))
-		error();
+		error("Map");
 	if (game->map[x][j] == ' ')
 	{
 		k = j;
 		while (game->map[x][k] == ' ')
 			k--;
 		if (game->map[x][k] != '1')
-			error();
+			error("Map");
 	}
 }
 
@@ -50,16 +50,16 @@ void	check_top_botton(t_game *game, int x, int j)
 {
 	if ((game->map[x][j] == '0' && !game->map[x - 1][j])
 		|| (game->map[x][j] == '0' && game->map[x - 1][j] == ' '))
-		error();
+		error("Map");
 	else if ((game->map[x][j] == '0' && !game->map[x + 1][j])
 		|| (game->map[x][j] == '0' && game->map[x + 1][j] == ' '))
-		error();
+		error("Map");
 	if ((game->map[x][j] == '2' && !game->map[x - 1][j])
 		|| (game->map[x][j] == '2' && game->map[x - 1][j] == ' '))
-		error();
+		error("Map");
 	else if ((game->map[x][j] == '2' && !game->map[x + 1][j])
 		|| (game->map[x][j] == '2' && game->map[x + 1][j] == ' '))
-		error();
+		error("Map");
 }
 
 void	check_map(t_game *game, int size_map)

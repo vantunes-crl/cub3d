@@ -25,13 +25,13 @@ void	init_game(t_game *game)
 int	main(int argc, char **argv)
 {
 	t_game	game;
-	
+
 	init_game(&game);
 	if (argc == 3)
-	{	
 		if (ft_strncmp(argv[2], "--save", ft_strlen(argv[2])) == 0)
 			game.screenshot = 1;
-	}
+	if (argc == 1 || argc > 3)
+		exit(0);
 	game.mlx = mlx_init();
 	parse(&game, argv[1]);
 	player_init(&game);

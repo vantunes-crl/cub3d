@@ -41,8 +41,8 @@ int	create_trgb(int r, int g, int b)
 	return (r << 16 | g << 8 | b);
 }
 
-void	error(void)
+void	error(char *str)
 {
-	printf("error");
+	printf("Error\n%s",str);
 	exit(0);
 }
