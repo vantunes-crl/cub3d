@@ -48,6 +48,15 @@ void	parse_floor_cell(t_game *game, char *line, int type)
 	cell_or_floor(game, type);
 }
 
+void	screen_error(t_game *game)
+{
+	if (game->width_screen > 2560)
+		game->width_screen = 2560;
+	if (game->width_screen > 1440)
+		game->width_screen = 1440;
+	
+}
+
 void	parse_screen(t_game *game, char *line, int i)
 {
 	char	width_screen[5];
@@ -116,10 +125,12 @@ void	parse(t_game *game, char *argv)
 	elem = NULL;
 	x = 0;
 	fd = open(argv, O_RDONLY);
+	if (fd < 0)
+		error("error open file");
 	elem = parse_infos(game, fd, elem);
 	i = ft_lstsize(elem);
 	game->map_size = i;
-	game->map = (char **)malloc(sizeof(char *) * i);
+	game->map = ft_calloc(i, sizeof(char *));
 	while (elem)
 	{
 		game->map[x] = ft_strdup(elem->content);
