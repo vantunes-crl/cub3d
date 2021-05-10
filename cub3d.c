@@ -12,6 +12,7 @@ int	main_loop(t_game *game)
 
 void	init_game(t_game *game)
 {
+	game->flag_parse = 0;
 	game->screenshot = 0;
 	game->moveSpeed = 0.08;
 	game->rotSpeed = 0.08;

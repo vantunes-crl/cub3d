@@ -27,6 +27,7 @@ typedef struct s_img
 
 typedef struct s_game
 {
+	int		flag_parse;
 	char	buff[4];
 	char	buff2[4];
 	char	buff3[4];

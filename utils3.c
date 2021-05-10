@@ -36,4 +36,5 @@ void	cell_or_floor(t_game *game, int type)
 	else if (type == 1)
 		game->cell_color = create_trgb(ft_atoi(game->buff),
 				ft_atoi(game->buff2), ft_atoi(game->buff3));
+	game->flag_parse += 1;
 }

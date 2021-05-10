@@ -73,6 +73,7 @@ void	parse_screen(t_game *game, char *line, int i)
 	}
 	game->width_screen = ft_atoi(width_screen);
 	game->height_screen = ft_atoi(height_screen);
+	game->flag_parse += 1;
 }
 
 t_list	*parse_infos(t_game *game, int fd, t_list *elem)
@@ -97,10 +98,9 @@ t_list	*parse_infos(t_game *game, int fd, t_list *elem)
 			parse_floor_cell(game, line, 0);
 		else if (line[0] == 'C' && line[1] == ' ')
 			parse_floor_cell(game, line, 1);
-		else
+		else if (game->flag_parse == 8)
 			ft_lstadd_back(&elem, ft_lstnew((void *)line));
 	}
-	free(line);
 	return (elem);
 }
 

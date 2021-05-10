@@ -12,6 +12,7 @@ void	chose_side(t_game *game, int side, char *texture)
 		game->tex_west = ft_strdup(texture);
 	if (side == 4)
 		game->tex_sprite = ft_strdup(texture);
+	game->flag_parse += 1;
 }
 
 void	check_left_borders(t_game *game, int x, int j)
@@ -74,7 +75,7 @@ void	check_map(t_game *game, int size_map)
 		j = 0;
 		while (j < ft_strlen(game->map[x]))
 		{
-			if (x == 0 || j == 0)
+			if (x == 1 || j == 0)
 				check_left_borders(game, x, j);
 			else if ((x == size_map - 1)
 				|| (j + 1 == ft_strlen(game->map[x])))
