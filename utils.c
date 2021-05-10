@@ -29,13 +29,6 @@ void	*ft_calloc(size_t count, size_t size)
 	return ((void *)mem);
 }
 
-int	ismap(char c)
-{
-	if (c == ' ' || c == '1')
-		return (1);
-	return (0);
-}
-
 int	create_trgb(int r, int g, int b)
 {
 	return (r << 16 | g << 8 | b);
@@ -49,12 +42,12 @@ void	error(char *str)
 
 int	ft_strstr(const char *s1, const char *s2)
 {
-	size_t i;
-	size_t j;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
 	if (*s2 == '\0' || s2 == NULL)
-		return 0;
+		return (0);
 	while (s1[i])
 	{
 		j = 0;

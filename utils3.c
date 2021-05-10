@@ -38,3 +38,20 @@ void	cell_or_floor(t_game *game, int type)
 				ft_atoi(game->buff2), ft_atoi(game->buff3));
 	game->flag_parse += 1;
 }
+
+int	check_start_map(t_game *game)
+{
+	int	x;
+
+	x = 0;
+	while (!ismap(game->map[x][0]))
+		x++;
+	return (x);
+}
+
+int	ismap(char c)
+{
+	if (c == ' ' || c == '1')
+		return (1);
+	return (0);
+}

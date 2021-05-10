@@ -49,7 +49,8 @@ void	check_right_borders(t_game *game, int x, int j)
 
 void	check_top_botton(t_game *game, int x, int j)
 {
-	if ((game->map[x][j] == ' ' && game->map[x][j - 1] == '0') || (game->map[x][j] == ' ' && game->map[x][j + 1] == '0'))
+	if ((game->map[x][j] == ' ' && game->map[x][j - 1] == '0')
+		|| (game->map[x][j] == ' ' && game->map[x][j + 1] == '0'))
 		error("space in map");
 	if ((game->map[x][j] == '0' && !game->map[x - 1][j])
 		|| (game->map[x][j] == '0' && game->map[x - 1][j] == ' '))
@@ -63,16 +64,6 @@ void	check_top_botton(t_game *game, int x, int j)
 	else if ((game->map[x][j] == '2' && !game->map[x + 1][j])
 		|| (game->map[x][j] == '2' && game->map[x + 1][j] == ' '))
 		error("Map");
-}
-
-int	check_start_map(t_game *game)
-{
-	int	x;
-
-	x = 0;
-	while (!ismap(game->map[x][0]))
-		x++;
-	return (x);
 }
 
 void	check_map(t_game *game, int size_map)

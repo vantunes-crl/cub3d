@@ -23,6 +23,18 @@ void	parse_side(t_game *game, char *line, int i, int side)
 	free(texture);
 }
 
+void	screen_error(t_game *game)
+{
+	if (game->width_screen > 2560)
+		game->width_screen = 2560;
+	if (game->height_screen > 1440)
+		game->height_screen = 1440;
+	if (!game->width_screen)
+		error("screen error");
+	if (!game->height_screen)
+		error("screen error");
+}
+
 void	parse_floor_cell(t_game *game, char *line, int type)
 {
 	int	j;
@@ -46,15 +58,6 @@ void	parse_floor_cell(t_game *game, char *line, int type)
 		game->buff3[j++] = (line[i++]);
 	game->buff3[j] = '\0';
 	cell_or_floor(game, type);
-}
-
-void	screen_error(t_game *game)
-{
-	if (game->width_screen > 2560)
-		game->width_screen = 2560;
-	if (game->width_screen > 1440)
-		game->width_screen = 1440;
-	
 }
 
 void	parse_screen(t_game *game, char *line, int i)
@@ -82,6 +85,7 @@ void	parse_screen(t_game *game, char *line, int i)
 	}
 	game->width_screen = ft_atoi(width_screen);
 	game->height_screen = ft_atoi(height_screen);
+	screen_error(game);
 	game->flag_parse += 1;
 }
 
