@@ -7,9 +7,9 @@ void	screen_error(t_game *game)
 	if (game->height_screen > 1440)
 		game->height_screen = 1440;
 	if (!game->width_screen)
-		error("screen error");
+		error(game, "screen error");
 	if (!game->height_screen)
-		error("screen error");
+		error(game, "screen error");
 }
 
 void	parse_screen(t_game *game, char *line, int i)

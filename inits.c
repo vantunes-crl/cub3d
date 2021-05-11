@@ -27,7 +27,7 @@ void	load_image(t_game *game, int *texture, char *path, t_img *img)
 	img->img = mlx_xpm_file_to_image(game->mlx, path,
 			&img->img_width, &img->img_height);
 	if (!img->img)
-		error("texture path");
+		error(game, "texture path");
 	img->data = (int *)mlx_get_data_addr(img->img,
 			&img->bpp, &img->size_l, &img->endian);
 	while (y < img->img_height)

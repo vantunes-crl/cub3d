@@ -216,7 +216,7 @@ int		write_bmp_data(int file, t_game *game);
 int		init_buff1(t_game *game);
 void	creat_bmp(t_game *game);
 void	*ft_calloc(size_t count, size_t size);
-void	error(char *str);
+void	error(t_game *game, char *str);
 void	chose_side(t_game *game, int side, char *texture);
 void	cell_or_floor(t_game *game, int type);
 int		check_start_map(t_game *game);
@@ -224,5 +224,7 @@ int		ft_strstr(const char *s1, const char *s2);
 void	screen_error(t_game *game);
 int		check_all_map(char c);
 void	parse_screen(t_game *game, char *line, int i);
+void	free_matriz(char **matriz);
+void	free_array(char *array);
 
 #endif

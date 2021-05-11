@@ -64,6 +64,7 @@ void	creat_bmp(t_game *game)
 	fd = open("screenshot.bmp", O_WRONLY | O_CREAT, 0777 | O_TRUNC | O_APPEND);
 	write_bmp_header(fd, fz, game);
 	write_bmp_data(fd, game);
+	free_matriz((char **)game->bmp_buf);
 	close(0);
 	exit(0);
 }

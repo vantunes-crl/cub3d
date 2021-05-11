@@ -20,7 +20,7 @@ void	*ft_calloc(size_t count, size_t size)
 	i = 0;
 	mem = (char *)malloc(count * size);
 	if (!mem)
-		error("malloc error");
+		return (0);
 	while (i < count * size)
 	{
 		mem[i] = 0;
@@ -34,8 +34,16 @@ int	create_trgb(int r, int g, int b)
 	return (r << 16 | g << 8 | b);
 }
 
-void	error(char *str)
+void	error(t_game *game, char *str)
 {
+	free_array(game->tex_south);
+	free_array(game->tex_east);
+	free_array(game->tex_north);
+	free_array(game->tex_west);
+	free_matriz(game->map);
+	free_matriz((char **)game->buf);
+	free_matriz((char **)game->texture);
+	free_array((char *)game->zBuffer);
 	printf("Error\n%s", str);
 	exit(0);
 }

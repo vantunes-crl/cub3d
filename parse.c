@@ -20,14 +20,14 @@ void	check_left_borders(t_game *game, int x, int j)
 	int	k;
 
 	if (!(ismap(game->map[x][j])))
-		error("Map");
+		error(game, "Map");
 	if (game->map[x][j] == ' ')
 	{
 		k = 0;
 		while (game->map[x][k] == ' ')
 			k++;
 		if (game->map[x][k] != '1')
-			error("Map");
+			error(game, "Map");
 	}
 }
 
@@ -36,14 +36,14 @@ void	check_right_borders(t_game *game, int x, int j)
 	int	k;
 
 	if (!(ismap(game->map[x][j])))
-		error("Map");
+		error(game, "Map");
 	if (game->map[x][j] == ' ')
 	{
 		k = j;
 		while (game->map[x][k] == ' ')
 			k--;
 		if (game->map[x][k] != '1')
-			error("Map");
+			error(game, "Map");
 	}
 }
 
@@ -51,19 +51,19 @@ void	check_top_botton(t_game *game, int x, int j)
 {
 	if ((game->map[x][j] == ' ' && game->map[x][j - 1] == '0')
 		|| (game->map[x][j] == ' ' && game->map[x][j + 1] == '0'))
-		error("space in map");
+		error(game, "space in map");
 	if ((game->map[x][j] == '0' && !game->map[x - 1][j])
 		|| (game->map[x][j] == '0' && game->map[x - 1][j] == ' '))
-		error("Map");
+		error(game, "Map");
 	else if ((game->map[x][j] == '0' && !game->map[x + 1][j])
 		|| (game->map[x][j] == '0' && game->map[x + 1][j] == ' '))
-		error("Map");
+		error(game, "Map");
 	if ((game->map[x][j] == '2' && !game->map[x - 1][j])
 		|| (game->map[x][j] == '2' && game->map[x - 1][j] == ' '))
-		error("Map");
+		error(game, "Map");
 	else if ((game->map[x][j] == '2' && !game->map[x + 1][j])
 		|| (game->map[x][j] == '2' && game->map[x + 1][j] == ' '))
-		error("Map");
+		error(game, "Map");
 }
 
 void	check_map(t_game *game, int size_map)
@@ -74,7 +74,7 @@ void	check_map(t_game *game, int size_map)
 	x = 0;
 	j = 0;
 	if (game->flag_parse != 8)
-		error("Need more arguments in parse file");
+		error(game, "Need more arguments in parse file");
 	while (x < size_map)
 	{
 		j = 0;

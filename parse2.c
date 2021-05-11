@@ -20,7 +20,7 @@ void	parse_side(t_game *game, char *line, int i, int side)
 		texture[j++] = line[i++];
 	texture[j] = '\0';
 	if (!texture)
-		error("texture name");
+		error(game, "texture name");
 	chose_side(game, side, texture);
 	free(texture);
 }
@@ -31,14 +31,14 @@ void	parse_cell_floor_half(t_game *game, char *line, int i)
 
 	j = 0;
 	if (!ft_isdigit(line[i]))
-		error("caracter in color");
+		error(game, "caracter in color");
 	while (ft_isdigit(line[i]) == 1)
 		game->buff2[j++] = (line[i++]);
 	game->buff2[j] = '\0';
 	j = 0;
 	i++;
 	if (!ft_isdigit(line[i]))
-		error("caracter in color");
+		error(game, "caracter in color");
 	while (ft_isdigit(line[i]) == 1)
 		game->buff3[j++] = (line[i++]);
 	game->buff3[j] = '\0';
@@ -55,7 +55,7 @@ void	parse_floor_cell(t_game *game, char *line, int type)
 	{
 		if ((line[i] >= 'a' && line[i] <= 'z')
 			|| (line[i] >= 'A' && line[i] <= 'Z'))
-			error("caracter in color");
+			error(game, "caracter in color");
 		i++;
 	}
 	while (ft_isdigit(line[i]) == 1)
@@ -103,12 +103,12 @@ void	parse(t_game *game, char *argv)
 	int		x;
 
 	if (!ft_strstr(argv, ".cub"))
-		error("Name file error");
+		error(game, "Name file error");
 	elem = NULL;
 	x = 0;
 	fd = open(argv, O_RDONLY);
 	if (fd < 0)
-		error("error open file");
+		error(game, "error open file");
 	elem = parse_infos(game, fd, elem);
 	i = ft_lstsize(elem);
 	game->map_size = i;
