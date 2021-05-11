@@ -55,7 +55,9 @@ void	creat_bmp(t_game *game)
 {
 	int	fd;
 	int	fz;
+	int i;
 
+	i = 0;
 	init_bpm_buf(game);
 	fz = 54 + (3 * (game->height_screen * game->width_screen));
 	calc(game);
@@ -64,7 +66,9 @@ void	creat_bmp(t_game *game)
 	fd = open("screenshot.bmp", O_WRONLY | O_CREAT, 0777 | O_TRUNC | O_APPEND);
 	write_bmp_header(fd, fz, game);
 	write_bmp_data(fd, game);
-	free_matriz((char **)game->bmp_buf);
+	while (i++ < game->height_screen)
+		free(game->bmp_buf[i]);
+	free(game->bmp_buf);
 	close(0);
 	exit(0);
 }

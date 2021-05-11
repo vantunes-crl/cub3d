@@ -34,16 +34,12 @@ int	create_trgb(int r, int g, int b)
 	return (r << 16 | g << 8 | b);
 }
 
-void	error(t_game *game, char *str)
+void	error(t_game *game, char *str, int map_free)
 {
-	free_array(game->tex_south);
-	free_array(game->tex_east);
-	free_array(game->tex_north);
-	free_array(game->tex_west);
-	free_matriz(game->map);
-	free_matriz((char **)game->buf);
-	free_matriz((char **)game->texture);
-	free_array((char *)game->zBuffer);
+	if (map_free == 1)
+		free_map(game);
+	else if (map_free == 2)
+		free_buffs(game);
 	printf("Error\n%s", str);
 	exit(0);
 }

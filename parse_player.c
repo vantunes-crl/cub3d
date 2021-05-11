@@ -61,7 +61,7 @@ void	player_init(t_game *game)
 		while (j < ft_strlen(game->map[i]))
 		{
 			if (!check_all_map(game->map[i][j]))
-				error(game, "No caracter map");
+				error(game, "No caracter map", 1);
 			if (game->map[i][j] == 'N')
 				game->flag_player += player_north(game, j, i);
 			else if (game->map[i][j] == 'S')
@@ -74,5 +74,5 @@ void	player_init(t_game *game)
 		}
 	}
 	if (game->flag_player != 1)
-		error(game, "More then one Player or no Player");
+		error(game, "More then one Player or no Player", 1);
 }

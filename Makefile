@@ -1,6 +1,6 @@
 CC	= gcc
 MLX =  -lmlx -lm -framework OpenGL -framework AppKit
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = 
 RM			= rm -f
 
 NAME		= cub3d.a
