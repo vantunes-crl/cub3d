@@ -31,6 +31,7 @@ clean :
 
 fclean : clean
 	rm -rf $(NAME)
+	rm -rf $(BONUS)
 	rm -rf screenshot.bmp
 
 re : fclean all
