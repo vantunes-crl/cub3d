@@ -74,7 +74,7 @@ t_list	*parse_infos(t_game *game, int fd, t_list *elem)
 	while (get_next_line(fd, &line))
 	{
 		if (line[0] == 'R')
-			parse_screen(game, line, 0);
+			parse_screen(game, line, 1);
 		else if (line[0] == 'N' && line[1] == 'O')
 			parse_side(game, line, 2, 0);
 		else if (line[0] == 'S' && line[1] == 'O')

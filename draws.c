@@ -5,7 +5,10 @@ void	draw_rectangle(t_game *game, int x, int y, int color)
 	int	i;
 	int	j;
 
-	game->minimap_size = game->width_screen / 170;
+	if (game->height_screen > game->width_screen)
+		game->minimap_size = game->height_screen / 170;
+	else
+		game->minimap_size = game->width_screen / 170;
 	x *= game->minimap_size;
 	y *= game->minimap_size;
 	i = 0;

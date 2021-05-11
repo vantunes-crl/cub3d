@@ -10,6 +10,7 @@ void	screen_error(t_game *game)
 		error(game, "screen error", 0);
 	if (!game->height_screen)
 		error(game, "screen error", 0);
+	game->flag_parse += 1;
 }
 
 void	parse_screen(t_game *game, char *line, int i)
@@ -19,26 +20,26 @@ void	parse_screen(t_game *game, char *line, int i)
 	int		j;
 
 	j = 0;
-	while (line[i] != '\0')
+	while (line[i++])
 	{
-		if (line[i] >= '0' && line[i] <= '9')
-		{
-			while (line[i] >= '0' && line[i] <= '9')
-				width_screen[j++] = line[i++];
-			width_screen[j] = '\0';
-			j = 0;
-			i++;
-			while (line[i] >= '0' && line[i] <= '9')
-				height_screen[j++] = line[i++];
-			height_screen[j] = '\0';
-			break ;
-		}
-		i++;
+		if ((line[i] >= 'a' && line[i] <= 'z')
+			|| (line[i] >= 'A' && line[i] <= 'Z'))
+			error(game, "caracter in color", 0);
 	}
+	i = 1;
+	while (!ft_isdigit(line[i]))
+		i++;
+	while (ft_isdigit(line[i]))
+		width_screen[j++] = line[i++];
+	width_screen[j] = '\0';
+	j = 0;
+	i++;
+	while (ft_isdigit(line[i]))
+		height_screen[j++] = line[i++];
+	height_screen[j] = '\0';
 	game->width_screen = ft_atoi(width_screen);
 	game->height_screen = ft_atoi(height_screen);
 	screen_error(game);
-	game->flag_parse += 1;
 }
 
 int	check_all_map(char c)
