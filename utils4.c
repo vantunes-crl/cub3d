@@ -27,3 +27,10 @@ char	*ft_strdup(const char *s1)
 	s1_cpy[i] = '\0';
 	return (s1_cpy);
 }
+
+int exit_game(t_game *game)
+{
+	free_map(game);
+	free_buffs(game);
+	exit(0);
+}

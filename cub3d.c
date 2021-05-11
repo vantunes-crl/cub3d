@@ -29,10 +29,14 @@ int	main(int argc, char **argv)
 
 	init_game(&game);
 	if (argc == 3)
+	{
 		if (ft_strncmp(argv[2], "--save", ft_strlen(argv[2])) == 0)
 			game.screenshot = 1;
+		else
+			error(&game, "invalid argument", 0);
+	}	
 	if (argc == 1 || argc > 3)
-		exit(0);
+		error(&game, "error arguments", 0);
 	game.mlx = mlx_init();
 	parse(&game, argv[1]);
 	player_init(&game);
@@ -49,5 +53,6 @@ int	main(int argc, char **argv)
 	mlx_loop_hook(game.mlx, &main_loop, &game);
 	mlx_hook(game.win, 2, 1L << 0, &key_press, &game);
 	mlx_hook(game.win, 3, 1L << 1, &key_release, &game);
+	mlx_hook(game.win, 17, 0, &exit_game, &game);
 	mlx_loop(game.mlx);
 }
