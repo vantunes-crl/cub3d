@@ -48,41 +48,31 @@ int	player_east(t_game *game, int j, int i)
 	return (1);
 }
 
-int check_all_map(char c)
-{
-	if (c == ' ' || c == '1' || c == '2' || c == '0' || c == 'N' || c == 'W' || c == 'S' || c == 'E')
-		return (1);
-	return (0);
-}
-
 void	player_init(t_game *game)
 {
 	int	i;
 	int	j;
 
-	i = 0;
-	int flag;
-
-	flag = 0;
-	while (i < game->map_size)
+	i = -1;
+	game->flag_player = 0;
+	while (++i < game->map_size)
 	{
 		j = 0;
 		while (j < ft_strlen(game->map[i]))
-		{	
+		{
 			if (!check_all_map(game->map[i][j]))
 				error("No caracter map");
 			if (game->map[i][j] == 'N')
-				flag += player_north(game, j, i);
+				game->flag_player += player_north(game, j, i);
 			else if (game->map[i][j] == 'S')
-				flag += player_south(game, j, i);
+				game->flag_player += player_south(game, j, i);
 			else if (game->map[i][j] == 'W')
-				flag += player_west(game, j, i);
+				game->flag_player += player_west(game, j, i);
 			else if (game->map[i][j] == 'E')
-				flag += player_east(game, j, i);
+				game->flag_player += player_east(game, j, i);
 			j++;
 		}
-		i++;
 	}
-	if (flag != 1)
+	if (game->flag_player != 1)
 		error("More then one Player or no Player");
 }

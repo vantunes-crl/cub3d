@@ -26,7 +26,8 @@ typedef struct s_img
 }				t_img;
 
 typedef struct s_game
-{
+{	
+	int		flag_player;
 	int		flag_parse;
 	char	buff[4];
 	char	buff2[4];
@@ -221,5 +222,7 @@ void	cell_or_floor(t_game *game, int type);
 int		check_start_map(t_game *game);
 int		ft_strstr(const char *s1, const char *s2);
 void	screen_error(t_game *game);
+int		check_all_map(char c);
+void	parse_screen(t_game *game, char *line, int i);
 
 #endif

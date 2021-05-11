@@ -54,8 +54,8 @@ void	draw_sprite(t_game *game, double pos_x, double pos_y)
 	t_sprite	sp;
 	double		norm;
 
-	sp.spriteX = (int)pos_x - game->posX;
-	sp.spriteY = (int)pos_y - game->posY;
+	sp.spriteX = (int)pos_x + 0.5 - game->posX;
+	sp.spriteY = (int)pos_y + 0.5 - game->posY;
 	norm = (game->planeX * game->dirY - game->dirX * game->planeY);
 	sp.invDet = 1.0 / norm;
 	norm = (game->dirY * sp.spriteX - game->dirX * sp.spriteY);

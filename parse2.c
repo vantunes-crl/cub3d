@@ -25,16 +25,23 @@ void	parse_side(t_game *game, char *line, int i, int side)
 	free(texture);
 }
 
-void	screen_error(t_game *game)
+void	parse_cell_floor_half(t_game *game, char *line, int i)
 {
-	if (game->width_screen > 2560)
-		game->width_screen = 2560;
-	if (game->height_screen > 1440)
-		game->height_screen = 1440;
-	if (!game->width_screen)
-		error("screen error");
-	if (!game->height_screen)
-		error("screen error");
+	int	j;
+
+	j = 0;
+	if (!ft_isdigit(line[i]))
+		error("caracter in color");
+	while (ft_isdigit(line[i]) == 1)
+		game->buff2[j++] = (line[i++]);
+	game->buff2[j] = '\0';
+	j = 0;
+	i++;
+	if (!ft_isdigit(line[i]))
+		error("caracter in color");
+	while (ft_isdigit(line[i]) == 1)
+		game->buff3[j++] = (line[i++]);
+	game->buff3[j] = '\0';
 }
 
 void	parse_floor_cell(t_game *game, char *line, int type)
@@ -43,10 +50,12 @@ void	parse_floor_cell(t_game *game, char *line, int type)
 	int	i;
 
 	j = 0;
-	i = 0;
-	while (ft_isdigit(line[i]) == 0)
+	i = 1;
+	while (!ft_isdigit(line[i]))
 	{
-		
+		if ((line[i] >= 'a' && line[i] <= 'z')
+			|| (line[i] >= 'A' && line[i] <= 'Z'))
+			error("caracter in color");
 		i++;
 	}
 	while (ft_isdigit(line[i]) == 1)
@@ -54,48 +63,8 @@ void	parse_floor_cell(t_game *game, char *line, int type)
 	game->buff[j] = '\0';
 	j = 0;
 	i++;
-	if (!ft_isdigit(line[i]))
-		error("caracter in color");
-	while (ft_isdigit(line[i]) == 1)
-		game->buff2[j++] = (line[i++]);
-	game->buff2[j] = '\0';;
-	j = 0;
-	i++;
-	if (!ft_isdigit(line[i]))
-		error("caracter in color");
-	while (ft_isdigit(line[i]) == 1)
-		game->buff3[j++] = (line[i++]);
-	game->buff3[j] = '\0';
+	parse_cell_floor_half(game, line, i);
 	cell_or_floor(game, type);
-}
-
-void	parse_screen(t_game *game, char *line, int i)
-{
-	char	width_screen[5];
-	char	height_screen[5];
-	int		j;
-
-	j = 0;
-	while (line[i] != '\0')
-	{
-		if (line[i] >= '0' && line[i] <= '9')
-		{
-			while (line[i] >= '0' && line[i] <= '9')
-				width_screen[j++] = line[i++];
-			width_screen[j] = '\0';
-			j = 0;
-			i++;
-			while (line[i] >= '0' && line[i] <= '9')
-				height_screen[j++] = line[i++];
-			height_screen[j] = '\0';
-			break ;
-		}
-		i++;
-	}
-	game->width_screen = ft_atoi(width_screen);
-	game->height_screen = ft_atoi(height_screen);
-	screen_error(game);
-	game->flag_parse += 1;
 }
 
 t_list	*parse_infos(t_game *game, int fd, t_list *elem)

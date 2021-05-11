@@ -30,9 +30,9 @@ char	*ft_strdup(const char *s1)
 
 void	cell_or_floor(t_game *game, int type)
 {	
-	int r;
-	int g;
-	int b;
+	int	r;
+	int	g;
+	int	b;
 
 	r = ft_atoi(game->buff);
 	g = ft_atoi(game->buff2);
