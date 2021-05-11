@@ -225,7 +225,8 @@ void	screen_error(t_game *game);
 int		check_all_map(char c);
 void	parse_screen(t_game *game, char *line, int i);
 void	free_map(t_game *game);
-void 	free_buffs(t_game *game);
+void	free_buffs(t_game *game);
 int		exit_game(t_game *game);
+void	need_screenshot(t_game *game, char *argv);
 
 #endif

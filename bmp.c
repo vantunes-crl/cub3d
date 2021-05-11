@@ -55,7 +55,7 @@ void	creat_bmp(t_game *game)
 {
 	int	fd;
 	int	fz;
-	int i;
+	int	i;
 
 	i = 0;
 	init_bpm_buf(game);

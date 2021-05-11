@@ -28,9 +28,17 @@ char	*ft_strdup(const char *s1)
 	return (s1_cpy);
 }
 
-int exit_game(t_game *game)
+int	exit_game(t_game *game)
 {
 	free_map(game);
 	free_buffs(game);
 	exit(0);
+}
+
+void	need_screenshot(t_game *game, char *argv)
+{
+	if (ft_strncmp(argv, "--save", ft_strlen(argv)) == 0)
+		game->screenshot = 1;
+	else
+		error(game, "invalid argument", 0);
 }

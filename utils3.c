@@ -35,9 +35,9 @@ int	ismap(char c)
 	return (0);
 }
 
-void free_map(t_game *game)
+void	free_map(t_game *game)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < game->map_size)
@@ -48,7 +48,7 @@ void free_map(t_game *game)
 	free(game->map);
 }
 
-void free_buffs(t_game *game)
+void	free_buffs(t_game *game)
 {
 	int	i;
 

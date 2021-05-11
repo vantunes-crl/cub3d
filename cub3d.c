@@ -29,12 +29,7 @@ int	main(int argc, char **argv)
 
 	init_game(&game);
 	if (argc == 3)
-	{
-		if (ft_strncmp(argv[2], "--save", ft_strlen(argv[2])) == 0)
-			game.screenshot = 1;
-		else
-			error(&game, "invalid argument", 0);
-	}	
+		need_screenshot(&game, argv[2]);
 	if (argc == 1 || argc > 3)
 		error(&game, "error arguments", 0);
 	game.mlx = mlx_init();
