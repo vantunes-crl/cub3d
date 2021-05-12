@@ -9,7 +9,7 @@ INCLUDE		= cub3d.h
 
 SRCS = cub3d.c calcs.c calcs2.c keys.c inits.c draws.c sprite.c utils.c parse2.c get_next_line.c get_next_line_utils.c parse.c parse_player.c lst.c bmp.c utils2.c utils3.c parse3.c utils4.c
 
-SRCS_BONUS = cub3d.c calcs_bonus.c calcs2.c keys.c inits.c draws.c sprite.c utils.c parse2.c get_next_line.c get_next_line_utils.c parse.c parse_player.c lst.c bmp.c utils2.c utils3.c parse3.c utils4.c
+SRCS_BONUS = cub3d_bonus.c calcs_bonus.c calcs2.c keys.c inits.c draws.c sprite.c utils.c parse2.c get_next_line.c get_next_line_utils.c parse.c parse_player.c lst.c bmp.c utils2.c utils3.c parse3.c utils4.c
 
 OBJS = $(SRCS:.c=.o)
 

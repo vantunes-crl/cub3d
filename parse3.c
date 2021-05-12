@@ -6,6 +6,8 @@ void	screen_error(t_game *game)
 		game->width_screen = 2560;
 	if (game->height_screen > 1440)
 		game->height_screen = 1440;
+	if (game->height_screen <= 150)
+		game->height_screen = 200;
 	if (!game->width_screen)
 		error(game, "screen error", 0);
 	if (!game->height_screen)

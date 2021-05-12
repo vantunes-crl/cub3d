@@ -5,6 +5,7 @@ int	main_loop(t_game *game)
 	calc(game);
 	draw(game);
 	key_move(game);
+    draw_rectangles(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->img.img, 0, 0);
 	return (0);
 }
