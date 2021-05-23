@@ -3,8 +3,8 @@ MLX =  -lmlx -lm -framework OpenGL -framework AppKit
 CFLAGS = -Wall -Werror -Wextra
 RM			= rm -f
 
-NAME		= cub3d.a
-BONUS		= CUB3D.a
+NAME		= cub3d
+BONUS		= CUB3D
 INCLUDE		= cub3d.h
 
 SRCS = cub3d.c calcs.c calcs2.c keys.c inits.c draws.c sprite.c utils.c parse2.c get_next_line.c get_next_line_utils.c parse.c parse_player.c lst.c bmp.c utils2.c utils3.c parse3.c utils4.c
